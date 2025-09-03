@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - OMAPI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <!-- Fil d'Ariane -->
+    <div class="bg-gray-100 py-3">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fas fa-home mr-1"></i> Accueil
+                </a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <span class="text-primary font-medium">Services</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Contenu Principal -->
+    <main class="max-w-5xl mx-auto px-3 sm:px-4 py-8">
+        <!-- Titre de la page -->
+        <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Nos Services de Propriété Industrielle</h1>
+            <p class="text-xl text-secondary font-medium">Découvrez comment protéger vos actifs immatériels</p>
+            <p class="mt-4 text-gray-700 leading-relaxed">
+                La propriété industrielle est un pilier essentiel pour l'innovation et le développement économique. À l'OMAPI, nous nous engageons à vous accompagner dans la protection et la valorisation de vos créations intellectuelles. Que vous soyez un inventeur, un artiste, une entreprise ou un entrepreneur, nos services sont conçus pour sécuriser vos droits et vous offrir la tranquillité d'esprit nécessaire pour vous concentrer sur ce qui compte le plus : innover.
+            </p>
+            <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+        </div>
+
+        <!-- Filtres et Recherche -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8 flex flex-col md:flex-row gap-4 items-center">
+            <input type="text" id="service-search" placeholder="Rechercher un service..." class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+            <select id="service-type-filter" class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <option value="">Tous les types</option>
+                <option value="brevet">Brevets</option>
+                <option value="marque">Marques</option>
+                <option value="dessin_modele">Dessins & Modèles</option>
+                <option value="nom_commercial">Noms Commerciaux</option>
+                <option value="indication_geographique">Indications Géographiques</option>
+            </select>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for service in services %}
+            <div class="service-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center" data-service-type="{{ service.nom }}">
+                <div class="icon-box mx-auto mb-4 bg-primary/10 text-primary rounded-full w-16 h-16 flex items-center justify-center">
+                    {% if service.nom == 'brevet' %}
+                    <i class="fas fa-flask text-3xl"></i>
+                    {% elif service.nom == 'marque' %}
+                    <i class="fas fa-award text-3xl"></i>
+                    {% elif service.nom == 'dessin_modele' %}
+                    <i class="fas fa-bezier-curve text-3xl"></i>
+                    {% elif service.nom == 'nom_commercial' %}
+                    <i class="fas fa-handshake text-3xl"></i>
+                    {% elif service.nom == 'indication_geographique' %}
+                    <i class="fas fa-map-marker-alt text-3xl"></i>
+                    {% else %}
+                    <i class="fas fa-cogs text-3xl"></i> {# Default icon #}
+                    {% endif %}
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ service.get_nom_display }}</h3>
+                <p class="text-gray-700 mb-4">{{ service.description_generale|truncatechars:250 }}</p>
+                <a href="{{ service.redirect_url }}" class="inline-block bg-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-secondary transition-colors duration-300">En savoir plus</a>
+            </div>
+            {% empty %}
+            <p class="col-span-full text-center text-gray-600 no-services-found">Aucun service disponible pour le moment.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Section "Pourquoi choisir l'OMAPI ?" -->
+        <section class="bg-white rounded-xl shadow-lg p-8 mt-12 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">Pourquoi choisir l'OMAPI ?</h2>
+            <p class="text-gray-700 leading-relaxed mb-6">
+                L'Office Malgache de la Propriété Industrielle (OMAPI) est votre partenaire de confiance pour la protection de vos droits de propriété intellectuelle. Forts de notre expertise et de notre connaissance approfondie du cadre juridique national et international, nous vous offrons un accompagnement personnalisé à chaque étape de votre démarche.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-handshake-alt text-4xl text-accent mb-3"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Expertise Reconnue</h3>
+                    <p class="text-gray-600">Une équipe de spécialistes à votre service pour des conseils avisés.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-shield-alt text-4xl text-accent mb-3"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Protection Optimale</h3>
+                    <p class="text-gray-600">Des procédures simplifiées pour sécuriser efficacement vos innovations.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-headset text-4xl text-accent mb-3"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Accompagnement Personnalisé</h3>
+                    <p class="text-gray-600">Un suivi dédié et une assistance continue tout au long de votre projet.</p>
+                </div>
+            </div>
+            <a href="{% url 'contact' %}" class="inline-block bg-accent text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary transition-colors duration-300 shadow-md">Contactez-nous pour un accompagnement personnalisé</a>
+        </section>
+
+        <div id="no-results" class="col-span-full text-center text-gray-600 hidden mt-8">Aucun service ne correspond à votre recherche.</div>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+    <script src="{% static 'js/carousel.js' %}"></script> {# Added carousel.js as it's in index.html #}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('service-search');
+            const typeFilter = document.getElementById('service-type-filter');
+            const serviceCards = document.querySelectorAll('.service-card');
+            const noResultsMessage = document.getElementById('no-results');
+
+            function filterServices() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedType = typeFilter.value;
+                let resultsFound = false;
+
+                serviceCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const description = card.querySelector('p').textContent.toLowerCase();
+                    const serviceType = card.dataset.serviceType;
+
+                    const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                    const matchesType = selectedType === '' || serviceType === selectedType;
+
+                    if (matchesSearch && matchesType) {
+                        card.style.display = '';
+                        resultsFound = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (resultsFound) {
+                    noResultsMessage.classList.add('hidden');
+                } else {
+                    noResultsMessage.classList.remove('hidden');
+                }
+            }
+
+            searchInput.addEventListener('keyup', filterServices);
+            typeFilter.addEventListener('change', filterServices);
+        });
+    </script>
+</body>
+</html>

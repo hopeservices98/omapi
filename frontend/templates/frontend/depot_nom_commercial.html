@@ -1,0 +1,861 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dépôt de Nom Commercial - OMAPI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <!-- Fil d'Ariane -->
+    <div class="bg-gray-100 py-3">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fas fa-home mr-1"></i> Accueil
+                </a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <a href="{% url 'services_list' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">Procédures</a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <span class="text-primary font-medium">Dépôt de Nom Commercial</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Contenu Principal -->
+    <main class="max-w-7xl mx-auto px-3 sm:px-4 py-8">
+        <div class="md:flex md:space-x-8">
+            <!-- Navigation rapide -->
+            <div class="md:w-1/4">
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-8 sticky top-[65px] z-10">
+                    <h2 class="text-lg font-bold text-gray-800 mb-4">Navigation rapide</h2>
+                    <div class="flex flex-col gap-2" id="tab-navigation">
+                        <a href="#depot" class="bg-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-secondary transition-colors duration-300">Dépôt initial</a>
+                        <a href="#inscription" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Inscription au registre</a>
+                        <a href="#modifications" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Modifications</a>
+                        <a href="#transfert" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Transfert</a>
+                        <a href="#radiation" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Radiation</a>
+                        <a href="#renouvellement" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Renouvellement</a>
+                        <a href="#faq" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">FAQ</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:w-3/4">
+                <!-- Titre de la page -->
+                <div class="mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Dépôt de Nom Commercial</h1>
+                    <p class="text-xl text-secondary font-medium">Protégez l'identité de votre entreprise</p>
+                    <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+                </div>
+
+                <!-- Section Dépôt Initial -->
+                <section id="depot" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-primary text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-store text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Dépôt Initial de Nom Commercial</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Le nom commercial est la dénomination sous laquelle une personne physique ou morale exerce son activité commerciale, industrielle, artisanale ou libérale. Son enregistrement protège cette dénomination et la rend opposable aux tiers.
+                </p>
+
+                <!-- Conditions d'enregistrement -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Conditions d'enregistrement</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-primary/5 rounded-lg p-4">
+                            <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Activité légale</h4>
+                            <p class="text-sm text-gray-600">Le demandeur doit exercer une activité commerciale, industrielle, artisanale ou libérale.</p>
+                        </div>
+                        <div class="bg-primary/5 rounded-lg p-4">
+                            <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-fingerprint"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Nom distinctif</h4>
+                            <p class="text-sm text-gray-600">Le nom doit être suffisamment distinctif pour identifier l'entreprise.</p>
+                        </div>
+                        <div class="bg-primary/5 rounded-lg p-4">
+                            <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Respect de l'ordre public</h4>
+                            <p class="text-sm text-gray-600">Le nom ne doit pas être contraire à l'ordre public ou aux bonnes mœurs.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Types de noms commerciaux -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Types de noms commerciaux</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <i class="fas fa-user-tie text-primary mr-2"></i>
+                                Noms de personnes physiques
+                            </h4>
+                            <p class="text-sm text-gray-600 mb-3">Dénomination sous laquelle une personne physique exerce son activité professionnelle.</p>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>• Nom patronyme complet</li>
+                                <li>• Nom d'usage commercial</li>
+                                <li>• Enseigne commerciale</li>
+                                <li>• Nom de fantaisie</li>
+                            </ul>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <i class="fas fa-building text-primary mr-2"></i>
+                                Noms de personnes morales
+                            </h4>
+                            <p class="text-sm text-gray-600 mb-3">Dénomination sociale ou raison sociale des entreprises et sociétés.</p>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>• Raison sociale</li>
+                                <li>• Nom abrégé</li>
+                                <li>• Enseigne</li>
+                                <li>• Marque d'entreprise</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Étapes du dépôt -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Étapes du dépôt</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">1</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Vérification de la disponibilité</h4>
+                                <p class="text-gray-600 text-sm">Consultez le registre pour vous assurer que le nom n'est pas déjà enregistré.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">2</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Préparation du dossier</h4>
+                                <p class="text-gray-600 text-sm">Rassemblez tous les documents nécessaires et complétez le formulaire.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">3</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Dépôt à l'OMAPI</h4>
+                                <p class="text-gray-600 text-sm">Soumettez votre dossier complet et payez les frais de dépôt.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">4</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Examen du dossier</h4>
+                                <p class="text-gray-600 text-sm">L'OMAPI vérifie la conformité de votre demande.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">5</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Enregistrement au registre</h4>
+                                <p class="text-gray-600 text-sm">Le nom est inscrit au registre des noms commerciaux.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documents nécessaires -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Documents nécessaires</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Pour les personnes physiques</h4>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Formulaire de demande d'enregistrement</li>
+                                <li>• Copie de la pièce d'identité</li>
+                                <li>• Copie du registre de commerce (si applicable)</li>
+                                <li>• Patente (si applicable)</li>
+                                <li>• Justificatif de domicile</li>
+                                <li>• Procuration si nécessaire</li>
+                            </ul>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Pour les personnes morales</h4>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Formulaire de demande d'enregistrement</li>
+                                <li>• Extrait du registre de commerce</li>
+                                <li>• Statuts de l'entreprise</li>
+                                <li>• Procès-verbal d'assemblée constitutive</li>
+                                <li>• Pouvoir du représentant légal</li>
+                                <li>• Procuration si nécessaire</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarifs -->
+                <div class="bg-primary/5 rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Tarifs de dépôt et services associés</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg shadow-md">
+                            <thead>
+                                <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                    <th class="py-3 px-6 text-left">Service</th>
+                                    <th class="py-3 px-6 text-left">Tarif (MGA)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 text-sm font-light">
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left">Taxe de dépôt d'un nom commercial</td>
+                                    <td class="py-3 px-6 text-left">160 000</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left">Taxe de régularisation ou de correction d'erreurs matérielles</td>
+                                    <td class="py-3 px-6 text-left">5 000</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left">Taxe de recherche d'antériorité, par nom commercial</td>
+                                    <td class="py-3 px-6 text-left">30 000</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left">Taxe de délivrance d'une copie officielle du nom commercial enregistré</td>
+                                    <td class="py-3 px-6 text-left">6 000</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left">Taxe de certification, par cas</td>
+                                    <td class="py-3 px-6 text-left">5 000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Inscription au Registre -->
+        <section id="inscription" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-secondary text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-book text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Inscription au Registre des Noms Commerciaux</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Le Registre National des Noms Commerciaux tenu par l'OMAPI recense tous les noms commerciaux enregistrés à Madagascar. Toute modification affectant les droits sur un nom commercial doit faire l'objet d'une inscription au registre pour être opposable aux tiers.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Cas d'inscription obligatoire</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-secondary mr-2 mt-1"></i>
+                                <span>Transfert de propriété</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-secondary mr-2 mt-1"></i>
+                                <span>Changement de nom ou d'adresse</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-secondary mr-2 mt-1"></i>
+                                <span>Modification de la forme juridique</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-secondary mr-2 mt-1"></i>
+                                <span>Fusion ou scission d'entreprise</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-secondary mr-2 mt-1"></i>
+                                <span>Constitution ou modification de droits réels</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-secondary mr-2 mt-1"></i>
+                                <span>Gage ou saisie</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Procédure d'inscription</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-secondary text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">1</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Demande d'inscription</div>
+                                    <div class="text-sm text-gray-600">Formulaire spécifique à compléter</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-secondary text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">2</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Pièces justificatives</div>
+                                    <div class="text-sm text-gray-600">Acte justificatif de la modification</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-secondary text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">3</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Examen par l'OMAPI</div>
+                                    <div class="text-sm text-gray-600">Vérification de la conformité</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-secondary text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">4</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Inscription au registre</div>
+                                    <div class="text-sm text-gray-600">Mise à jour du registre national</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-secondary/5 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Tarifs d'inscription et de radiation</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg shadow-md">
+                            <thead>
+                                <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                    <th class="py-3 px-6 text-left">Service</th>
+                                    <th class="py-3 px-6 text-left">Tarif (MGA)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 text-sm font-light">
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left">Taxe d'inscription ou de radiation sur le registre des noms commerciaux, par dossier</td>
+                                    <td class="py-3 px-6 text-left">10 000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Modifications -->
+        <section id="modifications" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-accent text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-edit text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Modifications du Nom Commercial</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Au cours de la vie d'une entreprise, diverses modifications peuvent affecter le nom commercial. Ces modifications doivent être déclarées et inscrites au registre pour maintenir la protection et l'opposabilité aux tiers.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Types de modifications</h3>
+                        <div class="space-y-4">
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-bold text-accent mb-2">Changement de dénomination</h4>
+                                <p class="text-sm text-gray-600">Modification du nom commercial pour des raisons stratégiques ou rebranding.</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-bold text-accent mb-2">Changement d'adresse</h4>
+                                <p class="text-sm text-gray-600">Mise à jour de l'adresse du siège social ou des établissements secondaires.</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-bold text-accent mb-2">Changement de forme juridique</h4>
+                                <p class="text-sm text-gray-600">Transformation d'entreprise (EI, EURL, SARL, SA, etc.)</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-bold text-accent mb-2">Fusion ou scission</h4>
+                                <p class="text-sm text-gray-600">Modification résultant d'opérations de fusion ou de scission.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Procédure de modification</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">1</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Demande de modification</div>
+                                    <div class="text-sm text-gray-600">Formulaire spécifique et justification détaillée</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">2</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Pièces justificatives</div>
+                                    <div class="text-sm text-gray-600">Acte justificatif de la modification</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">3</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Examen par l'OMAPI</div>
+                                    <div class="text-sm text-gray-600">Vérification de la conformité</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">4</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Publication au GOPI</div>
+                                    <div class="text-sm text-gray-600">Notification aux tiers</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">5</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Mise à jour du registre</div>
+                                    <div class="text-sm text-gray-600">Inscription de la modification</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-accent/5 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Tarifs des modifications</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white rounded-lg p-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">Changement de dénomination</span>
+                                <span class="text-xl font-bold text-accent">50 000 Ar</span>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">Changement d'adresse</span>
+                                <span class="text-xl font-bold text-accent">25 000 Ar</span>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">Changement de forme juridique</span>
+                                <span class="text-xl font-bold text-accent">60 000 Ar</span>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">Fusion/Scission</span>
+                                <span class="text-xl font-bold text-accent">80 000 Ar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Transfert -->
+        <section id="transfert" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-green-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-exchange-alt text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Transfert de Nom Commercial</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Le transfert d'un nom commercial consiste à céder les droits sur la dénomination commerciale à un tiers, généralement dans le cadre de la cession d'un fonds de commerce. Cette opération doit être obligatoirement inscrite au Registre National.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Conditions de transfert</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                <span>Le nom commercial doit être enregistré et en vigueur</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                <span>Accord écrit entre le cédant et le cessionnaire</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                <span>Le transfert doit porter sur le fonds de commerce complet</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                <span>Le cessionnaire doit avoir la capacité commerciale</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Documents nécessaires</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Formulaire de demande de transfert</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Acte de cession du fonds de commerce</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Pièces d'identité du cédant et du cessionnaire</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Preuve du paiement des frais d'inscription</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section Radiation -->
+        <section id="radiation" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-red-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-times-circle text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Radiation du Nom Commercial</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    La radiation d'un nom commercial entraîne la perte des droits sur cette dénomination et sa suppression du registre. Elle peut intervenir pour divers motifs légaux et procédures spécifiques.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Motifs de radiation</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                <span><strong>Cessation d'activité :</strong> Arrêt définitif de l'activité commerciale</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                <span><strong>Décès :</strong> Décès de l'exploitant sans succession</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                <span><strong>Faillite :</strong> Procédure de liquidation judiciaire</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                <span><strong>Nullité :</strong> Vice dans le dépôt initial</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                <span><strong>Renonciation volontaire :</strong> Demande du titulaire</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Procédure de radiation</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">1</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Demande de radiation</div>
+                                    <div class="text-sm text-gray-600">Formulaire et motifs détaillés</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">2</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Instruction du dossier</div>
+                                    <div class="text-sm text-gray-600">Vérification des motifs par l'OMAPI</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">3</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Publication au Bulletin Officiel</div>
+                                    <div class="text-sm text-gray-600">Notification aux tiers concernés</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">4</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Décision de radiation</div>
+                                    <div class="text-sm text-gray-600">Suppression du registre national</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-red-50 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Conséquences de la radiation</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white rounded-lg p-4">
+                            <h4 class="font-bold text-red-600 mb-2">Immédiates</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Perte des droits sur le nom commercial</li>
+                                <li>• Le nom devient disponible pour d'autres</li>
+                                <li>• Plus d'opposabilité aux tiers</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <h4 class="font-bold text-red-600 mb-2">À long terme</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Impact sur la notoriété commerciale</li>
+                                <li>• Perte de la clientèle attachée au nom</li>
+                                <li>• Nécessité de reconstruire l'image</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Renouvellement -->
+        <section id="renouvellement" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-purple-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-sync-alt text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Renouvellement du Nom Commercial</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Contrairement aux marques, les noms commerciaux n'ont pas de durée de protection limitée. Cependant, certaines situations nécessitent une mise à jour ou un renouvellement de l'enregistrement pour maintenir la protection effective.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Cas de renouvellement nécessaires</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-purple-600 mr-2 mt-1"></i>
+                                <span>Changement de statut juridique de l'entreprise</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-purple-600 mr-2 mt-1"></i>
+                                <span>Extension de l'activité à de nouveaux secteurs</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-purple-600 mr-2 mt-1"></i>
+                                <span>Modernisation ou réorientation de l'entreprise</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-purple-600 mr-2 mt-1"></i>
+                                <span>Après une période d'inactivité prolongée</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Documents pour le renouvellement</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-purple-600 mr-2 mt-1"></i>
+                                <span>Demande de renouvellement ou mise à jour</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-purple-600 mr-2 mt-1"></i>
+                                <span>Justificatif de l'activité en cours</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-purple-600 mr-2 mt-1"></i>
+                                <span>Documents mis à jour (statuts, registre de commerce)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-purple-600 mr-2 mt-1"></i>
+                                <span>Preuve du paiement des frais de renouvellement</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-purple-50 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Tarifs de renouvellement et restauration</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg shadow-md">
+                            <thead>
+                                <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                    <th class="py-3 px-6 text-left">Service</th>
+                                    <th class="py-3 px-6 text-left">Tarif (MGA)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 text-sm font-light">
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left">Taxe de renouvellement pour 10 ans</td>
+                                    <td class="py-3 px-6 text-left">160 000</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left">Taxe pour la restauration d'un droit à agir, par dossier</td>
+                                    <td class="py-3 px-6 text-left">20 000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section FAQ -->
+        <section id="faq" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-orange-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-question-circle text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Questions Fréquemment Posées</h2>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Quelle est la différence entre nom commercial et marque ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                Le nom commercial identifie l'entreprise elle-même, tandis que la marque identifie les produits ou services de l'entreprise. Le nom commercial protège la dénomination sous laquelle l'activité est exercée, alors que la marque protège les signes distinctifs des produits ou services.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Puis-je enregistrer plusieurs noms commerciaux ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                Oui, une entreprise peut enregistrer plusieurs noms commerciaux si elle exerce des activités différentes sous des dénominations distinctes. Chaque nom doit faire l'objet d'un dépôt séparé et donner lieu au paiement des frais correspondants.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Qu'est-ce que l'opposabilité aux tiers ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                L'opposabilité aux tiers signifie que vous pouvez faire valoir vos droits contre toute personne qui utiliserait un nom commercial identique ou similaire sans autorisation. Pour que le nom soit opposable, il doit être régulièrement enregistré au registre des noms commerciaux.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Mon nom commercial peut-il être refusé ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                Oui, l'OMAPI peut refuser l'enregistrement si le nom est déjà pris, s'il est trompeur ou susceptible d'induire en erreur, s'il est contraire à l'ordre public ou aux bonnes mœurs, ou s'il porte atteinte à des droits antérieurs.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Que se passe-t-il en cas de cession de fonds de commerce ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                En cas de cession de fonds de commerce, le nom commercial est automatiquement transféré au cessionnaire. Ce transfert doit être obligatoirement inscrit au registre des noms commerciaux pour être opposable aux tiers. Des frais d'inscription s'appliquent pour cette formalité.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Contact et Assistance -->
+        <section class="mb-12">
+            <div class="bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg p-8 text-white text-center">
+                <h2 class="text-2xl font-bold mb-4">Besoin d'aide pour votre dépôt ?</h2>
+                <p class="mb-6 max-w-2xl mx-auto">
+                    Nos experts en propriété industrielle sont à votre disposition pour vous accompagner dans toutes les étapes de votre démarche d'enregistrement de nom commercial.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="{% url 'contact' %}" class="bg-white text-primary px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-phone mr-2"></i> Contacter un expert
+                    </a>
+                    <a href="{% url 'formulaires' %}" class="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-primary transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-download mr-2"></i> Télécharger les formulaires
+                    </a>
+                </div>
+            </div>
+        </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Contact</h3>
+                    <p class="text-sm text-gray-300 mb-2">
+                        <i class="fas fa-map-marker-alt mr-2"></i> Antananarivo, Madagascar
+                    </p>
+                    <p class="text-sm text-gray-300 mb-2">
+                        <i class="fas fa-phone mr-2"></i> +261 XX XXX XX
+                    </p>
+                    <p class="text-sm text-gray-300">
+                        <i class="fas fa-envelope mr-2"></i> daniel.razanajaona@gmail.com
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Liens rapides</h3>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="formulaires.html" class="hover:text-white transition-colors duration-300">Formulaires</a></li>
+                        <li><a href="guides.html" class="hover:text-white transition-colors duration-300">Guides pratiques</a></li>
+                        <li><a href="legislation.html" class="hover:text-white transition-colors duration-300">Législation</a></li>
+                        <li><a href="faq.html" class="hover:text-white transition-colors duration-300">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Suivez-nous</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-gray-700 hover:bg-primary p-2 rounded-full transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-primary p-2 rounded-full transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-primary p-2 rounded-full transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-primary p-2 rounded-full transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-400">
+                <p>&copy; 2023 OMAPI. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+</body>
+</html>

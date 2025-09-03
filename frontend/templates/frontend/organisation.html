@@ -1,0 +1,229 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organisation - OMAPI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <main class="max-w-5xl mx-auto px-3 sm:px-4 py-8">
+        <!-- Fil d'Ariane -->
+        <div class="bg-gray-100 py-3">
+            <div class="max-w-5xl mx-auto px-3 sm:px-4">
+                <nav class="flex items-center space-x-2 text-sm">
+                    <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                        <i class="fas fa-home mr-1"></i> Accueil
+                    </a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <a href="{% url 'about' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">L'office</a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <span class="text-primary font-medium">Organisation</span>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Contenu Principal -->
+        <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Organisation de l'OMAPI</h1>
+            <p class="text-xl text-secondary font-medium">Structure et Fonctionnement</p>
+            <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+        </div>
+
+        <!-- Section Structure Organisationnelle -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Structure Organisationnelle</h2>
+            <p class="text-gray-700 mb-4 leading-relaxed">
+                L'Office Malgache de la Propriété Industrielle (OMAPI) est un établissement public doté d'une autonomie administrative et financière. Placé sous la tutelle technique du Ministère chargé de l'Industrie, l'OMAPI jouit de l'indépendance technique pour l'exécution de sa mission.
+            </p>
+            <p class="text-gray-700 mb-4 leading-relaxed">
+                Notre organisation est structurée pour garantir l'efficacité, la transparence et la qualité dans l'accomplissement de nos missions de protection de la propriété industrielle et de promotion de l'innovation à Madagascar.
+            </p>
+
+            <h3 class="text-xl font-bold text-gray-800 mb-3 mt-6">Gouvernance Structurée</h3>
+            <div class="border border-blue-200 rounded-lg p-4 mb-6">
+                <h4 class="text-lg font-semibold text-primary mb-3">Organes Directeurs</h4>
+                <ul class="space-y-4">
+                    <li class="bg-blue-50 p-3 rounded-lg border border-blue-100">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-gavel text-primary mr-2"></i>
+                            <strong class="text-gray-800">Conseil d'Administration</strong>
+                        </div>
+                        <p class="text-gray-700 text-sm mb-2">Le Conseil d'Administration est l'organe délibérant de l'OMAPI. Il définit la politique générale de l'établissement et contrôle sa gestion.</p>
+                        <ul class="list-disc list-inside text-gray-600 text-sm ml-4 space-y-1">
+                            <li>Composition représentative des secteurs public et privé</li>
+                            <li>Définition des orientations stratégiques</li>
+                            <li>Approbation du budget et des comptes</li>
+                        </ul>
+                    </li>
+                    <li class="bg-blue-50 p-3 rounded-lg border border-blue-100">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-cogs text-primary mr-2"></i>
+                            <strong class="text-gray-800">Direction Générale</strong>
+                        </div>
+                        <p class="text-gray-700 text-sm mb-2">La Direction Générale assure la gestion quotidienne et la mise en œuvre des décisions du Conseil d'Administration. Elle est dirigée par un Directeur Général nommé par décret.</p>
+                        <ul class="list-disc list-inside text-gray-600 text-sm ml-4 space-y-1">
+                            <li>Exécution des décisions du Conseil</li>
+                            <li>Représentation légale de l'établissement</li>
+                            <li>Gestion administrative et technique</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <h3 class="text-xl font-bold text-gray-800 mb-3 mt-6">Départements Techniques</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-gray-700 mb-6">
+                <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 shadow-sm">
+                    <h4 class="font-semibold text-primary mb-1 flex items-center"><i class="fas fa-flask mr-2 text-blue-600"></i> Brevets</h4>
+                    <p class="text-sm text-gray-700">Traitement des demandes de brevets d'invention et examen de leur brevetabilité.</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 shadow-sm">
+                    <h4 class="font-semibold text-primary mb-1 flex items-center"><i class="fas fa-trademark mr-2 text-blue-600"></i> Marques</h4>
+                    <p class="text-sm text-gray-700">Enregistrement et protection des marques de produits et de services.</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 shadow-sm">
+                    <h4 class="font-semibold text-primary mb-1 flex items-center"><i class="fas fa-paint-brush mr-2 text-blue-600"></i> Dessins & Modèles</h4>
+                    <p class="text-sm text-gray-700">Protection des créations esthétiques et designs industriels.</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 shadow-sm">
+                    <h4 class="font-semibold text-primary mb-1 flex items-center"><i class="fas fa-building mr-2 text-blue-600"></i> Noms Commerciaux</h4>
+                    <p class="text-sm text-gray-700">Enregistrement des dénominations commerciales des entreprises.</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 shadow-sm">
+                    <h4 class="font-semibold text-primary mb-1 flex items-center"><i class="fas fa-book mr-2 text-blue-600"></i> Documentation</h4>
+                    <p class="text-sm text-gray-700">Gestion de la documentation et publication de la GOPI.</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 shadow-sm">
+                    <h4 class="font-semibold text-primary mb-1 flex items-center"><i class="fas fa-globe mr-2 text-blue-600"></i> Relations Internationales</h4>
+                    <p class="text-sm text-gray-700">Coordination des coopérations internationales et PCT.</p>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-bold text-gray-800 mb-3 mt-6">Organigramme Simplifié</h3>
+            <div class="bg-gray-100 p-6 rounded-lg overflow-x-auto">
+                <div class="flex flex-col items-center py-4">
+                    <!-- Conseil d'Administration -->
+                    <div class="p-3 rounded-lg font-bold shadow-md text-center bg-blue-200 text-blue-800">Conseil d'Administration</div>
+                    
+                    <!-- Ligne verticale et flèche -->
+                    <div class="relative w-0.5 bg-gray-400 h-8 my-2">
+                        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3 border-r-2 border-b-2 border-gray-400 rotate-45 transform translate-y-1/2"></div>
+                    </div>
+
+                    <!-- Direction Générale -->
+                    <div class="p-3 rounded-lg font-bold shadow-md text-center bg-blue-300 text-blue-900">Direction Générale</div>
+                    
+                    <!-- Lignes vers les Directions -->
+                    <div class="flex justify-center w-full mt-4">
+                        <!-- Ligne horizontale supérieure -->
+                        <div class="h-0.5 bg-gray-400 flex-grow mx-2 self-center"></div>
+                        
+                        <!-- Point de connexion central -->
+                        <div class="relative w-0.5 h-4 bg-gray-400">
+                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 border-l-2 border-t-2 border-gray-400 -rotate-45 transform -translate-y-1/2"></div>
+                            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3 border-r-2 border-b-2 border-gray-400 rotate-45 transform translate-y-1/2"></div>
+                        </div>
+
+                        <!-- Ligne horizontale inférieure -->
+                        <div class="h-0.5 bg-gray-400 flex-grow mx-2 self-center"></div>
+                    </div>
+
+                    <div class="flex justify-center mt-4 w-full space-x-8">
+                        <!-- Direction Technique -->
+                        <div class="flex flex-col items-center">
+                            <div class="p-2 rounded-lg font-semibold shadow-sm bg-blue-100 text-blue-700 text-sm">Direction Technique</div>
+                            <ul class="text-sm text-gray-700 space-y-1 mt-2">
+                                <li>- Brevets</li>
+                                <li>- Marques</li>
+                                <li>- Dessins</li>
+                                <li>- Noms Com.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Direction Administrative & Financière -->
+                        <div class="flex flex-col items-center">
+                            <div class="p-2 rounded-lg font-semibold shadow-sm bg-blue-100 text-blue-700 text-sm">Direction Administrative & Financière</div>
+                        </div>
+
+                        <!-- Direction des Affaires Juridiques -->
+                        <div class="flex flex-col items-center">
+                            <div class="p-2 rounded-lg font-semibold shadow-sm bg-blue-100 text-blue-700 text-sm">Direction des Affaires Juridiques</div>
+                            <ul class="text-sm text-gray-700 space-y-1 mt-2">
+                                <li>- Doc.</li>
+                                <li>- R.I.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 mt-8">Nos Valeurs Organisationnelles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+                <div class="p-4 bg-blue-50 rounded-lg border border-blue-100 shadow-sm">
+                    <i class="fas fa-handshake text-4xl text-primary mb-3"></i>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Intégrité</h3>
+                    <p class="text-gray-700 text-sm">Nous agissons avec transparence et équité dans toutes nos décisions et actions.</p>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg border border-blue-100 shadow-sm">
+                    <i class="fas fa-lightbulb text-4xl text-primary mb-3"></i>
+                    <h3 class="font-bold text-lg text-primary mb-2">Indépendance</h3>
+                    <p class="text-gray-700 text-sm">Nous garantissons l'indépendance technique dans l'exécution de nos missions.</p>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg border border-blue-100 shadow-sm">
+                    <i class="fas fa-users-cog text-4xl text-primary mb-3"></i>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Collaboration</h3>
+                    <p class="text-gray-700 text-sm">Nous favorisons le travail d'équipe et la coopération interne et externe.</p>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg border border-blue-100 shadow-sm">
+                    <i class="fas fa-star text-4xl text-primary mb-3"></i>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Excellence</h3>
+                    <p class="text-gray-700 text-sm">Nous nous engageons à fournir des services de haute qualité à nos usagers.</p>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 mt-8">Nos Effectifs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mb-6">
+                <div class="p-4 bg-green-50 rounded-lg border border-green-100 shadow-sm">
+                    <p class="text-4xl font-bold text-green-700">50+</p>
+                    <p class="text-gray-700">Agents qualifiés</p>
+                </div>
+                <div class="p-4 bg-yellow-50 rounded-lg border border-yellow-100 shadow-sm">
+                    <p class="text-4xl font-bold text-yellow-700">15</p>
+                    <p class="text-gray-700">Experts en PI</p>
+                </div>
+                <div class="p-4 bg-red-50 rounded-lg border border-red-100 shadow-sm">
+                    <p class="text-4xl font-bold text-red-700">6</p>
+                    <p class="text-gray-700">Départements</p>
+                </div>
+            </div>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Notre équipe est composée d'experts hautement qualifiés dans les domaines de la propriété intellectuelle, du droit, de l'administration et des technologies de l'information.
+            </p>
+
+        </div>
+    </main>
+    {% include 'frontend/includes/footer.html' %}
+    <!-- Script pour le menu mobile et sous-menus -->
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+    <script>
+    </script>
+</body>
+</html>

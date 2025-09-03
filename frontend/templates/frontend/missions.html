@@ -1,0 +1,287 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missions - OMAPI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <main class="max-w-5xl mx-auto px-3 sm:px-4 py-8">
+        <!-- Fil d'Ariane -->
+        <div class="bg-gray-100 py-3">
+            <div class="max-w-5xl mx-auto px-3 sm:px-4">
+                <nav class="flex items-center space-x-2 text-sm">
+                    <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                        <i class="fas fa-home mr-1"></i> Accueil
+                    </a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <a href="{% url 'about' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">L'office</a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <span class="text-primary font-medium">Missions</span>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Contenu Principal -->
+        <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Nos Missions</h1>
+            <p class="text-xl text-secondary font-medium">Administration de la propriété industrielle et promotion de l'innovation</p>
+            <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+        </div>
+
+        <!-- Section Introduction -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="md:w-full">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Notre Mission Principale</h2>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        L'OMAPI est chargé de l'administration de la propriété industrielle et de la promotion de l'activité inventive à Madagascar. Notre mission fondamentale est de fournir un cadre juridique sécurisé pour la protection des droits de propriété intellectuelle, tout en encourageant l'innovation et la créativité au sein de l'écosystème malgache.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        À cet effet, nous délivrons, à la demande des intéressés, des titres de propriété industrielle qui protègent leurs créations et inventions, contribuant ainsi au développement économique et technologique du pays.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Titres de Propriété Industrielle -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Titres de Propriété Industrielle que nous délivrons</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-primary text-white p-3 rounded-full mr-4 flex-shrink-0">
+                            <i class="fas fa-certificate text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Brevets d'inventions</h3>
+                            <p class="text-gray-600 text-sm mt-1">
+                                Protection des inventions techniques nouvelles, impliquant une activité inventive et susceptibles d'application industrielle. Les brevets garantissent un monopole d'exploitation pour une durée limitée.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-primary text-white p-3 rounded-full mr-4 flex-shrink-0">
+                            <i class="fas fa-trademark text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Marques de produits ou de services</h3>
+                            <p class="text-gray-600 text-sm mt-1">
+                                Protection des signes distinctifs permettant d'identifier les produits ou services d'une entreprise et de les différencier de ceux des concurrents.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-primary text-white p-3 rounded-full mr-4 flex-shrink-0">
+                            <i class="fas fa-palette text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Dessins ou modèles industriels</h3>
+                            <p class="text-gray-600 text-sm mt-1">
+                                Protection des créations d'aspect ornemental ou esthétique d'un produit ou d'un ensemble de lignes, de couleurs ou de formes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-primary text-white p-3 rounded-full mr-4 flex-shrink-0">
+                            <i class="fas fa-store text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Noms commerciaux</h3>
+                            <p class="text-gray-600 text-sm mt-1">
+                                Protection des dénominations sous lesquelles s'exerce une activité commerciale, industrielle ou artisanale, permettant d'identifier une entreprise.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Publication et Documentation -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Publication et Documentation</h2>
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/2">
+                    <div class="bg-primary/10 p-6 rounded-xl mb-4">
+                        <i class="fas fa-newspaper text-4xl text-primary mb-3"></i>
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">Gazette Officielle de la Propriété Industrielle (GOPI)</h3>
+                        <p class="text-gray-600 text-sm">
+                            Tous les titres octroyés par l'OMAPI sont publiés à la Gazette Officielle de la Propriété Industrielle, assurant ainsi la publicité légale des droits de propriété industrielle.
+                        </p>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="bg-secondary/10 p-6 rounded-xl">
+                        <i class="fas fa-book-open text-4xl text-secondary mb-3"></i>
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">Documentation publique</h3>
+                        <p class="text-gray-600 text-sm">
+                            L'OMAPI met à la disposition du public une documentation complète en matière de propriété industrielle, incluant les documents de brevets, les législations nationales et internationales, ainsi que les traités multilatéraux.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Organisation et Indépendance -->
+        <div class="bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg p-6 md:p-8 text-white mb-8">
+            <h2 class="text-2xl font-bold mb-4">Organisation et Indépendance</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-lg font-bold mb-3">Tutelle et Autonomie</h3>
+                    <p class="mb-4">
+                        Placé sous la tutelle technique du Ministère chargé de l'Industrie, l'OMAPI bénéficie d'une autonomie administrative et financière qui lui permet d'agir avec efficacité et réactivité.
+                    </p>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Autonomie administrative</span>
+                    </div>
+                    <div class="flex items-center space-x-2 mt-2">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Autonomie financière</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-3">Indépendance Technique</h3>
+                    <p class="mb-4">
+                        L'OMAPI jouit de l'indépendance technique pour l'exécution de sa mission, garantissant ainsi l'impartialité et la qualité des décisions prises en matière de propriété industrielle.
+                    </p>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Conseil d'Administration</span>
+                    </div>
+                    <div class="flex items-center space-x-2 mt-2">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Direction Générale</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Partenariats Internationaux -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Engagements Internationaux</h2>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Opérationnel depuis le 1er avril 1994, l'OMAPI a développé un réseau de partenariats stratégiques avec les principales organisations mondiales de la propriété intellectuelle, renforçant ainsi sa capacité à offrir des services conformes aux standards internationaux.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="bg-gray-50 p-4 rounded-lg text-center">
+                    <i class="fas fa-globe text-3xl text-primary mb-2"></i>
+                    <h3 class="font-bold text-gray-800">OMPI</h3>
+                    <p class="text-xs text-gray-600">Membre depuis 1989</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center">
+                    <i class="fas fa-file-contract text-3xl text-primary mb-2"></i>
+                    <h3 class="font-bold text-gray-800">Convention de Paris</h3>
+                    <p class="text-xs text-gray-600">Adhésion en 1963</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center">
+                    <i class="fas fa-handshake text-3xl text-primary mb-2"></i>
+                    <h3 class="font-bold text-gray-800">Traité PCT</h3>
+                    <p class="text-xs text-gray-600">Adhésion en 1978</p>
+                </div>
+            </div>
+
+            <div class="bg-primary/5 border border-primary/20 rounded-lg p-6">
+                <h3 class="font-bold text-lg text-gray-800 mb-3 flex items-center">
+                    <i class="fas fa-star text-primary mr-2"></i>
+                    Office désigné PCT
+                </h3>
+                <p class="text-gray-700">
+                    L'OMAPI agit en tant qu'office désigné pour les demandes internationales de brevet dans le cadre du Traité de coopération en matière de brevets (PCT), facilitant ainsi l'accès des inventeurs malgaches à la protection internationale de leurs inventions.
+                </p>
+            </div>
+        </div>
+
+        <!-- Section Objectifs Stratégiques -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Nos Objectifs Stratégiques</h2>
+            <div class="space-y-4">
+                <div class="flex items-start space-x-4">
+                    <div class="bg-primary text-white p-2 rounded-full flex-shrink-0 mt-1">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">Protection efficace des droits</h3>
+                        <p class="text-gray-600 text-sm">Garantir une protection robuste et efficace des droits de propriété industrielle pour encourager l'innovation.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-primary text-white p-2 rounded-full flex-shrink-0 mt-1">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">Sensibilisation et formation</h3>
+                        <p class="text-gray-600 text-sm">Promouvoir la culture de la propriété intellectuelle à travers des programmes de sensibilisation et de formation.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-primary text-white p-2 rounded-full flex-shrink-0 mt-1">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">Coopération internationale</h3>
+                        <p class="text-gray-600 text-sm">Renforcer la coopération avec les organisations internationales et les offices nationaux de propriété intellectuelle.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-primary text-white p-2 rounded-full flex-shrink-0 mt-1">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">Modernisation des services</h3>
+                        <p class="text-gray-600 text-sm">Développer des services innovants et modernes pour répondre aux besoins évolutifs des utilisateurs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appel à l'action -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 text-center">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Protégez votre innovation avec l'OMAPI</h2>
+            <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                Faites confiance à notre expertise pour sécuriser vos droits de propriété intellectuelle et accompagner votre démarche d'innovation.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'procedures' %}" class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg transition-colors duration-300 flex items-center justify-center shadow-md hover:shadow-lg">
+                    <i class="fas fa-file-alt mr-2"></i> Déposer une demande
+                </a>
+                <a href="{% url 'contact' %}" class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-lg transition-colors duration-300 flex items-center justify-center">
+                    <i class="fas fa-phone mr-2"></i> Nous contacter
+                </a>
+            </div>
+        </div>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+</body>
+</html>

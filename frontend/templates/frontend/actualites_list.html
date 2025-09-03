@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualités - OMAPI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <!-- Fil d'Ariane -->
+    <div class="bg-gray-100 py-3">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fas fa-home mr-1"></i> Accueil
+                </a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <a href="{% url 'actualites_list' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">Actualités</a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <span class="text-primary font-medium">Toutes les Actualités</span>
+            </nav>
+        </div>
+    </div>
+
+    <main class="max-w-5xl mx-auto px-3 sm:px-4 py-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Toutes les Actualités</h1>
+        <p class="text-xl text-secondary font-medium">Restez informé des dernières nouvelles et événements</p>
+        <div class="w-24 h-1 bg-primary rounded-full mt-4 mb-8"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for actualite in actualites %}
+            <article class="news-card bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                <div class="news-image relative h-48 overflow-hidden rounded-t-lg">
+                    {% if actualite.image %}
+                        <img src="{{ actualite.image.url }}" alt="{{ actualite.titre }}" class="w-full h-full object-cover">
+                    {% else %}
+                        <img src="https://via.placeholder.com/800x400.png?text=Image+Actualite" alt="Placeholder Image" class="w-full h-full object-cover">
+                    {% endif %}
+                    <span class="news-badge absolute top-3 left-3 text-white px-3 py-1 rounded-md text-xs font-semibold" style="background-color: {{ actualite.type_actualite.couleur }};">{{ actualite.type_actualite.nom }}</span>
+                </div>
+                <div class="p-6">
+                    <span class="text-gray-500 text-sm mb-2 block"><i class="far fa-calendar-alt mr-1"></i> Publié le {{ actualite.date_publication|date:"d M Y" }}</span>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ actualite.titre }}</h3>
+                    <p class="text-gray-700 text-base mb-4">{{ actualite.contenu|striptags|truncatechars:200|safe }}</p>
+                    <a href="{% url 'actualite_detail' actualite.slug %}" class="inline-block bg-accent hover:bg-secondary text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-300">
+                        Lire la suite <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </article>
+            {% empty %}
+            <p class="col-span-full text-center text-gray-600">Aucune actualité pour le moment.</p>
+            {% endfor %}
+        </div>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+    <!-- Script pour le menu mobile et sous-menus -->
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+    <script>
+    </script>
+</body>
+</html>

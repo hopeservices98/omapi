@@ -1,0 +1,927 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dépôt de Dessin/Modèle - OMAPI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <!-- Fil d'Ariane -->
+    <div class="bg-gray-100 py-3">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fas fa-home mr-1"></i> Accueil
+                </a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <a href="{% url 'services_list' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">Procédures</a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <span class="text-primary font-medium">Dépôt de Dessin/Modèle</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Contenu Principal -->
+    <main class="max-w-7xl mx-auto px-3 sm:px-4 py-8">
+        <div class="md:flex md:space-x-8">
+            <!-- Navigation rapide -->
+            <div class="md:w-1/4">
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-8 sticky top-[65px] z-10">
+                    <h2 class="text-lg font-bold text-gray-800 mb-4">Navigation rapide</h2>
+                    <div class="flex flex-col gap-2" id="tab-navigation">
+                        <a href="#depot" class="bg-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-secondary transition-colors duration-300">Dépôt initial</a>
+                        <a href="#examen" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Examen</a>
+                        <a href="#delivrance" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Délivrance</a>
+                        <a href="#renouvellement" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Renouvellement</a>
+                        <a href="#modifications" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Modifications</a>
+                        <a href="#transfert" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Transfert</a>
+                        <a href="#radiation" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Radiation</a>
+                        <a href="#faq" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">FAQ</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:w-3/4">
+                <!-- Titre de la page -->
+                <div class="mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Dépôt de Dessin/Modèle</h1>
+                    <p class="text-xl text-secondary font-medium">Protégez vos créations esthétiques</p>
+                    <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+                </div>
+
+                <!-- Section Dépôt Initial -->
+                <section id="depot" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-primary text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-palette text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Dépôt Initial de Dessin/Modèle</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Le dessin ou modèle industriel protège l'apparence esthétique d'un produit ou d'une partie de produit, caractérisée par ses lignes, contours, couleurs, forme, texture ou matériaux. La protection est valable pour 5 ans renouvelables jusqu'à 25 ans maximum.
+                </p>
+
+                <!-- Conditions de protection -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Conditions de protection</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-primary/5 rounded-lg p-4">
+                            <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Nouveauté</h4>
+                            <p class="text-sm text-gray-600">Le dessin ou modèle ne doit pas avoir été divulgué au public avant la date de dépôt.</p>
+                        </div>
+                        <div class="bg-primary/5 rounded-lg p-4">
+                            <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Caractère original</h4>
+                            <p class="text-sm text-gray-600">L'impression visuelle globale doit différer sensiblement des créations antérieures.</p>
+                        </div>
+                        <div class="bg-primary/5 rounded-lg p-4">
+                            <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-industry"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Application industrielle</h4>
+                            <p class="text-sm text-gray-600">Le dessin ou modèle doit pouvoir servir de modèle pour la fabrication d'un produit.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Types de dessins et modèles -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Types de dessins et modèles</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <i class="fas fa-pencil-alt text-primary mr-2"></i>
+                                Dessins industriels
+                            </h4>
+                            <p class="text-sm text-gray-600 mb-3">Représentation en deux dimensions (plans, schémas, vues éclatées) définissant l'apparence d'un produit.</p>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>• Plans techniques</li>
+                                <li>• Schémas de construction</li>
+                                <li>• Vues orthogonales</li>
+                                <li>• Coupes et sections</li>
+                            </ul>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <i class="fas fa-cube text-primary mr-2"></i>
+                                Modèles industriels
+                            </h4>
+                            <p class="text-sm text-gray-600 mb-3">Représentation en trois dimensions (prototypes, maquettes) montrant la forme et le volume d'un produit.</p>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>• Formes tridimensionnelles</li>
+                                <li>• Configurations de produits</li>
+                                <li>• Ensembles décoratifs</li>
+                                <li>• Emballages et conditionnements</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Étapes du dépôt -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Étapes du dépôt</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">1</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Préparation des représentations</h4>
+                                <p class="text-gray-600 text-sm">Créez des dessins ou photographies claires montrant toutes les vues de votre création.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">2</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Rédaction de la description</h4>
+                                <p class="text-gray-600 text-sm">Décrivez brièvement les caractéristiques esthétiques de votre dessin ou modèle.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">3</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Classement de Locarno</h4>
+                                <p class="text-gray-600 text-sm">Indiquez la classe internationale correspondant à votre produit.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">4</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Dépôt à l'OMAPI</h4>
+                                <p class="text-gray-600 text-sm">Soumettez votre dossier complet et payez les frais de dépôt.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">5</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Examen formel</h4>
+                                <p class="text-gray-600 text-sm">Vérification de la conformité du dossier par l'OMAPI.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documents nécessaires -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Documents nécessaires</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Pour les personnes physiques</h4>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Formulaire de demande de dessin/modèle</li>
+                                <li>• Représentations graphiques ou photographiques</li>
+                                <li>• Description du dessin ou modèle</li>
+                                <li>• Indication du classement de Locarno</li>
+                                <li>• Copie de la pièce d'identité</li>
+                                <li>• Procuration si nécessaire</li>
+                            </ul>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Pour les personnes morales</h4>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Formulaire de demande de dessin/modèle</li>
+                                <li>• Représentations, description, classement</li>
+                                <li>• Extrait du registre de commerce</li>
+                                <li>• Statuts de l'entreprise</li>
+                                <li>• Pouvoir du représentant légal</li>
+                                <li>• Procuration si nécessaire</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarifs -->
+                <div class="bg-primary/5 rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Tarifs</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg shadow-md">
+                            <thead>
+                                <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                    <th class="py-3 px-6 text-left">Service</th>
+                                    <th class="py-3 px-6 text-left">Tarifs (MGA)</th>
+                                    <th class="py-3 px-6 text-left">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 text-sm font-light">
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">Dépôt simple (1 dessin/modèle, 5 ans)</td>
+                                    <td class="py-3 px-6 text-left">8 000</td>
+                                    <td class="py-3 px-6 text-left">Protection valable 5 ans</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">Dépôt double</td>
+                                    <td class="py-3 px-6 text-left">14 000</td>
+                                    <td class="py-3 px-6 text-left">2 dessins/modèles dans une même demande</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">Dépôt triple</td>
+                                    <td class="py-3 px-6 text-left">18 000</td>
+                                    <td class="py-3 px-6 text-left">3 dessins/modèles</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">Revendication de priorité (par priorité)</td>
+                                    <td class="py-3 px-6 text-left">6 000</td>
+                                    <td class="py-3 px-6 text-left">Si priorité revendiquée</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">Enregistrement + publication</td>
+                                    <td class="py-3 px-6 text-left">4 000</td>
+                                    <td class="py-3 px-6 text-left">Frais de mise en publication</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Examen -->
+        <section id="examen" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-secondary text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-search text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Examen de la Demande</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Après le dépôt, votre demande de dessin/modèle subit un examen formel pour vérifier sa conformité avec les exigences légales et réglementaires.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Examen formel</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Vérification de la complétude du dossier</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Conformité des représentations graphiques</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Paiement des frais de dépôt</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Classement correct de Locarno</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Respect des conditions de forme</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Motifs de rejet</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-times text-red-600 mr-2 mt-1"></i>
+                                <span>Défaut de nouveauté (divulgation antérieure)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times text-red-600 mr-2 mt-1"></i>
+                                <span>Caractère fonctionnel (non esthétique)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times text-red-600 mr-2 mt-1"></i>
+                                <span>Contrariété à l'ordre public</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times text-red-600 mr-2 mt-1"></i>
+                                <span>Représentations insuffisantes</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times text-red-600 mr-2 mt-1"></i>
+                                <span>Non-conformité aux exigences légales</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-secondary/5 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Procédure d'examen</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-secondary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">1</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Réception de la demande</h4>
+                                <p class="text-gray-600 text-sm">Accusé de réception et attribution d'un numéro de dépôt</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-secondary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">2</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Examen de fond</h4>
+                                <p class="text-gray-600 text-sm">Vérification des conditions de protection et de la nouveauté</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-secondary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">3</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Notification des irrégularités</h4>
+                                <p class="text-gray-600 text-sm">Le demandeur est invité à régulariser son dossier si nécessaire</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-secondary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">4</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Décision d'enregistrement</h4>
+                                <p class="text-gray-600 text-sm">Délivrance du certificat d'enregistrement si la demande est conforme</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Délivrance -->
+        <section id="delivrance" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-accent text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-award text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Délivrance du Certificat</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Après examen favorable, l'OMAPI délivre un certificat d'enregistrement qui confère à son titulaire un droit exclusif d'exploitation du dessin ou modèle pour une durée initiale de 5 ans.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Droits conférés</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-accent mr-2 mt-1"></i>
+                                <span>Droit exclusif d'utiliser le dessin ou modèle</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-accent mr-2 mt-1"></i>
+                                <span>Droit d'interdire l'exploitation non autorisée</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-accent mr-2 mt-1"></i>
+                                <span>Droit de céder ou licencier les droits</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-accent mr-2 mt-1"></i>
+                                <span>Droit d'engager des actions en contrefaçon</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Durée de protection</h3>
+                        <div class="space-y-3">
+                            <div class="bg-accent/10 rounded-lg p-3">
+                                <div class="font-bold text-accent mb-1">Protection initiale</div>
+                                <div class="text-sm text-gray-600">5 ans à compter de la date de dépôt</div>
+                            </div>
+                            <div class="bg-accent/10 rounded-lg p-3">
+                                <div class="font-bold text-accent mb-1">Renouvellements possibles</div>
+                                <div class="text-sm text-gray-600">4 périodes successives de 5 ans chacune</div>
+                            </div>
+                            <div class="bg-accent/10 rounded-lg p-3">
+                                <div class="font-bold text-accent mb-1">Durée maximale</div>
+                                <div class="text-sm text-gray-600">25 ans de protection totale</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-accent/5 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Procédure de délivrance</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">1</div>
+                            <div>
+                                <div class="font-medium text-gray-800">Décision d'enregistrement</div>
+                                <div class="text-sm text-gray-600">Notification de la décision favorable au demandeur</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">2</div>
+                            <div>
+                                <div class="font-medium text-gray-800">Paiement des frais de délivrance</div>
+                                <div class="text-sm text-gray-600">Versement des frais pour la délivrance du certificat</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">3</div>
+                            <div>
+                                <div class="font-medium text-gray-800">Délivrance du certificat</div>
+                                <div class="text-sm text-gray-600">Remise du certificat d'enregistrement</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">4</div>
+                            <div>
+                                <div class="font-medium text-gray-800">Publication au GOPI</div>
+                                <div class="text-sm text-gray-600">Publication de l'enregistrement au Bulletin Officiel</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Renouvellement -->
+        <section id="renouvellement" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-green-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-sync-alt text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Renouvellement du Dessin/Modèle</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    La protection d'un dessin ou modèle est valable pour 5 ans et peut être renouvelée par périodes successives de 5 ans jusqu'à une durée maximale de 25 ans. Le renouvellement doit être demandé dans les 6 mois précédant l'expiration.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Délais de renouvellement</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="bg-green-100 text-green-800 p-2 rounded-full">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">Période normale</div>
+                                    <div class="text-sm text-gray-600">6 mois avant l'expiration</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="bg-yellow-100 text-yellow-800 p-2 rounded-full">
+                                    <i class="fas fa-exclamation"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">Période de grâce</div>
+                                    <div class="text-sm text-gray-600">6 mois après l'expiration (+sursis)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="bg-red-100 text-red-800 p-2 rounded-full">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">Extinction des droits</div>
+                                    <div class="text-sm text-gray-600">Au-delà de la période de grâce</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Documents pour le renouvellement</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Demande de renouvellement de dessin/modèle</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Preuve du paiement des frais de renouvellement</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Numéro et date du certificat d'enregistrement</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Procuration si le renouvellement est effectué par un mandataire</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-green-50 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Tarifs de renouvellement</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg shadow-md">
+                            <thead>
+                                <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                    <th class="py-3 px-6 text-left">Service</th>
+                                    <th class="py-3 px-6 text-left">Tarifs (MGA)</th>
+                                    <th class="py-3 px-6 text-left">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 text-sm font-light">
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">Renouvellement simple (5 ans)</td>
+                                    <td class="py-3 px-6 text-left">10 000</td>
+                                    <td class="py-3 px-6 text-left">Pour conserver la protection après 5 ans</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">Renouvellement double (5 ans)</td>
+                                    <td class="py-3 px-6 text-left">16 000</td>
+                                    <td class="py-3 px-6 text-left">Pour deux dessins/modèles</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">Renouvellement triple (5 ans)</td>
+                                    <td class="py-3 px-6 text-left">18 000</td>
+                                    <td class="py-3 px-6 text-left">Pour trois dessins/modèles</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Modifications -->
+        <section id="modifications" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-purple-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-edit text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Modifications du Dessin/Modèle</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Après l'enregistrement, certaines modifications peuvent être apportées au dessin ou modèle sous conditions. Ces modifications doivent être demandées auprès de l'OMAPI et publiées pour être opposables aux tiers.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Types de modifications</h3>
+                        <div class="space-y-4">
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-bold text-purple-600 mb-2">Correction d'erreurs</h4>
+                                <p class="text-sm text-gray-600">Correction des erreurs matérielles dans la description ou les représentations.</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-bold text-purple-600 mb-2">Division de la demande</h4>
+                                <p class="text-sm text-gray-600">Séparation de plusieurs dessins ou modèles déposés ensemble.</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-bold text-purple-600 mb-2">Limitation de la protection</h4>
+                                <p class="text-sm text-gray-600">Réduction de l'étendue de la protection pour renforcer sa validité.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Procédure de modification</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-purple-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">1</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Demande de modification</div>
+                                    <div class="text-sm text-gray-600">Formulaire spécifique et justification détaillée</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-purple-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">2</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Examen par l'OMAPI</div>
+                                    <div class="text-sm text-gray-600">Vérification de la conformité de la modification</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-purple-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">3</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Publication au GOPI</div>
+                                    <div class="text-sm text-gray-600">Notification aux tiers de la modification</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-purple-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">4</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Mise à jour du registre</div>
+                                    <div class="text-sm text-gray-600">Inscription de la modification au registre</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-purple-50 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Tarifs des modifications</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg p-4 text-center">
+                            <div class="text-xl font-bold text-purple-600 mb-2">50 000 Ar</div>
+                            <div class="text-gray-600 text-sm">Correction d'erreurs</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 text-center">
+                            <div class="text-xl font-bold text-purple-600 mb-2">75 000 Ar</div>
+                            <div class="text-gray-600 text-sm">Division de la demande</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 text-center">
+                            <div class="text-xl font-bold text-purple-600 mb-2">60 000 Ar</div>
+                            <div class="text-gray-600 text-sm">Limitation de la protection</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Transfert -->
+        <section id="transfert" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-green-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-exchange-alt text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Transfert de Dessin/Modèle</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Le transfert d'un dessin ou modèle consiste à céder les droits de propriété à un tiers. Cette opération doit être obligatoirement inscrite au Registre National des Dessins et Modèles pour être opposable aux tiers.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Conditions de transfert</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                <span>Le dessin ou modèle doit être enregistré et en vigueur</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                <span>Accord écrit entre le cédant et le cessionnaire</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                <span>Le transfert doit porter sur la totalité des droits</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                <span>Le cessionnaire doit remplir les conditions légales</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Documents nécessaires</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Formulaire de demande de transfert</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Acte de cession (contrat de transfert)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Pièces d'identité du cédant et du cessionnaire</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Preuve du paiement des frais d'inscription</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-green-50 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Tarifs de transfert</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white rounded-lg p-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">Transfert de dessin/modèle</span>
+                                <span class="text-xl font-bold text-green-600">70 000 Ar</span>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">Licence d'exploitation</span>
+                                <span class="text-xl font-bold text-green-600">50 000 Ar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Radiation -->
+        <section id="radiation" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-red-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-times-circle text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Radiation du Droit sur Dessin/Modèle</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    La radiation d'un dessin ou modèle entraîne la perte définitive des droits de propriété industrielle. Elle peut intervenir pour divers motifs légaux et procédures spécifiques.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Motifs de radiation</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                <span><strong>Non-renouvellement :</strong> Absence de demande de renouvellement</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                <span><strong>Renonciation volontaire :</strong> Demande du titulaire</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                <span><strong>Nullité :</strong> Vice dans le dépôt initial</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                <span><strong>Extinction :</strong> Décès sans héritier</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Procédure de radiation</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">1</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Demande de radiation</div>
+                                    <div class="text-sm text-gray-600">Formulaire et motifs détaillés</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">2</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Instruction du dossier</div>
+                                    <div class="text-sm text-gray-600">Vérification des motifs par l'OMAPI</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">3</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Publication au Bulletin Officiel</div>
+                                    <div class="text-sm text-gray-600">Notification aux tiers concernés</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">4</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Décision de radiation</div>
+                                    <div class="text-sm text-gray-600">Mise à jour du registre national</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-red-50 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Conséquences de la radiation</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white rounded-lg p-4">
+                            <h4 class="font-bold text-red-600 mb-2">Immédiates</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Perte du droit exclusif</li>
+                                <li>• Le dessin/modèle tombe dans le domaine public</li>
+                                <li>• Tout le monde peut l'utiliser librement</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <h4 class="font-bold text-red-600 mb-2">À long terme</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Impossible de le restaurer</li>
+                                <li>• Perte de la valeur commerciale</li>
+                                <li>• Impact sur la stratégie de design</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section FAQ -->
+        <section id="faq" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-purple-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-question-circle text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Questions Fréquemment Posées</h2>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Quelle est la durée de protection d'un dessin ou modèle ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                La protection d'un dessin ou modèle est valable pour 5 ans à compter de la date de dépôt. Elle peut être renouvelée par périodes successives de 5 ans jusqu'à une durée maximale de 25 ans.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Qu'est-ce que le classement de Locarno ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                Le classement de Locarno est une classification internationale qui répartit les produits en différentes classes selon leur fonction. Il permet d'organiser les dessins et modèles industriels et facilite les recherches d'antériorité.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Puis-je déposer plusieurs dessins ou modèles en une seule demande ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                Oui, vous pouvez déposer plusieurs dessins ou modèles en une seule demande multiple, à condition qu'ils appartiennent à la même classe de Locarno. Des frais supplémentaires s'appliquent pour chaque dessin ou modèle supplémentaire.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Quelles créations ne peuvent pas être protégées comme dessin ou modèle ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                Ne peuvent pas être protégées : les créations dont les caractéristiques sont uniquement fonctionnelles, les œuvres d'art pur, les créations contraires à l'ordre public ou aux bonnes mœurs, et les éléments purement informatifs comme les logos ou textes.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Comment prouver la nouveauté de mon dessin ou modèle ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                La nouveauté est présumée si le dessin ou modèle n'a pas été divulgué au public avant la date de dépôt. Pour conserver la nouveauté, il est recommandé de garder la création confidentielle jusqu'au dépôt et d'éviter toute publication ou présentation publique.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Contact et Assistance -->
+        <section class="mb-12">
+            <div class="bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg p-8 text-white text-center">
+                <h2 class="text-2xl font-bold mb-4">Besoin d'aide pour votre dépôt ?</h2>
+                <p class="mb-6 max-w-2xl mx-auto">
+                    Nos experts en propriété industrielle sont à votre disposition pour vous accompagner dans toutes les étapes de votre démarche de protection de dessin ou modèle.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="{% url 'contact' %}" class="bg-white text-primary px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-phone mr-2"></i> Contacter un expert
+                    </a>
+                    <a href="{% url 'formulaires' %}" class="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-primary transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-download mr-2"></i> Télécharger les formulaires
+                    </a>
+                </div>
+            </div>
+        </section>
+            </div>
+        </section>
+    </div> <!-- Fermeture de md:w-3/4 -->
+    </div> <!-- Fermeture de md:flex md:space-x-8 -->
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ formation.titre }} - OMAPI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+    
+    <!-- Fil d'Ariane -->
+    <div class="bg-gray-100 py-3">
+        <div class="max-w-6xl mx-auto px-3 sm:px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fas fa-home mr-1"></i> Accueil
+                </a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <a href="{% url 'formations_list' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">Formations</a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <span class="text-primary font-medium">{{ formation.titre }}</span>
+            </nav>
+        </div>
+    </div>
+    
+    <!-- Contenu Principal -->
+    <main class="max-w-6xl mx-auto px-3 sm:px-4 py-8">
+        <div class="bg-white p-8 rounded-xl shadow-lg">
+            <h1 class="text-3xl md:text-4xl font-bold text-primary mb-4">{{ formation.titre }}</h1>
+            
+            <div class="flex flex-wrap items-center gap-4 mb-6 text-gray-700">
+                <span class="text-lg font-medium">
+                    <i class="far fa-calendar-alt mr-2 text-secondary"></i>
+                    {% if formation.date_debut %}Du {{ formation.date_debut|date:"d/m/Y" }}{% endif %}
+                    {% if formation.date_fin %} au {{ formation.date_fin|date:"d/m/Y" }}{% endif %}
+                </span>
+                {% if formation.lieu %}
+                    <span class="text-lg font-medium">
+                        <i class="fas fa-map-marker-alt mr-2 text-secondary"></i>
+                        {{ formation.lieu }}
+                    </span>
+                {% endif %}
+                {% if formation.type_formation == 'brevets' %}
+                    <span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full dark:bg-purple-900 dark:text-purple-300"><i class="fas fa-lightbulb mr-1"></i> Brevets</span>
+                {% elif formation.type_formation == 'marques' %}
+                    <span class="bg-pink-100 text-pink-800 text-sm font-medium px-3 py-1 rounded-full dark:bg-pink-900 dark:text-pink-300"><i class="fas fa-tag mr-1"></i> Marques</span>
+                {% elif formation.type_formation == 'dessins_modeles' %}
+                    <span class="bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full dark:bg-indigo-900 dark:text-indigo-300"><i class="fas fa-brush mr-1"></i> Dessins & Modèles</span>
+                {% elif formation.type_formation == 'contentieux' %}
+                    <span class="bg-red-100 text-red-800 text-sm font-medium px-3 py-1 rounded-full dark:bg-red-900 dark:text-red-300"><i class="fas fa-balance-scale mr-1"></i> Contentieux PI</span>
+                {% elif formation.type_formation == 'valorisation' %}
+                    <span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full dark:bg-yellow-900 dark:text-yellow-300"><i class="fas fa-chart-line mr-1"></i> Valorisation PI</span>
+                {% else %}
+                    <span class="bg-gray-100 text-gray-800 text-sm font-medium px-3 py-1 rounded-full dark:bg-gray-900 dark:text-gray-300"><i class="fas fa-book-open mr-1"></i> Général</span>
+                {% endif %}
+            </div>
+            
+            {% if formation.image_presentation %}
+                <div class="mb-8">
+                    <img src="{{ formation.image_presentation.url }}" alt="Image de présentation de la formation {{ formation.titre }}" class="rounded-lg shadow-md w-full h-64 object-cover">
+                </div>
+            {% endif %}
+            
+            {% if formation.duree_heures %}
+                <div class="bg-blue-50 p-4 rounded-lg mb-6 flex items-center">
+                    <i class="fas fa-clock text-blue-600 text-2xl mr-4"></i>
+                    <div>
+                        <h3 class="text-lg font-semibold text-blue-800">Durée estimée</h3>
+                        <p class="text-blue-700">{{ formation.duree_heures }}</p>
+                    </div>
+                </div>
+            {% endif %}
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Colonne de gauche : Description de la formation -->
+                <div>
+                    <div class="prose max-w-none text-gray-700 leading-relaxed mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-3">Description de la formation</h2>
+                        {{ formation.description|linebreaksbr }}
+                    </div>
+                    
+                    {% if formation.public_cible %}
+                        <div class="bg-green-50 p-4 rounded-lg mb-6">
+                            <h3 class="text-xl font-semibold text-green-800 mb-2"><i class="fas fa-users mr-2 text-green-600"></i> Public Cible</h3>
+                            <p class="text-green-700">{{ formation.public_cible|linebreaksbr }}</p>
+                        </div>
+                    {% endif %}
+                    
+                    {% if formation.objectifs_apprentissage %}
+                        <div class="bg-yellow-50 p-4 rounded-lg mb-6">
+                            <h3 class="text-xl font-semibold text-yellow-800 mb-2"><i class="fas fa-bullseye mr-2 text-yellow-600"></i> Objectifs d'Apprentissage</h3>
+                            <p class="text-yellow-700">{{ formation.objectifs_apprentissage|linebreaksbr }}</p>
+                        </div>
+                    {% endif %}
+                    
+                    {% if formation.prix %}
+                        <div class="bg-purple-50 p-4 rounded-lg mb-6 flex items-center">
+                            <i class="fas fa-money-bill-wave text-purple-600 text-2xl mr-4"></i>
+                            <div>
+                                <h3 class="text-lg font-semibold text-purple-800">Coût de la formation</h3>
+                                <p class="text-purple-700">{{ formation.prix }} Ar</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    {% if formation.modalites_inscription %}
+                        <div class="bg-red-50 p-4 rounded-lg mb-6">
+                            <h3 class="text-xl font-semibold text-red-800 mb-2"><i class="fas fa-file-signature mr-2 text-red-600"></i> Modalités d'Inscription</h3>
+                            <p class="text-red-700">{{ formation.modalites_inscription|linebreaksbr }}</p>
+                        </div>
+                    {% endif %}
+                    
+                    {% if formation.formateurs %}
+                        <div class="bg-gray-50 p-4 rounded-lg mb-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2"><i class="fas fa-chalkboard-teacher mr-2 text-primary"></i> Formateurs</h3>
+                            <p class="text-gray-700">{{ formation.formateurs }}</p>
+                        </div>
+                    {% endif %}
+                    
+                    {% if formation.programme %}
+                        <div class="mb-8">
+                            <a href="{{ formation.programme.url }}" target="_blank" class="inline-flex items-center bg-primary hover:bg-secondary text-white font-bold py-3 px-6 rounded-lg text-lg shadow-lg transform transition duration-300 hover:scale-105">
+                                <i class="fas fa-download mr-3"></i> Télécharger le programme
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Colonne de droite : Formulaire d'inscription -->
+                <div>
+                    <div class="bg-gray-50 rounded-xl shadow-lg p-6 sticky top-24">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Inscription à la formation</h2>
+                        
+                        {% if success_message %}
+                            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6 text-center">
+                                <p>{{ success_message }}</p>
+                            </div>
+                        {% else %}
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="grid grid-cols-1 gap-4 mb-4">
+                                    <div>
+                                        <label for="nom" class="block text-gray-700 font-medium mb-1 flex items-center">
+                                            <i class="fas fa-user mr-2 text-primary"></i> Nom
+                                        </label>
+                                        <input type="text" id="nom" name="nom" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
+                                    </div>
+                                    <div>
+                                        <label for="prenom" class="block text-gray-700 font-medium mb-1 flex items-center">
+                                            <i class="fas fa-user mr-2 text-primary"></i> Prénom
+                                        </label>
+                                        <input type="text" id="prenom" name="prenom" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 gap-4 mb-4">
+                                    <div>
+                                        <label for="email" class="block text-gray-700 font-medium mb-1 flex items-center">
+                                            <i class="fas fa-envelope mr-2 text-primary"></i> Email
+                                        </label>
+                                        <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
+                                    </div>
+                                    <div>
+                                        <label for="telephone" class="block text-gray-700 font-medium mb-1 flex items-center">
+                                            <i class="fas fa-phone mr-2 text-primary"></i> Téléphone
+                                        </label>
+                                        <input type="tel" id="telephone" name="telephone" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="message" class="block text-gray-700 font-medium mb-1 flex items-center">
+                                        <i class="fas fa-comment mr-2 text-primary"></i> Message (facultatif)
+                                    </label>
+                                    <textarea id="message" name="message" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300"></textarea>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="bg-primary hover:bg-secondary text-white font-bold py-2 px-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 w-full">
+                                        <i class="fas fa-paper-plane mr-2"></i> S'inscrire à la formation
+                                    </button>
+                                </div>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <a href="{% url 'formations_list' %}" class="inline-flex items-center text-gray-600 hover:text-primary font-semibold">
+                    <i class="fas fa-arrow-left mr-2"></i> Retour à la liste des formations
+                </a>
+            </div>
+        </div>
+        
+        <!-- Section Participer à la formation (Call to Action) -->
+        <section class="mt-12 mb-12">
+            <div class="bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg p-8 text-white text-center">
+                <h2 class="text-2xl font-bold mb-4">Participer à la formation</h2>
+                <p class="mb-6 max-w-2xl mx-auto">
+                    Rejoignez-nous pour cette formation et développez vos compétences en propriété industrielle.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="{% url 'formations_list' %}" class="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-primary transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-list mr-2"></i> Voir toutes les formations
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    {% include 'frontend/includes/footer.html' %}
+    <!-- Script pour le menu mobile et sous-menus -->
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+    </script>
+</body>
+</html>

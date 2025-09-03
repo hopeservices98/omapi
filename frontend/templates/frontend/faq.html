@@ -1,0 +1,552 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - OMAPI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <!-- Fil d'Ariane -->
+    <div class="bg-gray-100 py-3">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fas fa-home mr-1"></i> Accueil
+                </a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors duration-300">Ressources</a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <span class="text-primary font-medium">FAQ</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Contenu Principal -->
+    <main class="max-w-5xl mx-auto px-3 sm:px-4 py-8">
+        <!-- Titre de la page -->
+        <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Questions Fréquentes</h1>
+            <p class="text-xl text-secondary font-medium">Trouvez des réponses à vos questions sur la propriété industrielle</p>
+            <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+        </div>
+
+        <!-- Introduction -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <div class="flex items-start space-x-4">
+                <div class="bg-primary/10 p-3 rounded-lg flex-shrink-0">
+                    <i class="fas fa-question-circle text-2xl text-primary"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800 mb-3">À propos de notre FAQ</h2>
+                    <p class="text-gray-600 mb-3">
+                        Cette Foire Aux Questions (FAQ) a été conçue pour vous aider à trouver rapidement des réponses aux questions les plus fréquentes 
+                        concernant la propriété industrielle à Madagascar et les services de l'OMAPI.
+                    </p>
+                    <p class="text-gray-600">
+                        Les réponses sont organisées par catégories pour faciliter votre recherche. Si vous ne trouvez pas la réponse à votre question, 
+                        n'hésitez pas à contacter notre service d'assistance.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barre de recherche -->
+        <div class="bg-white rounded-xl shadow-lg p-4 mb-8">
+            <div class="relative">
+                <input type="text" id="faq-search" placeholder="Rechercher une question..." 
+                       class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                <i class="fas fa-search absolute left-4 top-3.5 text-gray-400"></i>
+            </div>
+        </div>
+
+        <!-- Catégories de FAQ -->
+        <div class="mb-6">
+            <div class="flex flex-wrap gap-2">
+                <button class="category-btn bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300" data-category="all">
+                    Toutes les questions
+                </button>
+                <button class="category-btn bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 border border-gray-300" data-category="general">
+                    Général
+                </button>
+                <button class="category-btn bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 border border-gray-300" data-category="marque">
+                    Marques
+                </button>
+                <button class="category-btn bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 border border-gray-300" data-category="brevet">
+                    Brevets
+                </button>
+                <button class="category-btn bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 border border-gray-300" data-category="dessin">
+                    Dessins et Modèles
+                </button>
+                <button class="category-btn bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 border border-gray-300" data-category="nom">
+                    Noms Commerciaux
+                </button>
+                <button class="category-btn bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 border border-gray-300" data-category="procedure">
+                    Procédures
+                </button>
+                <button class="category-btn bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 border border-gray-300" data-category="tarif">
+                    Tarifs
+                </button>
+            </div>
+        </div>
+
+        <!-- Liste des questions/réponses -->
+        <div class="space-y-4">
+            <!-- Question 1 - Général -->
+            <div class="faq-item bg-white rounded-xl shadow-md overflow-hidden" data-category="general">
+                <button class="faq-question w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300">
+                    <h3 class="font-medium text-gray-800">Qu'est-ce que la propriété industrielle ?</h3>
+                    <i class="fas fa-chevron-down text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-answer hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600 mb-3">
+                        La propriété industrielle est un ensemble de droits exclusifs qui protègent les innovations et créations intellectuelles 
+                        dans le domaine industriel, commercial et artisanal. Elle comprend principalement :
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                        <li>Les brevets d'invention</li>
+                        <li>Les marques de produits ou services</li>
+                        <li>Les dessins et modèles industriels</li>
+                        <li>Les noms commerciaux</li>
+                        <li>Les indications géographiques</li>
+                    </ul>
+                    <p class="text-gray-600 mt-3">
+                        Ces droits permettent aux titulaires de protéger leurs créations et d'en tirer profit, tout en contribuant à l'innovation 
+                        et au développement économique.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 2 - Général -->
+            <div class="faq-item bg-white rounded-xl shadow-md overflow-hidden" data-category="general">
+                <button class="faq-question w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300">
+                    <h3 class="font-medium text-gray-800">Quel est le rôle de l'OMAPI ?</h3>
+                    <i class="fas fa-chevron-down text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-answer hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600 mb-3">
+                        L'Office Malgache de la Propriété Industrielle (OMAPI) est l'organisme public chargé de l'administration de la propriété 
+                        industrielle à Madagascar. Ses missions principales sont :
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                        <li>Recevoir et examiner les demandes de titres de propriété industrielle</li>
+                        <li>Délivrer les titres de propriété industrielle (brevets, marques, etc.)</li>
+                        <li>Tenir les registres de propriété industrielle</li>
+                        <li>Publier la Gazette Officielle de la Propriété Industrielle (GOPI)</li>
+                        <li>Sensibiliser et informer le public sur la propriété industrielle</li>
+                        <li>Assurer la promotion de l'innovation et de la créativité</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Question 3 - Marques -->
+            <div class="faq-item bg-white rounded-xl shadow-md overflow-hidden" data-category="marque">
+                <button class="faq-question w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300">
+                    <h3 class="font-medium text-gray-800">Comment déposer une marque à l'OMAPI ?</h3>
+                    <i class="fas fa-chevron-down text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-answer hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600 mb-3">
+                        Pour déposer une marque à l'OMAPI, vous devez suivre les étapes suivantes :
+                    </p>
+                    <ol class="list-decimal list-inside text-gray-600 space-y-2 ml-4">
+                        <li>
+                            <strong>Remplir le formulaire de demande</strong> : Téléchargez le formulaire de dépôt de marque sur notre site 
+                            et remplissez-le avec soin en lettres majuscules.
+                        </li>
+                        <li>
+                            <strong>Fournir les pièces requises</strong> : Joignez une reproduction de la marque, la liste des produits ou services 
+                            concernés, et justifiez du paiement des taxes de dépôt.
+                        </li>
+                        <li>
+                            <strong>Déposer votre demande</strong> : Présentez votre dossier complet à l'OMAPI par voie postale ou directement 
+                            à nos guichets.
+                        </li>
+                        <li>
+                            <strong>Suivre l'examen</strong> : Votre demande sera examinée pour vérifier sa conformité aux exigences légales.
+                        </li>
+                        <li>
+                            <strong>Publication à la GOPI</strong> : Si votre demande est acceptée, elle sera publiée dans la Gazette Officielle 
+                            de la Propriété Industrielle.
+                        </li>
+                        <li>
+                            <strong>Obtenir votre certificat d'enregistrement</strong> : À l'issue du délai d'opposition sans contestation, 
+                            votre marque sera enregistrée et vous recevrez un certificat.
+                        </li>
+                    </ol>
+                    <p class="text-gray-600 mt-3">
+                        Nous vous recommandons de consulter notre guide de dépôt de marque pour plus de détails sur chaque étape.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 4 - Marques -->
+            <div class="faq-item bg-white rounded-xl shadow-md overflow-hidden" data-category="marque">
+                <button class="faq-question w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300">
+                    <h3 class="font-medium text-gray-800">Quelle est la durée de protection d'une marque ?</h3>
+                    <i class="fas fa-chevron-down text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-answer hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600 mb-3">
+                        À Madagascar, la durée de protection d'une marque est de 10 ans à compter de la date de dépôt de la demande. 
+                        Cette protection est renouvelable indéfiniment par périodes successives de 10 ans.
+                    </p>
+                    <p class="text-gray-600 mb-3">
+                        Pour renouveler votre marque, vous devez :
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                        <li>Déposer une demande de renouvellement au plus tard 6 mois après la date d'expiration</li>
+                        <li>Payer les taxes de renouvellement correspondantes</li>
+                        <li>Fournir les justificatifs nécessaires</li>
+                    </ul>
+                    <p class="text-gray-600 mt-3">
+                        Il est important de respecter les délais de renouvellement pour éviter la déchéance de vos droits. 
+                        L'OMAPI envoie généralement des rappels avant l'expiration, mais il est de votre responsabilité de 
+                        veiller au renouvellement à temps.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 5 - Brevets -->
+            <div class="faq-item bg-white rounded-xl shadow-md overflow-hidden" data-category="brevet">
+                <button class="faq-question w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300">
+                    <h3 class="font-medium text-gray-800">Quelles inventions peuvent être protégées par brevet ?</h3>
+                    <i class="fas fa-chevron-down text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-answer hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600 mb-3">
+                        Pour être brevetable, une invention doit remplir trois conditions essentielles :
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 ml-4">
+                        <li>
+                            <strong>Nouveauté</strong> : L'invention ne doit pas avoir été divulguée au public avant le dépôt de la demande 
+                            de brevet, sauf dans le cadre d'une exception légale (par exemple, lors d'une exposition officiellement reconnue).
+                        </li>
+                        <li>
+                            <strong>Activité inventive</strong> : L'invention ne doit pas découler de manière évidente de l'état de la technique 
+                            pour un homme du métier. Elle doit représenter un saut inventif par rapport aux connaissances existantes.
+                        </li>
+                        <li>
+                            <strong>Application industrielle</strong> : L'invention doit pouvoir être fabriquée ou utilisée dans tout type d'industrie, 
+                            y compris l'agriculture.
+                        </li>
+                    </ul>
+                    <p class="text-gray-600 mt-3">
+                        Certaines inventions ne sont pas brevetables, notamment :
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                        <li>Les découvertes, théories scientifiques et méthodes mathématiques</li>
+                        <li>Les créations esthétiques</li>
+                        <li>Les plans, principes et méthodes dans l'exercice d'activités intellectuelles</li>
+                        <li>Les programmes d'ordinateurs</li>
+                        <li>Les présentations d'informations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Question 6 - Brevets -->
+            <div class="faq-item bg-white rounded-xl shadow-md overflow-hidden" data-category="brevet">
+                <button class="faq-question w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300">
+                    <h3 class="font-medium text-gray-800">Quelle est la durée de protection d'un brevet ?</h3>
+                    <i class="fas fa-chevron-down text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-answer hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600 mb-3">
+                        À Madagascar, la durée de protection d'un brevet est de 20 ans à compter de la date de dépôt de la demande. 
+                        Cette protection est soumise au paiement d'annuités maintenues en vigueur.
+                    </p>
+                    <p class="text-gray-600 mb-3">
+                        Les annuités doivent être payées à compter de la deuxième année suivant la date de dépôt et ce, 
+                        chaque année jusqu'à l'expiration de la 20ème année. Un délai de grâce de 6 mois est accordé pour le paiement 
+                        de chaque annuité, moyennant le paiement d'une surtaxe.
+                    </p>
+                    <p class="text-gray-600">
+                        Le non-paiement des annuités entraîne la déchéance du brevet et la perte des droits qui y sont attachés. 
+                        Il est donc essentiel de surveiller les échéances et de payer les annuités à temps pour maintenir votre brevet en vigueur.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 7 - Dessins et Modèles -->
+            <div class="faq-item bg-white rounded-xl shadow-md overflow-hidden" data-category="dessin">
+                <button class="faq-question w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300">
+                    <h3 class="font-medium text-gray-800">Qu'est-ce qu'un dessin ou modèle industriel ?</h3>
+                    <i class="fas fa-chevron-down text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-answer hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600 mb-3">
+                        Un dessin ou modèle industriel est une protection accordée à l'apparence esthétique d'un produit ou d'une partie 
+                        de produit. Il peut s'agir de :
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                        <li>Des caractéristiques tridimensionnelles (la forme d'un produit)</li>
+                        <li>Des caractéristiques bidimensionnelles (les ornements, lignes, couleurs)</li>
+                        <li>Des combinaisons de ces caractéristiques</li>
+                    </ul>
+                    <p class="text-gray-600 mt-3">
+                        Pour être protégeable, un dessin ou modèle doit être nouveau et avoir un caractère individuel. 
+                        La protection par dessin ou modèle industriel s'applique à une grande variété de produits, notamment 
+                        l'emballage, les textiles, les appareils électroniques, les meubles, etc.
+                    </p>
+                    <p class="text-gray-600 mt-3">
+                        Il est important de noter que la protection par dessin ou modèle industriel ne couvre pas les aspects 
+                        techniques ou fonctionnels du produit, qui peuvent être protégés par brevet.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 8 - Dessins et Modèles -->
+            <div class="faq-item bg-white rounded-xl shadow-md overflow-hidden" data-category="dessin">
+                <button class="faq-question w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300">
+                    <h3 class="font-medium text-gray-800">Quelle est la durée de protection d'un dessin ou modèle ?</h3>
+                    <i class="fas fa-chevron-down text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-answer hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600 mb-3">
+                        À Madagascar, la durée de protection d'un dessin ou modèle industriel est de 5 ans à compter de la date 
+                        de dépôt de la demande. Cette protection est renouvelable deux fois, soit une durée maximale de 15 ans.
+                    </p>
+                    <p class="text-gray-600 mb-3">
+                        Pour renouveler votre dessin ou modèle, vous devez :
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                        <li>Déposer une demande de renouvellement avant l'expiration de la période de protection en cours</li>
+                        <li>Payer les taxes de renouvellement correspondantes</li>
+                        <li>Fournir les justificatifs nécessaires</li>
+                    </ul>
+                    <p class="text-gray-600 mt-3">
+                        Comme pour les marques, il est important de respecter les délais de renouvellement pour maintenir 
+                        votre protection. L'OMAPI envoie généralement des rappels avant l'expiration pour vous permettre 
+                        d'effectuer les démarches nécessaires à temps.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 9 - Noms Commerciaux -->
+            <div class="faq-item bg-white rounded-xl shadow-md overflow-hidden" data-category="nom">
+                <button class="faq-question w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300">
+                    <h3 class="font-medium text-gray-800">Quelle est la différence entre une marque et un nom commercial ?</h3>
+                    <i class="fas fa-chevron-down text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-answer hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600 mb-3">
+                        Bien qu'ils soient souvent confondus, la marque et le nom commercial sont deux notions distinctes de la propriété industrielle :
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-2">Marque</h4>
+                            <p class="text-gray-600 text-sm">
+                                Signe distinctif servant à identifier les produits ou services d'une entreprise et à les différencier 
+                                de ceux des concurrents. Elle peut être un mot, un logo, une combinaison de couleurs, un son, etc.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-2">Nom commercial</h4>
+                            <p class="text-gray-600 text-sm">
+                                Nom ou appellation sous lequel une personne physique ou morale exerce son activité commerciale, 
+                                industrielle ou artisanale. Il identifie l'entreprise elle-même plutôt que ses produits ou services.
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mt-4">
+                        Par exemple, "Coca-Cola" est une marque qui identifie les boissons, tandis que "The Coca-Cola Company" 
+                        est le nom commercial de l'entreprise qui fabrique ces boissons.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 10 - Procédures -->
+            <div class="faq-item bg-white rounded-xl shadow-md overflow-hidden" data-category="procedure">
+                <button class="faq-question w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300">
+                    <h3 class="font-medium text-gray-800">Comment suivre l'état d'avancement de ma demande ?</h3>
+                    <i class="fas fa-chevron-down text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-answer hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600 mb-3">
+                        Pour suivre l'état d'avancement de votre demande de propriété industrielle, vous avez plusieurs options :
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 ml-4">
+                        <li>
+                            <strong>Via votre compte en ligne</strong> : Si vous avez déposé votre demande via notre plateforme en ligne, 
+                            vous pouvez vous connecter à votre espace personnel pour suivre en temps réel l'état d'avancement de votre dossier.
+                        </li>
+                        <li>
+                            <strong>Par contact direct</strong> : Vous pouvez contacter l'OMAPI par téléphone ou email en fournissant 
+                            votre numéro de dossier pour obtenir des informations sur l'état d'avancement.
+                        </li>
+                        <li>
+                            <strong>Consultation de la GOPI</strong> : Pour les demandes qui ont atteint l'étape de publication, 
+                            vous pouvez consulter la Gazette Officielle de la Propriété Industrielle (GOPI) pour vérifier 
+                            la publication de votre demande.
+                        </li>
+                    </ul>
+                    <p class="text-gray-600 mt-3">
+                        Les principales étapes du traitement d'une demande sont : réception, examen formel, publication, 
+                        délivrance (ou rejet). Chaque étape a des délais spécifiques qui vous seront communiqués 
+                        lors du dépôt de votre demande.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 11 - Tarifs -->
+            <div class="faq-item bg-white rounded-xl shadow-md overflow-hidden" data-category="tarif">
+                <button class="faq-question w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300">
+                    <h3 class="font-medium text-gray-800">Quels sont les tarifs pour les dépôts de propriété industrielle ?</h3>
+                    <i class="fas fa-chevron-down text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-answer hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600 mb-3">
+                        Les tarifs pour les dépôts de propriété industrielle à l'OMAPI varient selon le type de droit que vous souhaitez protéger 
+                        et les services requis. Les principaux tarifs incluent :
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                        <li><strong>Taxes de dépôt</strong> : Payables au moment du dépôt de la demande</li>
+                        <li><strong>Taxes de publication</strong> : Pour la publication dans la GOPI</li>
+                        <li><strong>Taxes de délivrance</strong> : Pour l'obtention du titre de propriété industrielle</li>
+                        <li><strong>Taxes de maintien</strong> : Annuités pour les brevets, taxes de renouvellement pour les marques et dessins/modèles</li>
+                        <li><strong>Taxes pour les services supplémentaires</strong> : Copies, certificats, recherches, etc.</li>
+                    </ul>
+                    <p class="text-gray-600 mt-3">
+                        Le barème détaillé des taxes est disponible dans notre section "Tarifs" ou peut être obtenu auprès 
+                        de nos guichets. Les tarifs sont périodiquement mis à jour, nous vous recommandons de vous 
+                        renseigner sur les tarifs en vigueur au moment de votre dépôt.
+                    </p>
+                    <p class="text-gray-600 mt-3">
+                        Notez que certains bénéficiaires (petites et moyennes entreprises, inventeurs indépendants, etc.) 
+                        peuvent bénéficier de réductions de tarifs sous conditions.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 12 - Général -->
+            <div class="faq-item bg-white rounded-xl shadow-md overflow-hidden" data-category="general">
+                <button class="faq-question w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300">
+                    <h3 class="font-medium text-gray-800">Que faire si je n'ai pas trouvé réponse à ma question ?</h3>
+                    <i class="fas fa-chevron-down text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-answer hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                    <p class="text-gray-600 mb-3">
+                        Si vous n'avez pas trouvé réponse à votre question dans notre FAQ, vous pouvez nous contacter par plusieurs moyens :
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 ml-4">
+                        <li>
+                            <strong>Service d'assistance téléphonique</strong> : Notre équipe est disponible pour répondre à vos 
+                            questions du lundi au vendredi, de 8h à 17h, au numéro indiqué dans la section "Contact" de notre site.
+                        </li>
+                        <li>
+                            <strong>Email</strong> : Vous pouvez nous envoyer un email à l'adresse daniel.razanajaona@gmail.com en décrivant
+                            précisément votre question ou votre problème. Nous nous engageons à vous répondre dans les meilleurs délais.
+                        </li>
+                        <li>
+                            <strong>En personne</strong> : Vous pouvez vous rendre à nos bureaux pendant les heures d'ouverture 
+                            pour obtenir une assistance personnalisée de notre part.
+                        </li>
+                        <li>
+                            <strong>Formulaire de contact</strong> : Utilisez notre formulaire de contact en ligne pour soumettre 
+                            votre question, et nous vous répondrons par email ou téléphone.
+                        </li>
+                    </ul>
+                    <p class="text-gray-600 mt-3">
+                        N'hésitez pas à nous contacter pour toute question relative à la propriété industrielle. 
+                        Notre mission est de vous accompagner dans vos démarches et de vous aider à protéger vos créations.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Contact -->
+        <div class="bg-blue-50 rounded-xl p-6 mt-8">
+            <h3 class="font-bold text-lg text-primary mb-4">Vous avez encore des questions ?</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-lg p-4 shadow-sm">
+                    <h4 class="font-medium text-gray-800 mb-2">Contactez-nous directement</h4>
+                    <p class="text-sm text-gray-600 mb-3">Notre équipe d'experts est disponible pour répondre à toutes vos questions</p>
+                    <a href="{% url 'contact' %}" class="text-primary hover:text-secondary text-sm font-medium">Contacter l'OMAPI →</a>
+                </div>
+                <div class="bg-white rounded-lg p-4 shadow-sm">
+                    <h4 class="font-medium text-gray-800 mb-2">Prendre rendez-vous</h4>
+                    <p class="text-sm text-gray-600 mb-3">Planifiez un entretien personnalisé avec un de nos conseillers</p>
+                    <a href="#" class="text-primary hover:text-secondary text-sm font-medium">Prendre rendez-vous →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+
+    <!-- Script pour le menu mobile et sous-menus -->
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+    <script>
+
+        // Fonctionnalité FAQ
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Filtrage par catégorie
+        document.querySelectorAll('.category-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                
+                // Mettre à jour les boutons
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    if (btn === this) {
+                        btn.classList.remove('bg-white', 'text-gray-700', 'border-gray-300');
+                        btn.classList.add('bg-primary', 'text-white');
+                    } else {
+                        btn.classList.remove('bg-primary', 'text-white');
+                        btn.classList.add('bg-white', 'text-gray-700', 'border-gray-300');
+                    }
+                });
+                
+                // Filtrer les questions
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (category === 'all' || item.getAttribute('data-category') === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Fonctionnalité de recherche
+        document.getElementById('faq-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const items = document.querySelectorAll('.faq-item');
+            
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

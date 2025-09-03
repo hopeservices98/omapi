@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier la Demande - OMAPI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <main class="py-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Fil d'Ariane -->
+            <div class="bg-gray-100 py-3 rounded-lg mb-8 shadow-sm">
+                <nav class="flex items-center space-x-2 text-sm">
+                    <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                        <i class="fas fa-home mr-1"></i> Accueil
+                    </a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <a href="{% url 'liste_demandes' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">Demandes</a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <span class="text-primary font-medium">Modifier la Demande</span>
+                </nav>
+            </div>
+
+            <!-- En-tête de la page -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-primary mb-4 leading-tight">
+                    Modifier la Demande
+                </h1>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    Modifiez les informations de la demande de {{ demande.nom }}
+                </p>
+                <div class="w-32 h-1.5 bg-secondary rounded-full mt-6 mx-auto shadow"></div>
+            </div>
+
+            <!-- Formulaire d'édition -->
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <form method="post" class="space-y-6">
+                    {% csrf_token %}
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Statut -->
+                        <div>
+                            <label for="{{ form.statut.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+                                Statut <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.statut }}
+                            {% if form.statut.errors %}
+                                <p class="text-red-500 text-xs mt-1">{{ form.statut.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Nom -->
+                        <div>
+                            <label for="{{ form.nom.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+                                Nom complet <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.nom }}
+                            {% if form.nom.errors %}
+                                <p class="text-red-500 text-xs mt-1">{{ form.nom.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label for="{{ form.email.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+                                Adresse email <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <p class="text-red-500 text-xs mt-1">{{ form.email.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Téléphone -->
+                        <div>
+                            <label for="{{ form.telephone.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+                                Téléphone
+                            </label>
+                            {{ form.telephone }}
+                            {% if form.telephone.errors %}
+                                <p class="text-red-500 text-xs mt-1">{{ form.telephone.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Message -->
+                    <div>
+                        <label for="{{ form.message.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+                            Message
+                        </label>
+                        {{ form.message }}
+                        {% if form.message.errors %}
+                            <p class="text-red-500 text-xs mt-1">{{ form.message.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Informations de la demande -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Informations de la demande</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <span class="font-medium text-gray-600">Type de demande:</span>
+                                <span class="text-gray-800">{{ demande.get_type_demande_display }}</span>
+                            </div>
+                            <div>
+                                <span class="font-medium text-gray-600">Date de soumission:</span>
+                                <span class="text-gray-800">{{ demande.date_soumission|date:"d/m/Y H:i" }}</span>
+                            </div>
+                            {% if demande.gopi_concernee %}
+                            <div class="md:col-span-2">
+                                <span class="font-medium text-gray-600">GOPI concernée:</span>
+                                <span class="text-gray-800">n°{{ demande.gopi_concernee.numero }}</span>
+                            </div>
+                            {% elif demande.renouvellement_concerne %}
+                            <div class="md:col-span-2">
+                                <span class="font-medium text-gray-600">Renouvellement concerné:</span>
+                                <span class="text-gray-800">n°{{ demande.renouvellement_concerne.numero_edition }}</span>
+                            </div>
+                            {% elif demande.inscription_registre_concernee %}
+                            <div class="md:col-span-2">
+                                <span class="font-medium text-gray-600">Inscription registre concernée:</span>
+                                <span class="text-gray-800">n°{{ demande.inscription_registre_concernee.numero_gopi }}</span>
+                            </div>
+                            {% elif demande.formation_concernee %}
+                            <div class="md:col-span-2">
+                                <span class="font-medium text-gray-600">Formation concernée:</span>
+                                <span class="text-gray-800">{{ demande.formation_concernee.titre }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Boutons d'action -->
+                    <div class="flex justify-end space-x-4 pt-6 border-t">
+                        <a href="{% url 'liste_demandes' %}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-6 rounded-lg transition-colors duration-300">
+                            <i class="fas fa-times mr-2"></i> Annuler
+                        </a>
+                        <button type="submit" class="bg-primary hover:bg-secondary text-white font-bold py-2 px-6 rounded-lg transition-colors duration-300">
+                            <i class="fas fa-save mr-2"></i> Enregistrer les modifications
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+</body>
+</html>

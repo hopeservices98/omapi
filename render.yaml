@@ -1,0 +1,40 @@
+services:
+  # Service Web Django
+  - type: web
+    name: omapi-website
+    runtime: python3
+    plan: free  # Changez vers 'starter' ou autre plan si besoin
+    
+    # Build et Start
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn omapi_website.wsgi:application"
+    
+    # Variables d'environnement
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
+      - key: RENDER
+        value: "true"
+      - key: DEBUG
+        value: "false"
+      - key: SECRET_KEY
+        generateValue: true  # Render génèrera automatiquement une clé secrète
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+
+    # Domaine et port
+    domains:
+      - omapi-website.onrender.com  # Remplacez par votre domaine souhaité
+    
+    # Santé de l'application
+    healthCheckPath: /
+    
+    # Démarrage automatique des services
+    autoDeploy: true
+
+# Base de données PostgreSQL (optionnelle - Render peut la créer automatiquement)
+databases:
+  - name: omapi-database
+    databaseName: omapi_database
+    user: omapi_user
+    plan: free  # Base de données gratuite PostgreSQL

@@ -1,0 +1,293 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOPI - Gazette Officielle de la Propriété Industrielle - OMAPI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Styles personnalisés pour améliorer l'expérience utilisateur */
+        .gopi-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .gopi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .btn-action {
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .btn-action:hover {
+            transform: scale(1.05);
+        }
+        .table-header {
+            background-color: #e0f2f7; /* Couleur plus claire pour l'en-tête du tableau */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <main class="py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Fil d'Ariane -->
+            <div class="bg-gray-100 py-3 mb-8">
+                <nav class="flex items-center space-x-2 text-sm">
+                    <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                        <i class="fas fa-home mr-1"></i> Accueil
+                    </a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <a href="{% url 'gopi_list' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">GOPI</a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <span class="text-primary font-medium">Liste des GOPI</span>
+                </nav>
+            </div>
+
+            <!-- En-tête de la page -->
+            <div class="mb-8 text-center">
+                <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Gazette Officielle de la Propriété Industrielle (GOPI)</h1>
+                <p class="text-xl text-secondary font-medium">Consultez les dernières publications officielles</p>
+            </div>
+
+            <!-- Section de Présentation et Guides Utilisateur -->
+            <section class="bg-white p-8 rounded-xl shadow-lg mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-6 text-center">Comprendre et Utiliser la GOPI</h2>
+                <div class="grid md:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Qu'est-ce que la GOPI ?</h3>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            La Gazette Officielle de la Propriété Industrielle (GOPI) est la publication officielle de l'OMAPI
+                            qui centralise toutes les informations légales et administratives concernant les titres de propriété industrielle
+                            (brevets, marques, dessins et modèles, noms commerciaux) délivrés et enregistrés à Madagascar.
+                            Elle est une ressource indispensable pour les inventeurs, entreprises, juristes et le grand public
+                            souhaitant se tenir informés des dernières évolutions et des droits de propriété industrielle en vigueur.
+                        </p>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Pourquoi consulter la GOPI ?</h3>
+                        <ul class="text-gray-600 space-y-3">
+                            <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i> <span>Pour vérifier l'existence de droits antérieurs avant un dépôt.</span></li>
+                            <li class="flex items-start"><i class="fas fa-chart-line text-blue-500 mr-2 mt-1"></i> <span>Pour suivre l'évolution des demandes et des titres de propriété industrielle.</span></li>
+                            <li class="flex items-start"><i class="fas fa-lightbulb text-yellow-500 mr-2 mt-1"></i> <span>Pour s'informer sur les nouvelles inventions et créations.</span></li>
+                            <li class="flex items-start"><i class="fas fa-gavel text-red-500 mr-2 mt-1"></i> <span>Pour contester ou s'opposer à un dépôt.</span></li>
+                            <li class="flex items-start"><i class="fas fa-book text-purple-500 mr-2 mt-1"></i> <span>Pour des recherches documentaires et statistiques.</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-secondary mb-3">Guide d'utilisation de cette page</h3>
+                        <ol class="text-gray-600 space-y-3">
+                            <li class="flex items-start"><i class="fas fa-search-dollar text-primary mr-2 mt-1"></i> <span>Utilisez la barre de recherche ci-dessous pour trouver une GOPI par son numéro.</span></li>
+                            <li class="flex items-start"><i class="fas fa-table text-primary mr-2 mt-1"></i> <span>Parcourez les différents tableaux de publication (Demande d'enregistrement, Renouvellement, Inscription au Registre).</span></li>
+                            <li class="flex items-start"><i class="fas fa-file-download text-primary mr-2 mt-1"></i> <span>Cliquez sur "Demander" pour obtenir une copie officielle d'une publication spécifique.</span></li>
+                            <li class="flex items-start"><i class="fas fa-sitemap text-primary mr-2 mt-1"></i> <span>Les informations sont organisées par type de publication pour une navigation facilitée.</span></li>
+                        </ol>
+                        <div class="mt-6 p-4 bg-accent bg-opacity-20 border-l-4 border-accent text-gray-800 rounded-lg shadow-sm">
+                            <p class="font-semibold text-accent"><i class="fas fa-info-circle mr-2"></i> Astuce:</p>
+                            <p class="text-gray-700">La recherche par numéro de GOPI est le moyen le plus rapide de trouver une édition spécifique.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section de Recherche -->
+            <section class="bg-white p-8 rounded-xl shadow-lg mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-6 text-center">Rechercher une GOPI</h2>
+                <form action="{% url 'gopi_list' %}" method="get" class="max-w-md mx-auto flex gap-4">
+                    <input type="text" name="q" placeholder="Rechercher par numéro GOPI..."
+                           class="flex-grow px-5 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-lg"
+                           value="{{ request.GET.q }}">
+                    <button type="submit" class="bg-primary hover:bg-secondary text-white font-bold py-3 px-6 rounded-full btn-action shadow-md">
+                        <i class="fas fa-search mr-2"></i> Rechercher
+                    </button>
+                </form>
+                {% if search_query and not gopis and not renouvellements and not inscriptions_registre %}
+                    <p class="text-center text-red-500 mt-4">Aucun résultat trouvé pour "{{ search_query }}".</p>
+                {% endif %}
+            </section>
+
+            <!-- Tableau pour "Demande d'enregistrement" -->
+            <section class="bg-white p-8 rounded-xl shadow-lg mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-6">PUBLICATION: Demande d'enregistrement</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="table-header">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 normal-case tracking-wider">
+                                    Numéro GOPI
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 normal-case tracking-wider">
+                                    Date d'édition
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 normal-case tracking-wider">
+                                    Brevet
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 normal-case tracking-wider">
+                                    Marque
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 normal-case tracking-wider">
+                                    Dessin ou modèle
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 normal-case tracking-wider">
+                                    Nom commercial
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 normal-case tracking-wider">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for gopi in gopis %}
+                            <tr class="hover:bg-blue-50 gopi-card">
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-gray-900">
+                                    GOPI n°{{ gopi.numero }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                    {{ gopi.date_publication|date:"d/m/Y" }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">{{ gopi.contient_brevet|default:"N/A" }}</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">{{ gopi.contient_marque|default:"N/A" }}</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">{{ gopi.contient_dessin_modele|default:"N/A" }}</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">{{ gopi.contient_nom_commercial|default:"N/A" }}</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                                    <a href="{% url 'gopi_request_form' gopi.numero %}" class="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded-full btn-action text-sm shadow">Demander</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="7" class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                    Aucune Demande d'enregistrement disponible pour le moment.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Tableau pour "PUBLICATION: RENOUVELLEMENT" -->
+            <section class="bg-white p-8 rounded-xl shadow-lg mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-6">PUBLICATION: RENOUVELLEMENT</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="table-header">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                    Numéro de l’édition
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                    Date de publication
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                    Année d'émission du certificat de renouvellement
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for renouvellement in renouvellements %}
+                            <tr class="hover:bg-blue-50 gopi-card">
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-gray-800">
+                                    {{ renouvellement.numero_edition }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                    {{ renouvellement.date_publication|date:"d/m/Y" }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                    {{ renouvellement.annee_emission_certificat }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                                    <a href="{% url 'renouvellement_request_form' renouvellement.pk %}" class="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded-full btn-action text-sm shadow">Demander</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                    Aucune publication de ce type disponible pour le moment.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Tableau pour "PUBLICATION: INSCRIPTION AU REGISTRE" -->
+            <section class="bg-white p-8 rounded-xl shadow-lg mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-6">PUBLICATION: INSCRIPTION AU REGISTRE</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="table-header">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                    Numéro de la GOPI
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                    Date de publication
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                    Année de dépôt de la demande d'inscription
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for inscription in inscriptions_registre %}
+                            <tr class="hover:bg-blue-50 gopi-card">
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-gray-800">
+                                    GOPI n°{{ inscription.numero_gopi }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                    {{ inscription.date_publication|date:"d/m/Y" }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                    {{ inscription.annee_depot_demande }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                                    <a href="{% url 'inscription_registre_request_form' inscription.pk %}" class="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded-full btn-action text-sm shadow">Demander</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                    Aucune publication de ce type disponible pour le moment.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+</body>
+</html>

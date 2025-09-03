@@ -1,0 +1,369 @@
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Demandes - OMAPI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .table-header {
+            background-color: #e0f2f7;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <main class="py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Fil d'Ariane -->
+            <div class="bg-gray-100 py-3 rounded-lg mb-8 shadow-sm">
+                <nav class="flex items-center space-x-2 text-sm">
+                    <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                        <i class="fas fa-home mr-1"></i> Accueil
+                    </a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <span class="text-primary font-medium">Demandes Centralisées</span>
+                </nav>
+            </div>
+
+            <!-- En-tête de la page -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-primary mb-4 leading-tight">
+                    Toutes les Demandes Utilisateur
+                </h1>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    Centralisation des demandes GOPI, de renouvellement, d'inscription au registre et d'inscription aux formations.
+                </p>
+                <div class="w-32 h-1.5 bg-secondary rounded-full mt-6 mx-auto shadow"></div>
+            </div>
+
+            <!-- Section des Indicateurs Clés (KPIs) -->
+            <section class="mb-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                    <!-- Total Demandes -->
+                    <a href="{% url 'liste_demandes' %}" class="bg-white rounded-xl shadow-lg p-6 flex items-center justify-between hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                        <div>
+                            <div class="text-sm font-medium text-gray-500">Total des Demandes</div>
+                            <div class="text-3xl font-bold text-gray-900">{{ kpis.total }}</div>
+                        </div>
+                        <div class="text-indigo-500 opacity-70">
+                            <i class="fas fa-folder-open fa-3x"></i>
+                        </div>
+                    </a>
+                    <!-- Nouvelles -->
+                    <a href="?statut=nouvelle" class="bg-white rounded-xl shadow-lg p-6 flex items-center justify-between hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                        <div>
+                            <div class="text-sm font-medium text-blue-600">Nouvelles</div>
+                            <div class="text-3xl font-bold text-blue-600">{{ kpis.nouvelle }}</div>
+                        </div>
+                        <div class="text-blue-500 opacity-70">
+                            <i class="fas fa-envelope fa-3x"></i>
+                        </div>
+                    </a>
+                    <!-- En cours -->
+                    <a href="?statut=en_cours" class="bg-white rounded-xl shadow-lg p-6 flex items-center justify-between hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                        <div>
+                            <div class="text-sm font-medium text-yellow-600">En Cours</div>
+                            <div class="text-3xl font-bold text-yellow-600">{{ kpis.en_cours }}</div>
+                        </div>
+                        <div class="text-yellow-500 opacity-70">
+                            <i class="fas fa-hourglass-half fa-3x"></i>
+                        </div>
+                    </a>
+                    <!-- Traitées -->
+                    <a href="?statut=traitee" class="bg-white rounded-xl shadow-lg p-6 flex items-center justify-between hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                        <div>
+                            <div class="text-sm font-medium text-green-600">Traitées</div>
+                            <div class="text-3xl font-bold text-green-600">{{ kpis.traitee }}</div>
+                        </div>
+                        <div class="text-green-500 opacity-70">
+                            <i class="fas fa-check-circle fa-3x"></i>
+                        </div>
+                    </a>
+                    <!-- Archivées -->
+                    <a href="?statut=archivee" class="bg-white rounded-xl shadow-lg p-6 flex items-center justify-between hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                        <div>
+                            <div class="text-sm font-medium text-gray-600">Archivées</div>
+                            <div class="text-3xl font-bold text-gray-600">{{ kpis.archivee }}</div>
+                        </div>
+                        <div class="text-gray-500 opacity-70">
+                            <i class="fas fa-archive fa-3x"></i>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Section de Filtres et Recherche -->
+            <section class="bg-white p-8 rounded-xl shadow-lg mb-8">
+                <h2 class="text-2xl font-bold text-primary mb-4">Filtrer et Rechercher les Demandes</h2>
+                <form method="get" action="{% url 'liste_demandes' %}" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label for="type_filter" class="block text-gray-700 text-sm font-bold mb-2">Type de Demande:</label>
+                        <select name="type" id="type_filter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="">Tous les types</option>
+                            {% for key, value in TYPE_DEMANDE_CHOICES %}
+                                <option value="{{ key }}" {% if type_filter == key %}selected{% endif %}>{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <label for="statut_filter" class="block text-gray-700 text-sm font-bold mb-2">Statut:</label>
+                        <select name="statut" id="statut_filter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="">Tous les statuts</option>
+                            {% for key, value in STATUT_CHOICES %}
+                                <option value="{{ key }}" {% if statut_filter == key %}selected{% endif %}>{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <label for="search_query" class="block text-gray-700 text-sm font-bold mb-2">Recherche:</label>
+                        <input type="text" name="q" id="search_query" placeholder="Nom, email, message..." value="{{ search_query|default:'' }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    <div class="md:col-span-3 flex justify-end">
+                        <button type="submit" class="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">
+                            <i class="fas fa-filter mr-2"></i> Appliquer les filtres
+                        </button>
+                        {% if type_filter or statut_filter or search_query %}
+                            <a href="{% url 'liste_demandes' %}" class="ml-4 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg transition-colors duration-300">
+                                <i class="fas fa-times-circle mr-2"></i> Réinitialiser
+                            </a>
+                        {% endif %}
+                    </div>
+                </form>
+            </section>
+
+            <!-- Nouvelle section de la liste des demandes -->
+<section>
+    <form method="post" action="{% url 'liste_demandes' %}" id="bulk-actions-form">
+        {% csrf_token %}
+        <!-- Barre d'actions et d'export -->
+        <div class="bg-white p-4 rounded-xl shadow-lg mb-6 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <select name="action" id="bulk_action" class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <option value="">Actions groupées...</option>
+                    <option value="mark_as_nouvelle">Marquer comme Nouvelle</option>
+                    <option value="mark_as_en_cours">Marquer comme En cours</option>
+                    <option value="mark_as_traitee">Marquer comme Traitée</option>
+                    <option value="mark_as_archivee">Marquer comme Archivée</option>
+                    <option value="delete_selected">Supprimer la sélection</option>
+                </select>
+                <button type="submit" class="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">Appliquer</button>
+            </div>
+            <a href="{% url 'export_demandes' %}?{{ request.GET.urlencode }}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300 flex items-center">
+                <i class="fas fa-file-excel mr-2"></i> Exporter (CSV)
+            </a>
+        </div>
+
+        <!-- En-tête de la liste -->
+        <div class="grid grid-cols-12 gap-4 px-4 py-2 text-sm font-semibold text-gray-600 bg-gray-100 rounded-t-lg">
+            <div class="col-span-1 flex items-center">
+                <input type="checkbox" id="select_all" class="rounded text-primary focus:ring-primary">
+            </div>
+            <div class="col-span-3"><a href="?{% url_replace request 'sort_by' 'nom' %}" class="hover:text-primary">Demandeur</a></div>
+            <div class="col-span-3"><a href="?{% url_replace request 'sort_by' 'type_demande' %}" class="hover:text-primary">Type de Demande</a></div>
+            <div class="col-span-2"><a href="?{% url_replace request 'sort_by' '-date_soumission' %}" class="hover:text-primary">Date</a></div>
+            <div class="col-span-2"><a href="?{% url_replace request 'sort_by' 'statut' %}" class="hover:text-primary">Statut</a></div>
+            <div class="col-span-1 text-right">Actions</div>
+        </div>
+
+        <!-- Corps de la liste -->
+        <div class="space-y-4 mt-4">
+            {% for demande in demandes %}
+            <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 grid grid-cols-12 gap-4 items-center p-4">
+                <!-- Checkbox -->
+                <div class="col-span-1 flex items-center">
+                    <input type="checkbox" name="demande_ids" value="{{ demande.id }}" class="rounded text-primary focus:ring-primary">
+                </div>
+
+                <!-- Demandeur -->
+                <div class="col-span-3">
+                    <div class="font-bold text-gray-800">{{ demande.nom }}</div>
+                    <div class="text-sm text-gray-500">{{ demande.email }}</div>
+                </div>
+
+                <!-- Type de Demande -->
+                <div class="col-span-3 text-sm text-gray-700">
+                    <p>{{ demande.get_type_demande_display }}</p>
+                    <p class="text-xs text-gray-500 italic">
+                        {% if demande.gopi_concernee %}
+                            GOPI n°{{ demande.gopi_concernee.numero }}
+                        {% elif demande.renouvellement_concerne %}
+                            Renouvellement n°{{ demande.renouvellement_concerne.numero_edition }}
+                        {% elif demande.inscription_registre_concernee %}
+                            Inscription n°{{ demande.inscription_registre_concernee.numero_gopi }}
+                        {% elif demande.formation_concernee %}
+                            {{ demande.formation_concernee.titre|truncatechars:30 }}
+                        {% endif %}
+                    </p>
+                </div>
+
+                <!-- Date -->
+                <div class="col-span-2 text-sm text-gray-600">
+                    {{ demande.date_soumission|date:"d/m/Y H:i" }}
+                </div>
+
+                <!-- Statut -->
+                <div class="col-span-2">
+                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
+                        {% if demande.statut == 'nouvelle' %}bg-blue-100 text-blue-800
+                        {% elif demande.statut == 'en_cours' %}bg-yellow-100 text-yellow-800
+                        {% elif demande.statut == 'traitee' %}bg-green-100 text-green-800
+                        {% else %}bg-gray-100 text-gray-800{% endif %}">
+                        {{ demande.get_statut_display }}
+                    </span>
+                </div>
+
+                <!-- Actions -->
+                <div class="col-span-1 text-right flex space-x-2">
+                    <button type="button" class="text-primary hover:text-secondary transition-colors duration-300 detail-button" data-demande-id="{{ demande.id }}" title="Voir les détails">
+                        <i class="fas fa-eye fa-lg"></i>
+                    </button>
+                    <a href="{% url 'edit_demande' demande.id %}" class="text-blue-600 hover:text-blue-800 transition-colors duration-300" title="Modifier">
+                        <i class="fas fa-edit fa-lg"></i>
+                    </a>
+                    <button type="button" class="text-red-600 hover:text-red-800 transition-colors duration-300 delete-button" data-demande-id="{{ demande.id }}" title="Supprimer">
+                        <i class="fas fa-trash fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+            {% empty %}
+            <div class="bg-white rounded-xl shadow-md text-center p-12">
+                <p class="text-gray-500">Aucune demande à afficher.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </form>
+
+    <!-- Pagination -->
+    <div class="flex justify-between items-center mt-6">
+        <span class="text-sm text-gray-700">
+            Page {{ demandes.number }} sur {{ demandes.paginator.num_pages }}
+        </span>
+        <div class="flex space-x-2">
+            {% if demandes.has_previous %}
+                <a href="?page={{ demandes.previous_page_number }}{% if type_filter %}&type={{ type_filter }}{% endif %}{% if statut_filter %}&statut={{ statut_filter }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}{% if sort_by %}&sort_by={{ sort_by }}{% endif %}" class="bg-white hover:bg-gray-100 text-gray-800 font-bold py-2 px-4 rounded-lg transition-colors duration-300 border">Précédent</a>
+            {% endif %}
+            {% for i in demandes.paginator.page_range %}
+                <a href="?page={{ i }}{% if type_filter %}&type={{ type_filter }}{% endif %}{% if statut_filter %}&statut={{ statut_filter }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}{% if sort_by %}&sort_by={{ sort_by }}{% endif %}" class="{% if demandes.number == i %}bg-primary text-white{% else %}bg-white text-gray-800 hover:bg-gray-100{% endif %} font-bold py-2 px-4 rounded-lg transition-colors duration-300 border">{{ i }}</a>
+            {% endfor %}
+            {% if demandes.has_next %}
+                <a href="?page={{ demandes.next_page_number }}{% if type_filter %}&type={{ type_filter }}{% endif %}{% if statut_filter %}&statut={{ statut_filter }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}{% if sort_by %}&sort_by={{ sort_by }}{% endif %}" class="bg-white hover:bg-gray-100 text-gray-800 font-bold py-2 px-4 rounded-lg transition-colors duration-300 border">Suivant</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+        </div>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('select_all').addEventListener('change', function() {
+                let checkboxes = document.querySelectorAll('input[name="demande_ids"]');
+                for (let i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].checked = this.checked;
+                }
+            });
+
+            // Modal functionality
+            const detailModal = document.getElementById('detailModal');
+            const closeModalButton = document.getElementById('closeModal');
+            const detailContent = document.getElementById('detailContent');
+
+            document.querySelectorAll('.detail-button').forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default button behavior
+                    const demandeId = this.dataset.demandeId;
+                    // Fetch details via AJAX
+                    fetch(`/demandes/${demandeId}/detail/`)
+                        .then(response => {
+                            console.log('Response status:', response.status, response.statusText);
+                            if (!response.ok) {
+                                return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status} ${response.statusText} - ${text}`); });
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            detailContent.innerHTML = `
+                                <h3 class="text-xl font-bold text-gray-800 mb-4">${data.type_demande_display}</h3>
+                                <p><strong>Nom:</strong> ${data.nom}</p>
+                                <p><strong>Email:</strong> ${data.email}</p>
+                                <p><strong>Téléphone:</strong> ${data.telephone || 'N/A'}</p>
+                                <p><strong>Message:</strong> ${data.message || 'Aucun'}</p>
+                                <p><strong>Date de Soumission:</strong> ${data.date_soumission}</p>
+                                <p><strong>Statut:</strong> ${data.statut_display}</p>
+                                <p><strong>Objet Concerné:</strong> ${data.objet_concerne}</p>
+                                <!-- Add more details as needed -->
+                            `;
+                            detailModal.classList.remove('hidden');
+                        })
+                        .catch(error => {
+                            console.error('Error fetching demand details:', error);
+                            detailContent.innerHTML = `<p class="text-red-500">Erreur lors du chargement des détails: ${error.message}</p>`;
+                            detailModal.classList.remove('hidden');
+                        });
+                });
+            });
+
+            // Delete confirmation
+            document.querySelectorAll('.delete-button').forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const demandeId = this.dataset.demandeId;
+                    if (confirm('Êtes-vous sûr de vouloir supprimer cette demande ? Cette action est irréversible.')) {
+                        // Create a form to submit POST request
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = `/demandes/${demandeId}/delete/`;
+                        form.innerHTML = '<input type="hidden" name="csrfmiddlewaretoken" value="' + document.querySelector('[name=csrfmiddlewaretoken]').value + '">';
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                });
+            });
+
+            closeModalButton.addEventListener('click', function() {
+                detailModal.classList.add('hidden');
+            });
+
+            detailModal.addEventListener('click', function(e) {
+                if (e.target === detailModal) {
+                    detailModal.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+
+    <!-- Modal Structure -->
+    <div id="detailModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md mx-auto">
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h2 class="text-2xl font-bold text-gray-800">Détails de la Demande</h2>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+            </div>
+            <div id="detailContent">
+                <!-- Content will be loaded here via AJAX -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

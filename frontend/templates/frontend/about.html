@@ -1,0 +1,269 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos - OMAPI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <main class="max-w-5xl mx-auto px-3 sm:px-4 py-8">
+        <!-- Fil d'Ariane -->
+        <div class="bg-gray-100 py-3">
+            <div class="max-w-5xl mx-auto px-3 sm:px-4">
+                <nav class="flex items-center space-x-2 text-sm">
+                    <a href="index.html" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                        <i class="fas fa-home mr-1"></i> Accueil
+                    </a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <a href="#" class="text-gray-600 hover:text-primary transition-colors duration-300">L'office</a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <span class="text-primary font-medium">Présentation</span>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Contenu Principal -->
+        <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">À propos de l'OMAPI</h1>
+            <p class="text-xl text-secondary font-medium">Promouvoir l'innovation et la Créativité</p>
+            <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+        </div>
+
+        <!-- Section Introduction -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="md:w-full">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">L'Office Malgache de la propriété Industrielle</h2>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        Après leur indépendance, Madagascar et douze autres États africains ont signé l’Accord de Libreville du 13 septembre 1962 instituant un régime uniforme de protection de la propriété industrielle et créant l’Office Africain et Malgache de la Propriété Industrielle (OAMPI), sis à Yaoundé (Cameroun). Cet office était chargé des procédures administratives communes et agissait comme un service public national pour chacun des treize États membres.
+                    </p>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        Suite à la dénonciation de cet Accord par Madagascar le 31 janvier 1974 qui a pris effet le 31 décembre 1976, un vide juridique et administratif existait en la matière. Or, les dispositions de l’article 12.1) de la Convention de Paris pour la protection de la propriété industrielle du 20 mars 1883 à laquelle Madagascar a adhéré en 1963 stipulent que : « Chacun des pays de l’Union s’engage à établir un service spécial de la propriété industrielle et un dépôt central pour la communication au public des brevets d’invention, des modèles d’utilité, des dessins ou modèles industriels et des marques de fabrique ou de commerce ».
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        C’est ainsi qu’après maints projets de textes législatifs élaborés par les départements ministériels concernés, l’ordonnance n° 89-019 du 31 juillet 1989 instituant un régime pour la protection de la propriété industrielle à Madagascar a été promulguée.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Historique -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Historique</h2>
+            <div class="space-y-4">
+                <div class="flex items-start space-x-4">
+                    <div class="bg-primary text-white p-3 rounded-full flex-shrink-0">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">1962</h3>
+                        <p class="text-gray-600">Accord de Libreville du 13 septembre 1962 instituant un régime uniforme de protection de la Propriété Industrielle et créant l’Office Africain et Malgache de la Propriété Industrielle (OAMPI).</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-primary text-white p-3 rounded-full flex-shrink-0">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">1974-1976</h3>
+                        <p class="text-gray-600">Dénonciation de l'Accord par Madagascar le 31 janvier 1974, prenant effet le 31 décembre 1976, créant un vide juridique et administratif.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-primary text-white p-3 rounded-full flex-shrink-0">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">1989</h3>
+                        <p class="text-gray-600">Promulgation de l'ordonnance n° 89-019 du 31 juillet 1989 instituant un régime pour la protection de la Propriété Industrielle à Madagascar.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-primary text-white p-3 rounded-full flex-shrink-0">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">1992</h3>
+                        <p class="text-gray-600">Décret n° 92-993 du 2 décembre 1992 portant application de l'ordonnance et décret n° 92-994 de la même date portant création et organisation de l'Office Malgache de la Propriété Industrielle (OMAPI).</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-primary text-white p-3 rounded-full flex-shrink-0">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">1994</h3>
+                        <p class="text-gray-600">L'OMAPI devient opérationnel depuis le 1er avril 1994.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Attributions -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Attributions</h2>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                L’OMAPI est chargé de l’administration de la propriété industrielle et de la promotion de l’activité inventive à Madagascar. À cet effet, il peut délivrer, à la demande des intéressés, des titres de propriété industrielle, à savoir :
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="flex items-start space-x-4">
+                    <div class="bg-primary text-white p-3 rounded-lg flex-shrink-0">
+                        <i class="fas fa-certificate text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-2">Brevets d'inventions</h3>
+                        <p class="text-gray-600 text-sm">Protection des inventions techniques et brevetables.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-primary text-white p-3 rounded-lg flex-shrink-0">
+                        <i class="fas fa-trademark text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Marques de produits ou de services</h3>
+                        <p class="text-gray-600 text-sm">Protection des signes distinctifs des produits et services.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-primary text-white p-3 rounded-lg flex-shrink-0">
+                        <i class="fas fa-palette text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Dessins ou modèles industriels</h3>
+                        <p class="text-gray-600 text-sm">Protection des créations esthétiques et fonctionnelles.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-primary text-white p-3 rounded-lg flex-shrink-0">
+                        <i class="fas fa-store text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Noms commerciaux</h3>
+                        <p class="text-gray-600 text-sm">Protection des dénominations des entreprises commerciales.</p>
+                    </div>
+                </div>
+            </div>
+            <p class="text-gray-700 mb-4 leading-relaxed">
+                Les titres octroyés par l'OMAPI sont publiés à la Gazette Officielle de la Propriété Industrielle (GOPI). En outre, il met à la disposition du public une documentation en matière de propriété industrielle tels que les documents de brevets, les législations sur la propriété industrielle dans divers pays, les traités multilatéraux sur la propriété industrielle.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+                Placé sous la tutelle technique du Ministère chargé de l'Industrie, l'OMAPI est doté d'une autonomie administrative et financière et jouit de l'indépendance technique pour l'exécution de sa mission. Ses organes sont le Conseil d'Administration et la Direction Générale.
+            </p>
+        </div>
+<!-- Section Nos Valeurs -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Nos Valeurs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="p-4 bg-blue-50 rounded-lg">
+                    <i class="fas fa-handshake text-4xl text-primary mb-3"></i>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Intégrité</h3>
+                    <p class="text-gray-600 text-sm">Agir avec honnêteté, transparence et éthique dans toutes nos opérations.</p>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg">
+                    <i class="fas fa-lightbulb text-4xl text-primary mb-3"></i>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Innovation</h3>
+                    <p class="text-gray-600 text-sm">Encourager et soutenir la créativité et le développement de nouvelles idées.</p>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg">
+                    <i class="fas fa-users-cog text-4xl text-primary mb-3"></i>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Service</h3>
+                    <p class="text-gray-600 text-sm">Offrir un accompagnement de qualité et une expertise fiable à nos usagers.</p>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg">
+                    <i class="fas fa-balance-scale text-4xl text-primary mb-3"></i>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Équité</h3>
+                    <p class="text-gray-600 text-sm">Assurer un traitement juste et impartial pour tous les acteurs de la propriété industrielle.</p>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg">
+                    <i class="fas fa-seedling text-4xl text-primary mb-3"></i>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Développement</h3>
+                    <p class="text-gray-600 text-sm">Contribuer à la croissance économique et au progrès technologique de Madagascar.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Partenariats -->
+        <div class="bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg p-6 md:p-8 text-white mb-8">
+            <h2 class="text-2xl font-bold mb-4">Partenariats Internationaux</h2>
+            <p class="mb-4">
+                Opérationnel depuis le 1er avril 1994, l'OMAPI entretient des relations privilégiées avec :
+            </p>
+            <ul class="space-y-2 mb-4">
+                <li class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>L'Organisation Mondiale de la Propriété Intellectuelle (OMPI) dont Madagascar est membre depuis 1989</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>L'Institut National de la Propriété Industrielle (INPI France)</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>L'Office des brevets et des marques des États-Unis (USPTO)</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>L'Office Européen des Brevets (OEB)</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>L'Organisation Africaine de la Propriété Intellectuelle (OAPI)</span>
+                </li>
+            </ul>
+            <p>
+                Par ailleurs, l'OMAPI agit en tant qu'office désigné pour les demandes internationales de brevet dans le cadre du Traité de coopération en matière de brevets (PCT) fait à Washington le 19 juin 1978 auquel Madagascar a adhéré le 24 janvier 1978.
+            </p>
+        </div>
+
+        <!-- Section Équipe OMAPI -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">L'équipe OMAPI</h2>
+            <div class="flex flex-col items-center text-center">
+                <div class="bg-primary/10 p-6 rounded-full mb-4">
+                    <i class="fas fa-users text-4xl text-primary"></i>
+                </div>
+                <p class="text-gray-700 max-w-2xl">
+                    L'équipe de l'OMAPI est composée d'experts dédiés à la protection de la propriété industrielle et à la promotion de l'innovation à Madagascar. Notre personnel qualifié travaille quotidiennement pour offrir un service de qualité et accompagner les inventeurs, créateurs et entreprises dans leurs démarches de protection de la propriété intellectuelle.
+                </p>
+            </div>
+        </div>
+
+        <!-- Appel à l'action -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 text-center">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Protégez votre innovation</h2>
+            <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                Découvrez comment l'OMAPI peut vous aider à protéger vos créations et à sécuriser vos droits de propriété intellectuelle.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'procedures' %}" class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg transition-colors duration-300 flex items-center justify-center shadow-md hover:shadow-lg">
+                    <i class="fas fa-file-alt mr-2"></i> Déposer une demande
+                </a>
+            </div>
+        </div>
+    </main>
+    {% include 'frontend/includes/footer.html' %} 
+    <!-- Script pour le menu mobile et sous-menus -->
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+    <script>
+    </script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procédures de Dépôt - OMAPI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <!-- Fil d'Ariane -->
+    <div class="bg-gray-100 py-3">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fas fa-home mr-1"></i> Accueil
+                </a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <span class="text-primary font-medium">Procédures de Dépôt</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Contenu Principal -->
+    <main class="max-w-7xl mx-auto px-3 sm:px-4 py-8 flex">
+        <!-- Barre de navigation latérale -->
+        <aside class="w-64 mr-8 sticky top-20 h-screen hidden md:block">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-lg font-bold text-gray-800 mb-4">Navigation rapide</h2>
+                <nav>
+                    <ul class="space-y-1">
+                        <li><a href="#marque" class="flex items-center p-2 text-gray-700 rounded-lg text-sm hover:bg-primary hover:text-white transition-colors duration-200 group"><i class="fas fa-trademark mr-2 group-hover:text-white text-primary"></i>Dépôt de Marque</a></li>
+                        <li><a href="#brevet" class="flex items-center p-2 text-gray-700 rounded-lg text-sm hover:bg-primary hover:text-white transition-colors duration-200 group"><i class="fas fa-flask mr-2 group-hover:text-white text-secondary"></i>Dépôt de Brevet</a></li>
+                        <li><a href="#dessin_modele" class="flex items-center p-2 text-gray-700 rounded-lg text-sm hover:bg-primary hover:text-white transition-colors duration-200 group"><i class="fas fa-bezier-curve mr-2 group-hover:text-white text-accent"></i>Dépôt de Dessin & Modèle</a></li>
+                        <li><a href="#nom_commercial" class="flex items-center p-2 text-gray-700 rounded-lg text-sm hover:bg-primary hover:text-white transition-colors duration-200 group"><i class="fas fa-store mr-2 group-hover:text-white text-primary"></i>Dépôt de Nom Commercial</a></li>
+                        <li><a href="#international" class="flex items-center p-2 text-gray-700 rounded-lg text-sm hover:bg-primary hover:text-white transition-colors duration-200 group"><i class="fas fa-globe mr-2 group-hover:text-white text-blue-600"></i>Procédures Internationales</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Contenu principal des procédures -->
+        <div class="flex-1">
+            <!-- Titre de la page -->
+            <div class="mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Procédures de Dépôt</h1>
+                <p class="text-xl text-secondary font-medium">Déposez et protégez vos créations et innovations</p>
+                <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+            </div>
+
+            <!-- Navigation rapide pour mobile (affichée sur les petits écrans) -->
+            <div class="md:hidden bg-white rounded-xl shadow-lg p-6 mb-8 sticky top-[65px] z-10">
+                <h2 class="text-lg font-bold text-gray-800 mb-4">Navigation rapide</h2>
+                <div class="flex flex-wrap gap-2">
+                    <a href="#marque" class="bg-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-secondary transition-colors duration-300">Dépôt de Marque</a>
+                    <a href="#brevet" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Dépôt de Brevet</a>
+                    <a href="#dessin_modele" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Dépôt de Dessin & Modèle</a>
+                    <a href="#nom_commercial" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Dépôt de Nom Commercial</a>
+                    <a href="#international" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Procédures Internationales</a>
+                </div>
+            </div>
+
+        <!-- Section Dépôt de Marque -->
+        <section id="marque" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-primary text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-trademark text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Dépôt de Marque</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    La marque est un signe distinctif qui permet d'identifier les produits ou services d'une entreprise et de les différencier de ceux de ses concurrents.
+                </p>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Étapes du dépôt</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">1</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Recherche d'antériorité</h4>
+                                <p class="text-gray-600 text-sm">Vérifiez la disponibilité de votre marque.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">2</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Dépôt de la demande</h4>
+                                <p class="text-gray-600 text-sm">Remplissez le formulaire et fournissez les pièces requises.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">3</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Examen et publication</h4>
+                                <p class="text-gray-600 text-sm">Votre demande est examinée et publiée au GOPI.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">4</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Enregistrement</h4>
+                                <p class="text-gray-600 text-sm">Après examen favorable, votre marque est enregistrée.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end mt-8">
+                    <a href="{% url 'depot_marque' %}" class="bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-secondary transition-colors duration-300">
+                        En savoir plus sur le dépôt de marque <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Dépôt de Brevet -->
+        <section id="brevet" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-secondary text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-flask text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Dépôt de Brevet</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Le brevet protège les inventions nouvelles, impliquant une activité inventive et susceptibles d'application industrielle.
+                </p>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Conditions de brevetabilité</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-secondary/5 rounded-lg p-4">
+                            <div class="bg-secondary text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Nouveauté</h4>
+                            <p class="text-sm text-gray-600">L'invention ne doit pas être comprise dans l'état de la technique.</p>
+                        </div>
+                        <div class="bg-secondary/5 rounded-lg p-4">
+                            <div class="bg-secondary text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Activité inventive</h4>
+                            <p class="text-sm text-gray-600">L'invention ne doit pas découler de manière évidente.</p>
+                        </div>
+                        <div class="bg-secondary/5 rounded-lg p-4">
+                            <div class="bg-secondary text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-industry"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Application industrielle</h4>
+                            <p class="text-sm text-gray-600">L'invention doit pouvoir être fabriquée ou utilisée.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end mt-8">
+                    <a href="{% url 'depot_brevet' %}" class="bg-secondary text-white px-6 py-3 rounded-lg font-bold hover:bg-primary transition-colors duration-300">
+                        En savoir plus sur le dépôt de brevet <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Dépôt de Dessin & Modèle -->
+        <section id="dessin_modele" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-accent text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-bezier-curve text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Dépôt de Dessin & Modèle</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Le dessin ou modèle protège l'apparence esthétique d'un produit, qu'il soit bidimensionnel (dessin) ou tridimensionnel (modèle).
+                </p>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Conditions de protection</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-accent/5 rounded-lg p-4">
+                            <div class="bg-accent text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Nouveauté</h4>
+                            <p class="text-sm text-gray-600">Le dessin ou modèle ne doit pas avoir été divulgué avant la date de dépôt.</p>
+                        </div>
+                        <div class="bg-accent/5 rounded-lg p-4">
+                            <div class="bg-accent text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Caractère propre</h4>
+                            <p class="text-sm text-gray-600">L'impression visuelle d'ensemble doit différer de celle des dessins ou modèles existants.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end mt-8">
+                    <a href="{% url 'depot_dessin_modele' %}" class="bg-accent text-white px-6 py-3 rounded-lg font-bold hover:bg-primary transition-colors duration-300">
+                        En savoir plus sur le dépôt de dessin & modèle <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Dépôt de Nom Commercial -->
+        <section id="nom_commercial" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-primary text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-store text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Dépôt de Nom Commercial</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Le nom commercial est l'appellation sous laquelle une entreprise exerce son activité. Il est essentiel pour identifier votre établissement et vous différencier.
+                </p>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Protection et enregistrement</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-primary/5 rounded-lg p-4">
+                            <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-gavel"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Droit d'usage</h4>
+                            <p class="text-sm text-gray-600">Le nom commercial est protégé par l'usage. L'enregistrement renforce cette protection.</p>
+                        </div>
+                        <div class="bg-primary/5 rounded-lg p-4">
+                            <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Lien avec l'entreprise</h4>
+                            <p class="text-sm text-gray-600">Le nom commercial est rattaché au fonds de commerce et se cède avec lui.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end mt-8">
+                    <a href="{% url 'depot_nom_commercial' %}" class="bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-secondary transition-colors duration-300">
+                        En savoir plus sur le dépôt de nom commercial <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Procédures Internationales -->
+        <section id="international" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-blue-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-globe text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Procédures Internationales</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Pour la protection de votre propriété intellectuelle à l'échelle internationale, l'OMAPI vous guide à travers les systèmes suivants :
+                </p>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Systèmes de protection internationaux</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-blue-100 rounded-lg p-4">
+                            <div class="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Système de Madrid (Marques)</h4>
+                            <p class="text-sm text-gray-600">Permet d'obtenir la protection d'une marque dans plusieurs pays par le dépôt d'une seule demande internationale auprès de l'OMPI.</p>
+                        </div>
+                        <div class="bg-blue-100 rounded-lg p-4">
+                            <div class="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-gavel"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Système de La Haye (Dessins et Modèles Industriels)</h4>
+                            <p class="text-sm text-gray-600">Offre la possibilité d'enregistrer jusqu'à 100 dessins et modèles industriels dans plusieurs pays au moyen d'une seule demande internationale.</p>
+                        </div>
+                        <div class="bg-blue-100 rounded-lg p-4">
+                            <div class="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Traité de Coopération en matière de Brevets (PCT)</h4>
+                            <p class="text-sm text-gray-600">Facilite le dépôt de demandes de brevets dans plusieurs pays par le biais d'une seule demande internationale de brevet.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end mt-8">
+                    <a href="{% url 'procedures_internationales' %}" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors duration-300">
+                        En savoir plus <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Contact et Assistance -->
+        <section class="mb-12">
+            <div class="bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg p-8 text-white text-center">
+                <h2 class="text-2xl font-bold mb-4">Besoin d'aide pour vos démarches ?</h2>
+                <p class="mb-6 max-w-2xl mx-auto">
+                    Nos experts en propriété industrielle sont à votre disposition pour vous accompagner dans toutes les étapes de vos dépôts.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="{% url 'contact' %}" class="bg-white text-primary px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-phone mr-2"></i> Contacter un expert
+                    </a>
+                    <a href="{% url 'formulaires' %}" class="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-primary transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-download mr-2"></i> Télécharger les formulaires
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+
+    <!-- Script pour le menu mobile et sous-menus -->
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+    <script>
+    </script>
+</body>
+</html>
