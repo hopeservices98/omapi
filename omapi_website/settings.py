@@ -110,13 +110,27 @@ WSGI_APPLICATION = 'omapi_website.wsgi.application'
 
 if IS_PRODUCTION:
     # Production sur Render - PostgreSQL automatique
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=os.getenv('DATABASE_URL'),
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
-    }
+    database_url = os.getenv('DATABASE_URL')
+    if database_url:
+        DATABASES = {
+            'default': dj_database_url.config(
+                default=database_url,
+                conn_max_age=600,
+                conn_health_checks=True,
+            )
+        }
+    else:
+        # Configuration de secours si DATABASE_URL n'est pas défini
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': 'omapi_database',
+                'USER': 'omapi_user',
+                'PASSWORD': 'omapi_password',
+                'HOST': 'localhost',
+                'PORT': '5432',
+            }
+        }
 else:
     # Développement local - MySQL (WAMP) par défaut
     database_engine = os.getenv('DB_ENGINE', 'mysql')  # mysql ou postgresql
