@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formations - OMAPI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <!-- Fil d'Ariane -->
+    <div class="bg-gray-100 py-3">
+        <div class="max-w-6xl mx-auto px-3 sm:px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fas fa-home mr-1"></i> Accueil
+                </a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <span class="text-primary font-medium">Formations</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Contenu Principal -->
+    <main class="max-w-6xl mx-auto px-3 sm:px-4 py-8">
+        <!-- Titre de la page -->
+        <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Nos Formations sur la Propriété Industrielle</h1>
+            <p class="text-xl text-secondary font-medium">Développez vos compétences avec nos programmes spécialisés</p>
+            <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+        </div>
+
+        <section id="filtres" class="mb-8 p-6 bg-white rounded-xl shadow-lg">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Filtrer les formations</h2>
+            <div class="flex flex-wrap gap-3">
+                <a href="{% url 'formations_list' %}" class="px-4 py-2 rounded-full text-sm font-medium {% if not selected_type and not selected_lieu %}bg-primary text-white{% else %}bg-gray-200 text-gray-700 hover:bg-gray-300{% endif %} transition-colors duration-200">Toutes</a>
+                <!-- Filtres par type -->
+                <a href="{% url 'formations_list' %}?type=brevets{% if selected_lieu %}&lieu={{ selected_lieu }}{% endif %}" class="px-4 py-2 rounded-full text-sm font-medium {% if selected_type == 'brevets' %}bg-purple-600 text-white{% else %}bg-gray-200 text-gray-700 hover:bg-gray-300{% endif %} transition-colors duration-200"><i class="fas fa-lightbulb mr-1"></i> Brevets</a>
+                <a href="{% url 'formations_list' %}?type=marques{% if selected_lieu %}&lieu={{ selected_lieu }}{% endif %}" class="px-4 py-2 rounded-full text-sm font-medium {% if selected_type == 'marques' %}bg-pink-600 text-white{% else %}bg-gray-200 text-gray-700 hover:bg-gray-300{% endif %} transition-colors duration-200"><i class="fas fa-tag mr-1"></i> Marques</a>
+                <a href="{% url 'formations_list' %}?type=dessins-modeles{% if selected_lieu %}&lieu={{ selected_lieu }}{% endif %}" class="px-4 py-2 rounded-full text-sm font-medium {% if selected_type == 'dessins-modeles' %}bg-indigo-600 text-white{% else %}bg-gray-200 text-gray-700 hover:bg-gray-300{% endif %} transition-colors duration-200"><i class="fas fa-brush mr-1"></i> Dessins & Modèles</a>
+                <a href="{% url 'formations_list' %}?type=contentieux{% if selected_lieu %}&lieu={{ selected_lieu }}{% endif %}" class="px-4 py-2 rounded-full text-sm font-medium {% if selected_type == 'contentieux' %}bg-red-600 text-white{% else %}bg-gray-200 text-gray-700 hover:bg-gray-300{% endif %} transition-colors duration-200"><i class="fas fa-balance-scale mr-1"></i> Contentieux PI</a>
+                <a href="{% url 'formations_list' %}?type=valorisation{% if selected_lieu %}&lieu={{ selected_lieu }}{% endif %}" class="px-4 py-2 rounded-full text-sm font-medium {% if selected_type == 'valorisation' %}bg-yellow-600 text-white{% else %}bg-gray-200 text-gray-700 hover:bg-gray-300{% endif %} transition-colors duration-200"><i class="fas fa-chart-line mr-1"></i> Valorisation PI</a>
+                <a href="{% url 'formations_list' %}?type=general{% if selected_lieu %}&lieu={{ selected_lieu }}{% endif %}" class="px-4 py-2 rounded-full text-sm font-medium {% if selected_type == 'general' %}bg-gray-600 text-white{% else %}bg-gray-200 text-gray-700 hover:bg-gray-300{% endif %} transition-colors duration-200"><i class="fas fa-book-open mr-1"></i> Général</a>
+                
+                <!-- Filtres par lieu -->
+                <a href="{% url 'formations_list' %}?lieu=en ligne{% if selected_type %}&type={{ selected_type }}{% endif %}" class="px-4 py-2 rounded-full text-sm font-medium {% if selected_lieu == 'en ligne' %}bg-green-600 text-white{% else %}bg-gray-200 text-gray-700 hover:bg-gray-300{% endif %} transition-colors duration-200"><i class="fas fa-globe mr-1"></i> En ligne</a>
+                <a href="{% url 'formations_list' %}?lieu=antananarivo{% if selected_type %}&type={{ selected_type }}{% endif %}" class="px-4 py-2 rounded-full text-sm font-medium {% if selected_lieu == 'antananarivo' %}bg-blue-600 text-white{% else %}bg-gray-200 text-gray-700 hover:bg-gray-300{% endif %} transition-colors duration-200"><i class="fas fa-map-marker-alt mr-1"></i> Antananarivo</a>
+            </div>
+        </section>
+
+        <section id="liste-formations" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                {% if formations %}
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {% for formation in formations %}
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ formation.titre }}</h3>
+                            <div class="flex flex-wrap items-center gap-2 mb-3">
+                                {% if "En ligne" in formation.lieu %}
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300"><i class="fas fa-globe mr-1"></i> En ligne</span>
+                                {% elif formation.lieu %}
+                                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300"><i class="fas fa-map-marker-alt mr-1"></i> {{ formation.lieu }}</span>
+                                {% endif %}
+                                {% if formation.type_formation == 'brevets' %}
+                                    <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-purple-900 dark:text-purple-300"><i class="fas fa-lightbulb mr-1"></i> Brevets</span>
+                                {% elif formation.type_formation == 'marques' %}
+                                    <span class="bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-pink-900 dark:text-pink-300"><i class="fas fa-tag mr-1"></i> Marques</span>
+                                {% elif formation.type_formation == 'dessins_modeles' %}
+                                    <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-indigo-900 dark:text-indigo-300"><i class="fas fa-brush mr-1"></i> Dessins & Modèles</span>
+                                {% elif formation.type_formation == 'contentieux' %}
+                                    <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300"><i class="fas fa-balance-scale mr-1"></i> Contentieux PI</span>
+                                {% elif formation.type_formation == 'valorisation' %}
+                                    <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300"><i class="fas fa-chart-line mr-1"></i> Valorisation PI</span>
+                                {% else %}
+                                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-gray-900 dark:text-gray-300"><i class="fas fa-book-open mr-1"></i> Général</span>
+                                {% endif %}
+                                <span class="text-gray-600 text-sm">
+                                    <i class="far fa-calendar-alt mr-1"></i>
+                                    {% if formation.date_debut %}Du {{ formation.date_debut|date:"d/m/Y" }}{% endif %}
+                                    {% if formation.date_fin %} au {{ formation.date_fin|date:"d/m/Y" }}{% endif %}
+                                </span>
+                            </div>
+                            <p class="text-gray-700 mb-4">{{ formation.description|truncatechars:150 }}</p>
+                        </div>
+                        <div class="mt-auto">
+                            <a href="{% url 'formation_detail' slug=formation.slug %}" class="inline-flex items-center text-primary hover:text-secondary font-medium transition-colors duration-300">
+                                En savoir plus <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-center text-gray-600 text-lg py-10">
+                    <i class="fas fa-info-circle text-2xl text-primary mb-4"></i><br>
+                    Aucune formation n'est disponible pour le moment. Revenez bientôt pour découvrir nos nouvelles offres !
+                </p>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- Section Avantages -->
+        <section class="mb-12">
+            <div class="bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg p-8 text-white">
+                <h2 class="text-2xl font-bold mb-4 text-center">Avantages de participer à nos formations</h2>
+                <p class="mb-6 max-w-3xl mx-auto text-center">
+                    Nos formations sur la propriété industrielle vous offrent une expertise reconnue et des compétences essentielles pour protéger et valoriser vos innovations.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                    <!-- Avantage 1 -->
+                    <div class="bg-white/10 p-5 rounded-lg backdrop-blur-sm">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-graduation-cap text-white text-xl mr-3"></i>
+                            <h3 class="text-lg font-bold">Expertise reconnue</h3>
+                        </div>
+                        <p class="text-white/90">
+                            Bénéficiez de l'enseignement d'experts en propriété industrielle, reconnus pour leur savoir-faire et leur expérience.
+                        </p>
+                    </div>
+                    
+                    <!-- Avantage 2 -->
+                    <div class="bg-white/10 p-5 rounded-lg backdrop-blur-sm">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-network-wired text-white text-xl mr-3"></i>
+                            <h3 class="text-lg font-bold">Réseau professionnel</h3>
+                        </div>
+                        <p class="text-white/90">
+                            Élargissez votre réseau professionnel en participant à nos formations et en échangeant avec d'autres participants.
+                        </p>
+                    </div>
+                    
+                    <!-- Avantage 3 -->
+                    <div class="bg-white/10 p-5 rounded-lg backdrop-blur-sm">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-chart-line text-white text-xl mr-3"></i>
+                            <h3 class="text-lg font-bold">Avantage concurrentiel</h3>
+                        </div>
+                        <p class="text-white/90">
+                            Acquérez des compétences stratégiques pour protéger vos innovations et renforcer votre position sur le marché.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <a href="{% url 'contact' %}" class="bg-white text-primary px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors duration-300 inline-flex items-center">
+                        <i class="fas fa-envelope mr-2"></i> Contactez-nous pour plus d'informations
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+    <!-- Script pour le menu mobile et sous-menus -->
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+    <script>
+    </script>
+</body>
+</html>

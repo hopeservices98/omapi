@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Liste des Mandataires{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <!-- Fil d'Ariane -->
+    <div class="bg-gray-100 py-3">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fas fa-home mr-1"></i> Accueil
+                </a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <span class="text-primary font-medium">Liste des Mandataires Agréés</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Contenu Principal -->
+    <main class="max-w-5xl mx-auto px-3 sm:px-4 py-8">
+        <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Mandataire en Propriété Industrielle</h1>
+            <p class="text-xl text-secondary font-medium">Trouvez le professionnel qu'il vous faut pour vos démarches en propriété industrielle</p>
+            <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+        </div>
+
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Définition du métier</h2>
+            <p class="text-gray-700 leading-relaxed mb-6">
+                Le mandataire en propriété industrielle est un expert juridique et technique spécialisé dans la protection et la valorisation des créations intellectuelles d’une entreprise, d’un inventeur, d’un artisan ou de toute organisation.
+                Il agit comme intermédiaire officiel auprès des offices de propriété industrielle (nationaux, régionaux ou internationaux) pour le dépôt, la défense, la gestion et la surveillance des titres de propriété industrielle : brevets d’invention, marques, dessins et modèles, noms commerciaux, indications géographiques, etc.
+            </p>
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Missions principales</h2>
+            <div class="space-y-4">
+                <div class="flex items-start space-x-3">
+                    <i class="fas fa-lightbulb text-primary mt-1 text-lg"></i>
+                    <div>
+                        <h3 class="font-bold text-gray-800">Conseil stratégique</h3>
+                        <ul class="list-disc list-inside ml-5 text-sm text-gray-600">
+                            <li>Orienter les entreprises et inventeurs dans le choix des outils de protection adaptés à leur activité (marque, brevet, design, etc.).</li>
+                            <li>Évaluer la pertinence et la force juridique d’une protection.</li>
+                            <li>Élaborer une stratégie de portefeuille de droits (gestion nationale et internationale).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <i class="fas fa-file-alt text-secondary mt-1 text-lg"></i>
+                    <div>
+                        <h3 class="font-bold text-gray-800">Rédaction et dépôt</h3>
+                        <ul class="list-disc list-inside ml-5 text-sm text-gray-600">
+                            <li>Rédiger et déposer les demandes de brevets, marques, modèles et autres titres auprès des offices compétents.</li>
+                            <li>Assurer la conformité des dossiers selon les exigences légales et administratives.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <i class="fas fa-eye text-accent mt-1 text-lg"></i>
+                    <div>
+                        <h3 class="font-bold text-gray-800">Suivi et gestion des titres</h3>
+                        <ul class="list-disc list-inside ml-5 text-sm text-gray-600">
+                            <li>Surveiller les échéances (renouvellements, taxes annuelles).</li>
+                            <li>Gérer l’étendue géographique des protections (extension à l’international via le système de Madrid, PCT, etc.).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <i class="fas fa-gavel text-primary mt-1 text-lg"></i>
+                    <div>
+                        <h3 class="font-bold text-gray-800">Défense et contentieux</h3>
+                        <ul class="list-disc list-inside ml-5 text-sm text-gray-600">
+                            <li>Assister et représenter les clients en cas de litige lié à la contrefaçon, à l’opposition ou à la nullité d’un droit.</li>
+                            <li>Négocier des accords (licences, cessions, coexistence de marques).</li>
+                            <li>Collaborer avec les avocats pour les procédures judiciaires.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <i class="fas fa-chart-line text-secondary mt-1 text-lg"></i>
+                    <div>
+                        <h3 class="font-bold text-gray-800">Valorisation et exploitation</h3>
+                        <ul class="list-disc list-inside ml-5 text-sm text-gray-600">
+                            <li>Aider à transformer les droits de propriété industrielle en avantage économique et concurrentiel.</li>
+                            <li>Conseiller sur la commercialisation des droits (licences, partenariats, franchise).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Liste des Mandataires Agréés</h2>
+            
+            {% if mandataires %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr"> {# Ajout de auto-rows-fr pour des hauteurs de lignes flexibles #}
+                {% for mandataire in mandataires %}
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col justify-between overflow-hidden"> {# Ajout de overflow-hidden #}
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">{{ mandataire.nom }}</h2>
+                        {% if mandataire.qualite %}
+                        <p class="text-gray-600 text-sm mb-1 break-words"><i class="fas fa-briefcase mr-2 text-accent"></i>Qualité: <span class="font-medium">{{ mandataire.qualite }}</span></p> {# Ajout de break-words #}
+                        {% endif %}
+                        {% if mandataire.numero_agrement %}
+                        <p class="text-gray-600 text-sm mb-1 break-words"><i class="fas fa-id-badge mr-2 text-primary"></i>Numéro d'agrément: <span class="font-medium">{{ mandataire.numero_agrement }}</span></p> {# Ajout de break-words #}
+                        {% endif %}
+                        {% if mandataire.date_agrement %}
+                        <p class="text-gray-600 text-sm mb-1 break-words"><i class="fas fa-calendar-alt mr-2 text-secondary"></i>Date d'agrément: <span class="font-medium">{{ mandataire.date_agrement|date:"d/m/Y" }}</span></p> {# Ajout de break-words #}
+                        {% endif %}
+                        {% if mandataire.adresse %}
+                        <p class="text-gray-600 text-sm mb-1 break-words"><i class="fas fa-map-marker-alt mr-2 text-accent"></i>Adresse: {{ mandataire.adresse }}</p> {# Ajout de break-words #}
+                        {% endif %}
+                        {% if mandataire.telephone %}
+                        <p class="text-gray-600 text-sm mb-1 break-words"><i class="fas fa-phone mr-2 text-primary"></i>Téléphone 1: <a href="tel:{{ mandataire.telephone }}" class="text-blue-600 hover:underline">{{ mandataire.telephone }}</a></p> {# Ajout de break-words #}
+                        {% endif %}
+                        {% if mandataire.telephone_2 %}
+                        <p class="text-gray-600 text-sm mb-1 break-words"><i class="fas fa-phone mr-2 text-primary"></i>Téléphone 2: <a href="tel:{{ mandataire.telephone_2 }}" class="text-blue-600 hover:underline">{{ mandataire.telephone_2 }}</a></p> {# Ajout de break-words #}
+                        {% endif %}
+                        {% if mandataire.email %}
+                        <p class="text-gray-600 text-sm mb-1 break-words"><i class="fas fa-envelope mr-2 text-secondary"></i>Email 1: <a href="mailto:{{ mandataire.email }}" class="text-blue-600 hover:underline">{{ mandataire.email }}</a></p> {# Ajout de break-words #}
+                        {% endif %}
+                        {% if mandataire.email_2 %}
+                        <p class="text-gray-600 text-sm mb-1 break-words"><i class="fas fa-envelope mr-2 text-secondary"></i>Email 2: <a href="mailto:{{ mandataire.email_2 }}" class="text-blue-600 hover:underline">{{ mandataire.email_2 }}</a></p> {# Ajout de break-words #}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-gray-700 text-lg">Aucun mandataire n'est actuellement enregistré.</p>
+            {% endif %}
+        </section>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+
+    <!-- Script pour le menu mobile et sous-menus (si nécessaire) -->
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+</body>
+</html>

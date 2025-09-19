@@ -1,0 +1,868 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMAPI - Accueil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+      /* Animation plus fluide pour les sous-menus */
+      .group > div {
+          transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+      }
+      
+      /* Meilleure gestion du focus pour l'accessibilité */
+      button:focus, a:focus {
+          outline: 2px solid #60a5fa;
+          outline-offset: 2px;
+      }
+      
+      /* Amélioration de l'apparence sur mobile */
+      @media (max-width: 767px) {
+          .mobile-submenu-content {
+              max-height: 0;
+              overflow: hidden;
+              transition: max-height 0.3s ease;
+          }
+          
+          .mobile-submenu-content:not(.hidden) {
+              max-height: 500px;
+          }
+      }
+      
+      /* Styles pour la barre d'annonce */
+      .announce-bar {
+          background-color: #1e40af;
+          color: white;
+          padding: 12px 0;
+          overflow: hidden;
+          position: relative;
+      }
+      
+      .announce-wrapper {
+          display: flex;
+          animation: scroll 30s linear infinite;
+          width: max-content;
+      }
+      
+      .announce-slide {
+          display: flex;
+          align-items: center;
+          padding: 0 50px;
+          white-space: nowrap;
+      }
+      
+      .announce-slide .tag {
+          background-color: #f59e0b;
+          color: white;
+          padding: 4px 8px;
+          border-radius: 4px;
+          font-size: 12px;
+          font-weight: bold;
+          margin-right: 10px;
+      }
+      
+      .announce-slide .msg {
+          margin: 0;
+          font-size: 14px;
+      }
+      
+      .announce-slide .link {
+          color: #fbbf24;
+          text-decoration: none;
+          margin-left: 15px;
+          font-weight: bold;
+      }
+      
+      .link:hover {
+          text-decoration: underline;
+      }
+      
+      @keyframes scroll {
+          0% {
+              transform: translateX(0);
+          }
+          100% {
+              transform: translateX(-50%);
+          }
+      }
+      
+      /* Styles pour la barre de statistiques */
+      .stats-bar {
+          background-color: #f3f4f6;
+          color: #1e40af;
+          padding: 15px 0;
+          border-top: 1px solid #e5e7eb;
+          border-bottom: 1px solid #e5e7eb;
+      }
+      
+      .stats-bar .flash-num {
+          font-weight: bold;
+          font-size: 18px;
+      }
+      
+      /* Styles pour le carrousel */
+      .hero {
+          position: relative;
+          height: 500px;
+          overflow: hidden;
+      }
+      
+      .slides {
+          display: flex;
+          height: 100%;
+          transition: transform 0.5s ease;
+      }
+      
+      .slide {
+          min-width: 100%;
+          height: 100%;
+          background-size: cover;
+          background-position: center;
+          position: relative;
+      }
+      
+      .filter-dim::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+      }
+      
+      .filter-blue::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(30, 64, 175, 0.7);
+      }
+      
+      .filter-dark::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.7);
+      }
+      
+      .slide-content {
+          position: relative;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          height: 100%;
+          padding: 0 5%;
+          max-width: 1200px;
+          margin: 0 auto;
+      }
+      
+      .slide-content.left {
+          align-items: flex-start;
+          text-align: left;
+      }
+      
+      .slide-content h1 {
+          font-size: 2.5rem;
+          font-weight: bold;
+          color: white;
+          margin-bottom: 20px;
+          max-width: 600px;
+      }
+      
+      .slide-desc {
+          font-size: 1.2rem;
+          color: rgba(255, 255, 255, 0.9);
+          margin-bottom: 30px;
+          max-width: 600px;
+      }
+      
+      .btn-hero {
+          background-color: #f59e0b;
+          color: white;
+          padding: 12px 30px;
+          border-radius: 30px;
+          text-decoration: none;
+          font-weight: bold;
+          transition: background-color 0.3s;
+      }
+      
+      .btn-hero:hover {
+          background-color: #d97706;
+      }
+      
+      .bullets {
+          position: absolute;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          gap: 10px;
+      }
+      
+      .bullet {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background-color: rgba(255, 255, 255, 0.5);
+          cursor: pointer;
+      }
+      
+      .bullet.active {
+          background-color: white;
+      }
+      
+       /* Styles for the News Section */
+       .news {
+           padding: 60px 0; /* Reduced vertical padding */
+           background-color: #f8f8f8;
+       }
+
+       .news-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Reduced min-width for cards */
+           gap: 30px; /* Consistent gap */
+           margin-top: 50px; /* More space from the title */
+       }
+
+        .news-card {
+            border-radius: 8px; /* Slightly less rounded */
+            overflow: hidden;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Softer, lighter shadow */
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border: 1px solid #e0e0e0; /* More visible border */
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px); /* Gentle lift */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Slightly more pronounced shadow on hover */
+        }
+
+        .news-image {
+            position: relative;
+            height: 200px; /* Back to original height */
+            overflow: hidden;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover .news-image img {
+            transform: scale(1.03); /* Subtle zoom */
+        }
+
+        .news-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #1e40af; /* Primary color */
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px; /* Square badge */
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: normal;
+            z-index: 10;
+        }
+
+        .news-content {
+            padding: 20px; /* Reduced padding */
+        }
+
+        .date {
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+        }
+
+        .date i {
+            margin-right: 8px;
+            color: #1e40af;
+        }
+
+        .news-content h3 {
+            font-size: 1.25rem; /* Standard title size */
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1f2937;
+            line-height: 1.4;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Limite à deux lignes */
+                        line-clamp: 2; /* Standard property for compatibility */
+            -webkit-box-orient: vertical;
+        }
+
+        .news-content p {
+            color: #4b5563;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .news-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .btn-read-more {
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .btn-read-more:hover {
+            color: #3b82f6;
+            text-decoration: underline;
+            transform: none; /* Remove slide effect */
+        }
+
+        .btn-read-more i {
+            margin-left: 5px;
+            font-size: inherit;
+        }
+
+        .news-views {
+            color: #6b7280;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+        }
+
+        .news-views i {
+            margin-right: 6px;
+            color: #1e40af;
+        }
+      
+      /* Styles pour la section Domaines */
+      .domains {
+          padding: 40px 0; /* Reduced vertical padding */
+          background-color: #f9fafb;
+      }
+      
+      .section-title {
+          font-size: 2rem;
+          font-weight: bold;
+          text-align: center;
+          margin-bottom: 15px;
+          color: #1f2937;
+      }
+      
+      .section-subtitle {
+          text-align: center;
+          color: #6b7280;
+          max-width: 700px;
+          margin: 0 auto 40px;
+      }
+      
+      .domains-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 30px;
+          justify-content: center; /* Ajout pour centrer les cartes */
+      }
+      
+      .domain-card {
+          background-color: white;
+          border-radius: 10px;
+          padding: 30px;
+          text-align: center;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+          transition: transform 0.3s, box-shadow 0.3s;
+      }
+      
+      .domain-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Rendre l'ombre plus prononcée */
+      }
+      .domain-card .icon-box { /* Ajouter une transition à l'icon-box pour un effet fluide */
+          transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+      .domain-card:hover .icon-box { /* Effet au survol de la carte sur l'icon-box */
+          transform: scale(1.1); /* Agrandir légèrement l'icône */
+          background-color: #dbeafe; /* Changer la couleur de fond */
+      }
+      
+      .icon-box {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 80px;
+          height: 80px;
+          margin: 0 auto 20px;
+          background-color: #eff6ff;
+          border-radius: 50%;
+      }
+      
+      .domain-card h3 {
+          font-size: 1.25rem;
+          font-weight: bold;
+          margin-bottom: 15px;
+          color: #1f2937;
+      }
+      
+      .domain-card p {
+          color: #4b5563;
+          margin-bottom: 20px;
+      }
+      
+      .btn-card {
+          display: inline-block;
+          background-color: #1e40af;
+          color: white;
+          padding: 10px 20px;
+          border-radius: 5px;
+          text-decoration: none;
+          font-weight: bold;
+          transition: background-color 0.3s;
+      }
+      
+      .btn-card:hover {
+          background-color: #1d4ed8;
+      }
+      
+      /* Styles pour la section "Commencez vos démarches" */
+      .start {
+          padding: 60px 0;
+          background-color: white;
+      }
+      
+      .start-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 30px;
+      }
+      
+      .start-card {
+          background-color: #f9fafb;
+          border-radius: 10px;
+          padding: 30px;
+          transition: transform 0.3s, box-shadow 0.3s;
+      }
+      
+      .start-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      .start-icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 60px;
+          height: 60px;
+          margin: 0 auto 20px;
+          background-color: #1e40af;
+          border-radius: 50%;
+      }
+      
+      .start-card h3 {
+          font-size: 1.25rem;
+          font-weight: bold;
+          margin-bottom: 15px;
+          text-align: center;
+          color: #1f2937;
+      }
+      
+      .start-card p {
+          color: #4b5563;
+          margin-bottom: 20px;
+          text-align: center;
+      }
+      
+      .btn-start {
+          display: block;
+          background-color: #1e40af;
+          color: white;
+          padding: 12px 20px;
+          border-radius: 5px;
+          text-decoration: none;
+          font-weight: bold;
+          text-align: center;
+          transition: background-color 0.3s;
+          margin: 0 auto;
+          width: fit-content;
+      }
+      
+      .btn-start:hover {
+          background-color: #1d4ed8;
+      }
+      
+      /* Styles pour la section Ressources */
+      .resources {
+          padding: 60px 0;
+          background-color: #f9fafb;
+      }
+      
+      .resources-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 30px;
+          justify-content: center; /* Ajout pour centrer les cartes */
+          margin: 0 auto;
+      }
+      
+      .resource-card {
+          background-color: white;
+          border-radius: 10px;
+          padding: 30px;
+          text-align: center;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+          transition: transform 0.3s, box-shadow 0.3s;
+      }
+      
+      .resource-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      .resource-icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 20px;
+      }
+      
+      .resource-card h3 {
+          font-size: 1.1rem;
+          font-weight: bold;
+          margin-bottom: 10px;
+          color: #1f2937;
+      }
+      
+      .resource-card p {
+          color: #4b5563;
+          margin-bottom: 20px;
+      }
+      
+      .btn-outline-blue {
+          display: inline-block;
+          border: 2px solid #1e40af;
+          color: #1e40af;
+          padding: 8px 16px;
+          border-radius: 5px;
+          text-decoration: none;
+          font-weight: bold;
+          transition: all 0.3s;
+      }
+      
+      .btn-outline-blue:hover {
+          background-color: #1e40af;
+          color: white;
+      }
+      
+      /* Styles pour le conteneur */
+      .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+      }
+  </style>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+<main>
+<!-- Section du carrousel d'accueil (Hero Slider) -->
+<section class="hero" id="hero">
+  <div class="slides" id="slides">
+    {% for slide in carousel_slides %}
+    <div class="slide {% if forloop.first %}filter-dim{% elif forloop.counter == 2 %}filter-blue{% else %}filter-dark{% endif %}" style="background-image:url('{{ slide.image.url }}')">
+      <div class="slide-content left">
+        <h1>{{ slide.titre }}</h1>
+        <p class="slide-desc">
+          {{ slide.description }}
+        </p>
+        {% if slide.lien %}
+        <a href="{{ slide.lien }}" class="btn-hero">En savoir plus</a>
+        {% endif %}
+      </div>
+    </div>
+    {% empty %}
+    <!-- Placeholder slides if no slides are available -->
+    <div class="slide filter-dim" style="background-image:url('https://via.placeholder.com/1350x500.png?text=Ajouter+des+slides+de+carrousel+via+l%27admin')">
+      <div class="slide-content left">
+        <h1>Bienvenue à l'Office Malgache de la Propriété Industrielle</h1>
+        <p class="slide-desc">
+          Découvrez un guichet unique pour protéger vos marques, brevets et dessins en toute simplicité.
+        </p>
+        <a href="{% url 'procedures' %}" class="btn-hero">Commencer</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <!-- Indicateurs de slide (bullets) -->
+  <div class="bullets" id="bullets">
+    {% for slide in carousel_slides %}
+    <span class="bullet {% if forloop.first %}active{% endif %}"></span>
+    {% endfor %}
+    {% if not carousel_slides %}
+    <span class="bullet active"></span>
+    {% endif %}
+  </div>
+</section>
+<!-- Fin de la section carrousel d'accueil -->
+<!-- Section de la barre d'annonce défilante -->
+<section class="announce-bar">
+  <div class="announce-wrapper">
+    {% for annonce in annonces %}
+    <div class="announce-slide">
+      <span class="tag">{{ annonce.get_type_annonce_display }}</span>
+      <p class="msg">{{ annonce.message }}</p>
+      {% if annonce.lien %}
+      <a href="{{ annonce.lien }}" class="link">{{ annonce.texte_lien }} →</a>
+      {% endif %}
+    </div>
+    {% empty %}
+    <div class="announce-slide">
+      <p class="msg">Aucune annonce disponible pour le moment.</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+<!-- Fin de la section barre d'annonce -->
+<!-- Section des chiffres clés transformée en barre de notification -->
+<section class="announce-bar stats-bar">
+  <div class="announce-wrapper">
+    {% for stat in statistiques %}
+    <div class="announce-slide">
+      <p class="msg">
+        {% if stat.icone_fa %}
+        <i class="{{ stat.icone_fa }} text-primary mr-2"></i>
+        {% endif %}
+        <span class="flash-num">{{ stat.valeur }}</span> {{ stat.nom }}
+      </p>
+    </div>
+    {% empty %}
+    <div class="announce-slide">
+      <p class="msg">Aucune statistique disponible pour le moment.</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+<!-- Fin de la section des chiffres clés -->
+<!-- Section Actualités -->
+<section class="news">
+  <div class="container">
+    <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2 text-center flex items-center justify-center gap-2">
+        <i class="fas fa-newspaper"></i> Actualités
+    </h1>
+    <p class="text-xl text-secondary font-medium text-center">Restez informés des derniers événements, ateliers et nouveautés de l’Office Malgache de la Propriété Industrielle.</p>
+    <div class="news-grid mx-auto max-w-6xl">
+      {% for actualite in latest_actualites %}
+      <article class="news-card" data-category="{{ actualite.type_actualite }}">
+        <div class="news-card-inner">
+          <div class="news-image">
+            {% if actualite.image %}
+            <img src="{{ actualite.image.url }}" alt="{{ actualite.titre }}">
+            {% else %}
+            <img src="https://via.placeholder.com/800x400.png?text=Image+Actualite" alt="Placeholder Image">
+            {% endif %}
+            <span class="news-badge" style="--badge-color: {{ actualite.type_actualite.couleur|default:'#1e40af' }}; background-color: var(--badge-color);">{{ actualite.type_actualite.nom }}</span>
+          </div>
+          <div class="news-content">
+            <span class="date"><i class="far fa-calendar-alt"></i> {{ actualite.date_publication|date:"d M Y" }}</span>
+            <h3>{{ actualite.titre }}</h3>
+            <p>{{ actualite.contenu|striptags|truncatechars:200|safe }}</p>
+            <div class="news-footer">
+              <a href="{% url 'actualite_detail' actualite.slug %}" class="btn-read-more">Lire la suite</a>
+              <span class="news-views"><i class="far fa-eye"></i> 0</span> {# Placeholder for views, if not available in model #}
+            </div>
+          </div>
+        </div>
+      </article>
+      {% empty %}
+      <p class="col-span-full text-center text-gray-600">Aucune actualité récente pour le moment.</p>
+      {% endfor %}
+    </div>
+    <a href="{% url 'actualites_list' %}" class="bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-secondary transition-colors duration-300 flex items-center justify-center shadow-md hover:shadow-lg mt-10 mx-auto max-w-max">Toutes les actualités</a>
+  </div>
+</section>
+<!-- Fin de la section Actualités -->
+<!-- Section Domaines de Protection -->
+<section class="domains" id="services">
+  <div class="container">
+    <h2 class="section-title">Nos domaines de protection</h2>
+    <p class="section-subtitle">
+      Découvrez nos services complets pour protéger tous vos actifs de propriété industrielle
+    </p>
+    <div class="domains-grid">
+      <!-- Carte Marque -->
+      <article class="domain-card">
+        <div class="icon-box">
+          <!-- Icône Marque -->
+          <i class="fas fa-award text-4xl text-primary"></i>
+        </div>
+        <h3>Marque</h3>
+        <p>
+          Protégez l'identité de vos produits et services. Une marque est un signe distinctif (un nom, un logo) qui vous différencie de vos concurrents.
+        </p>
+        <a href="{% url 'depot_marque' %}" class="btn-card">Déposer</a>
+      </article>
+      <!-- Carte Brevets -->
+      <article class="domain-card">
+        <div class="icon-box">
+          <!-- Icône Brevet -->
+          <i class="fas fa-flask text-4xl text-primary"></i>
+        </div>
+        <h3>Brevets d'invention</h3>
+        <p>
+          Sécurisez vos innovations techniques. Le brevet vous accorde un monopole d'exploitation sur votre invention pour une durée déterminée.
+        </p>
+        <a href="{% url 'depot_brevet' %}" class="btn-card">Déposer</a>
+      </article>
+      <!-- Carte Dessins & Modèles -->
+      <article class="domain-card">
+        <div class="icon-box">
+          <!-- Icône Dessin/Modèle -->
+          <i class="fas fa-bezier-curve text-4xl text-primary"></i>
+        </div>
+        <h3>Dessins et Modèles</h3>
+        <p>
+          Valorisez l'apparence unique de vos produits. Protégez le design, les contours, les couleurs et la forme de vos créations.
+        </p>
+        <a href="{% url 'depot_dessin_modele' %}" class="btn-card">Déposer</a>
+      </article>
+      <!-- Carte Noms Commerciaux -->
+      <article class="domain-card">
+        <div class="icon-box">
+          <!-- Icône Nom Commercial -->
+          <i class="fas fa-handshake text-4xl text-primary"></i>
+        </div>
+        <h3>Noms Commerciaux</h3>
+        <p>
+          Identifiez et protégez le nom de votre entreprise. Le nom commercial est essentiel pour bâtir la réputation de votre activité.
+        </p>
+        <a href="{% url 'depot_nom_commercial' %}" class="btn-card">Déposer</a>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- Fin de la section Domaines de Protection -->
+<!-- Section "Commencez vos démarches" -->
+<section class="start" id="procedures">
+  <div class="container">
+    <h2 class="section-title">Commencez vos démarches</h2>
+    <p class="section-subtitle">
+      Simplifiez vos procédures avec nos services numériques sécurisés et efficaces
+    </p>
+    <div class="start-grid">
+      <!-- Carte d'action 1 : Déposer une demande -->
+      <article class="start-card">
+        <div class="start-icon">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v5h5v11H6z'/%3E%3Cpath d='M14 2v6h6'/%3E%3C/svg%3E" alt="Déposer">
+        </div>
+        <h3>Déposer une demande</h3>
+        <p>
+          Soumettez votre demande de marque, brevet, dessin ou modèle directement. Interface simple et sécurisée pour toutes vos démarches.
+        </p>
+        <a href="{% url 'services_list' %}" class="btn-start">Déposer maintenant</a> {# Placeholder for actual URL #}
+      </article>
+      <!-- Carte d'action 2 : Demander une copie de la GOPI -->
+      <article class="start-card">
+        <div class="start-icon">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M4 6h16v2H4zm0 5h16v2H4zm0 5h7v2H4z'/%3E%3C/svg%3E" alt="GOPI">
+        </div>
+        <h3>Demander une copie de la GOPI</h3>
+        <p>
+          Consultez ou recevez la Gazette officielle de la propriété industrielle pour connaître les nouveaux enregistrements, modifications ou renouvellements.
+        </p>
+        <a href="{% url 'gopi_list' %}" class="btn-start">Obtenir la copie</a>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- Fin de la section "Commencez vos démarches" -->
+<!-- Section Centre de Ressources -->
+<section class="resources">
+  <div class="container">
+    <h2 class="section-title">Centre de Ressources</h2>
+    <p class="section-subtitle">
+      Toutes les informations et outils dont vous avez besoin pour vos démarches
+    </p>
+    <div class="resources-grid">
+      <!-- Carte ressource 1 : Textes de loi et règlements -->
+      <article class="resource-card">
+        <div class="resource-icon">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='%230056b3'%3E%3Cpath d='M21 11H11v10h10V11zm0-8H11v6h10V3zM3 21h8V11H3v10zm0-14h8V3H3v4z'/%3E%3C/svg%3E" alt="Textes">
+        </div>
+        <h3>Textes de loi et règlements</h3>
+        <p>Consultez la législation complète sur la propriété industrielle</p>
+        <a href="#" class="btn-outline-blue">Consulter</a> {# Placeholder for actual URL #}
+      </article>
+      <!-- Carte ressource 2 : Guides et manuels de dépôt -->
+      <article class="resource-card">
+        <div class="resource-icon">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='%230056b3'%3E%3Cpath d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/%3E%3C/svg%3E" alt="Guides">
+        </div>
+        <h3>Guides et manuels de dépôt</h3>
+        <p>Accédez aux guides détaillés pour vos démarches</p>
+        <a href="{% url 'documents_list' %}" class="btn-outline-blue">Consulter</a>
+      </article>
+      <!-- Carte ressource 3 : Formulaires à télécharger -->
+      <article class="resource-card">
+        <div class="resource-icon">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='%230056b3'%3E%3Cpath d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v5h5v11H6z'/%3E%3Cpath d='M14 2v6h6'/%3E%3C/svg%3E" alt="Formulaires">
+        </div>
+        <h3>Formulaires à télécharger</h3>
+        <p>Téléchargez tous les formulaires nécessaires</p>
+        <a href="{% url 'documents_list' %}" class="btn-outline-blue">Consulter</a>
+      </article>
+      <!-- Carte ressource 4 : Offres de formation -->
+      <article class="resource-card">
+        <div class="resource-icon">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='%230056b3'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E" alt="Formation">
+        </div>
+        <h3>Offres de formation</h3>
+        <p>Découvrez nos programmes de formation spécialisés</p>
+        <a href="{% url 'formations_list' %}" class="btn-outline-blue">Consulter</a>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- Fin de la section Centre de Ressources -->
+</main>
+
+    {% include 'frontend/includes/footer.html' %}
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+    <script src="{% static 'js/carousel.js' %}"></script>
+</body>
+</html>

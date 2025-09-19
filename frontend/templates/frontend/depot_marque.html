@@ -1,0 +1,698 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dépôt de Marque - OMAPI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?v=1.0"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <main class="max-w-7xl mx-auto px-3 sm:px-4">
+        <!-- Fil d'Ariane -->
+        <div class="bg-gray-100 py-3">
+            <div class="max-w-5xl mx-auto px-3 sm:px-4">
+                <nav class="flex items-center space-x-2 text-sm">
+                    <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                        <i class="fas fa-home mr-1"></i> Accueil
+                    </a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <a href="{% url 'services_list' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">Procédures</a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <span class="text-primary font-medium">Dépôt de Marque</span>
+                </nav>
+            </div>
+        </div>
+
+        <div class="md:flex md:space-x-8">
+            <!-- Navigation rapide -->
+            <div class="md:w-1/4">
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-8 sticky top-[65px] z-10">
+                    <h2 class="text-lg font-bold text-gray-800 mb-4">Navigation rapide</h2>
+                    <div class="flex flex-col gap-2" id="tab-navigation">
+                        <a href="#depot-initial" class="bg-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-secondary transition-colors duration-300">Dépôt initial</a>
+                        <a href="#renouvellement" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Renouvellement</a>
+                        <a href="#inscription-registre" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Inscription au registre</a>
+                        <a href="#transfert" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Transfert</a>
+                        <a href="#radiation" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Radiation</a>
+                        <a href="#faq" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">FAQ</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenu Principal -->
+            <div class="md:w-3/4">
+                <div class="mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Dépôt de Marque</h1>
+                    <p class="text-xl text-secondary font-medium">Protégez l'identité de vos produits et services</p>
+                    <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+                </div>
+
+                <!-- Section Dépôt Initial de Marque -->
+                <section id="depot-initial" class="mb-12">
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-primary text-white p-3 rounded-lg mr-4">
+                                <i class="fas fa-certificate text-2xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-800">Dépôt Initial de Marque</h2>
+                        </div>
+                        
+                        <p class="text-gray-700 mb-6 leading-relaxed">
+                            Le dépôt d'une marque auprès de l'OMAPI vous permet de protéger votre signe distinctif et d'obtenir un monopole d'exploitation sur le territoire malgache. La protection est valable pour une durée de 10 ans renouvelable indéfiniment.
+                        </p>
+
+                        <!-- Étapes du dépôt -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Étapes du dépôt</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">1</div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Recherche d'antériorité</h4>
+                                        <p class="text-gray-600 text-sm">Vérifiez que votre marque n'est pas déjà déposée ou enregistrée par un tiers.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">2</div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Préparation du dossier</h4>
+                                        <p class="text-gray-600 text-sm">Rassemblez tous les documents nécessaires et complétez le formulaire de dépôt.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">3</div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Dépôt à l'OMAPI</h4>
+                                        <p class="text-gray-600 text-sm">Soumettez votre dossier complet à l'OMAPI et payez les frais de dépôt.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">4</div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Examen et publication</h4>
+                                        <p class="text-gray-600 text-sm">L'OMAPI examine votre demande et publie la marque au Bulletin Officiel.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">5</div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Délivrance du certificat</h4>
+                                        <p class="text-gray-600 text-sm">Après la période d'opposition, le certificat d'enregistrement vous est délivré.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Documents nécessaires -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Documents nécessaires</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <h4 class="font-bold text-gray-800 mb-2">Pour les personnes physiques</h4>
+                                    <ul class="space-y-1 text-sm text-gray-600">
+                                        <li>• Formulaire de dépôt de marque</li>
+                                        <li>• Copie de la pièce d'identité</li>
+                                        <li>• Représentation graphique de la marque</li>
+                                        <li>• Liste des produits/services visés</li>
+                                    </ul>
+                                </div>
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <h4 class="font-bold text-gray-800 mb-2">Pour les personnes morales</h4>
+                                    <ul class="space-y-1 text-sm text-gray-600">
+                                        <li>• Formulaire de dépôt de marque</li>
+                                        <li>• Extrait du registre de commerce</li>
+                                        <li>• Statuts de l'entreprise</li>
+                                        <li>• Pouvoir du représentant légal</li>
+                                        <li>• Procuration si nécessaire</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarifs -->
+                        <div class="bg-purple-50 rounded-lg p-6 mb-8">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Taxes en matière de marques (enregistrement national)</h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm">
+                                    <thead>
+                                        <tr class="bg-purple-100">
+                                            <th class="text-left p-3">Nature</th>
+                                            <th class="text-right p-3">Montant (en Ariary)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Taxe de dépôt pour trois classes</td>
+                                            <td class="text-right p-3">180 000</td>
+                                        </tr>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Taxes par classe supplémentaire au-delà de la troisième</td>
+                                            <td class="text-right p-3">20 000</td>
+                                        </tr>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Taxe de revendication de priorité, par priorité revendiquée</td>
+                                            <td class="text-right p-3">30 000</td>
+                                        </tr>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Taxe de régularisation ou de correction d'erreurs matérielles</td>
+                                            <td class="text-right p-3">10 000</td>
+                                        </tr>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Taxe de renouvellement pour dix ans</td>
+                                            <td class="text-right p-3">200 000</td>
+                                        </tr>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Surtaxe pour renouvellement tardif</td>
+                                            <td class="text-right p-3">40 000</td>
+                                        </tr>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Taxe de recherche d'antériorité ou de disponibilité d'une marque</td>
+                                            <td class="text-right p-3">30 000</td>
+                                        </tr>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Taxe supplémentaire par élément trouvé pour une recherche spéciale</td>
+                                            <td class="text-right p-3">4 000</td>
+                                        </tr>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Taxe pour la délivrance d'une copie officielle d'un titre ou d'une décision</td>
+                                            <td class="text-right p-3">10 000</td>
+                                        </tr>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Taxe d'inscription ou de radiation sur le registre des marques, par marque</td>
+                                            <td class="text-right p-3">30 000</td>
+                                        </tr>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Taxe pour la délivrance d'un état des inscriptions au registre, par marque</td>
+                                            <td class="text-right p-3">10 000</td>
+                                        </tr>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Taxe pour la restauration d'un droit à agir par marque</td>
+                                            <td class="text-right p-3">40 000</td>
+                                        </tr>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Taxe de certification, par cas</td>
+                                            <td class="text-right p-3">4 000</td>
+                                        </tr>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Taxe pour délivrance d'une attestation</td>
+                                            <td class="text-right p-3">10 000</td>
+                                        </tr>
+                                        <tr class="border-b border-purple-100">
+                                            <td class="p-3">Taxe pour délivrance d'une attestation de dépôt (avec reproduction en couleur)</td>
+                                            <td class="text-right p-3">15 000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Renouvellement de Marque -->
+                <section id="renouvellement" class="mb-12">
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-secondary text-white p-3 rounded-lg mr-4">
+                                <i class="fas fa-calendar-alt text-2xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-800">Renouvellement de Marque</h2>
+                        </div>
+                        
+                        <p class="text-gray-700 mb-6 leading-relaxed">
+                            La protection d'une marque est valable pour 10 ans à compter de la date de dépôt. Le renouvellement doit être demandé dans les 6 mois précédant l'expiration, avec une tolérance de 6 mois supplémentaires moyennant des frais de retard.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Délais de renouvellement</h3>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                        <span><strong>Période normale:</strong> 6 mois avant l'expiration</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                        <span><strong>Période de grâce:</strong> 6 mois après l'expiration (+ frais)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                        <span><strong>Radiation d'office:</strong> Au-delà de la période de grâce</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Documents pour le renouvellement</h3>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-file-alt text-secondary mr-2 mt-1"></i>
+                                        <span>Demande de renouvellement de marque</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-file-alt text-secondary mr-2 mt-1"></i>
+                                        <span>Preuve du paiement des frais de renouvellement</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-file-alt text-secondary mr-2 mt-1"></i>
+                                        <span>Si renouvellement pendant la période de grâce : justificatif du paiement des frais de retard</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-file-alt text-secondary mr-2 mt-1"></i>
+                                        <span>Procuration si le renouvellement est effectué par un mandataire</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Section Inscription au Registre des Marques -->
+                <section id="inscription-registre" class="mb-12">
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-accent text-white p-3 rounded-lg mr-4">
+                                <i class="fas fa-book text-2xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-800">Inscription au Registre des Marques</h2>
+                        </div>
+                        
+                        <p class="text-gray-700 mb-6 leading-relaxed">
+                            Le Registre National des Marques tenu par l'OMAPI recense toutes les marques enregistrées à Madagascar. Toute modification affectant les droits sur une marque doit faire l'objet d'une inscription au registre pour être opposable aux tiers.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Cas d'inscription obligatoire</h3>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent mr-2 mt-1"></i>
+                                        <span>Transfert de propriété</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent mr-2 mt-1"></i>
+                                        <span>Changement de nom ou d'adresse du titulaire</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent mr-2 mt-1"></i>
+                                        <span>Constitution ou modification de droits réels</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent mr-2 mt-1"></i>
+                                        <span>Licence d'exploitation</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent mr-2 mt-1"></i>
+                                        <span>Gage ou saisie</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Procédure d'inscription</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">1</div>
+                                        <div>
+                                            <div class="font-medium text-gray-800">Demande d'inscription</div>
+                                            <div class="text-sm text-gray-600">Formulaire spécifique à compléter</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">2</div>
+                                        <div>
+                                            <div class="font-medium text-gray-800">Pièces justificatives</div>
+                                            <div class="text-sm text-gray-600">Acte justificatif de la modification</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">3</div>
+                                        <div>
+                                            <div class="font-medium text-gray-800">Examen par l'OMAPI</div>
+                                            <div class="text-sm text-gray-600">Vérification de la conformité</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">4</div>
+                                        <div>
+                                            <div class="font-medium text-gray-800">Inscription au registre</div>
+                                            <div class="text-sm text-gray-600">Mise à jour du registre national</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-accent/5 rounded-lg p-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-4">Tarifs d'inscription</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="bg-white rounded-lg p-4 text-center">
+                                    <div class="text-xl font-bold text-accent mb-2">80 000 Ar</div>
+                                    <div class="text-gray-600 text-sm">Transfert de propriété</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-4 text-center">
+                                    <div class="text-xl font-bold text-accent mb-2">40 000 Ar</div>
+                                    <div class="text-gray-600 text-sm">Changement de nom/adresse</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-4 text-center">
+                                    <div class="text-xl font-bold text-accent mb-2">60 000 Ar</div>
+                                    <div class="text-gray-600 text-sm">Licence ou gage</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Transfert de Marque -->
+                <section id="transfert" class="mb-12">
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-green-600 text-white p-3 rounded-lg mr-4">
+                                <i class="fas fa-exchange-alt text-2xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-800">Transfert de Marque</h2>
+                        </div>
+                        
+                        <p class="text-gray-700 mb-6 leading-relaxed">
+                            Le transfert d'une marque consiste à céder les droits de propriété d'une marque à un tiers. Cette opération doit être obligatoirement inscrite au Registre National des Marques pour être opposable aux tiers.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Conditions de transfert</h3>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                        <span>La marque doit être enregistrée et valide</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                        <span>Accord écrit entre le cédant et le cessionnaire</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                        <span>Le transfert doit porter sur la totalité des produits/services</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                        <span>Le cessionnaire doit remplir les conditions pour détenir une marque</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Documents nécessaires</h3>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                        <span>Formulaire de demande de transfert</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                        <span>Acte de cession (contrat de transfert)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                        <span>Pièces d'identité du cédant et du cessionnaire</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                        <span>Preuve du paiement des frais d'inscription</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 rounded-lg p-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-4">Effets du transfert</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-bold text-green-600 mb-2">Pour le cédant</h4>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• Perte du droit exclusif</li>
+                                        <li>• Interdiction d'utiliser la marque</li>
+                                        <li>• Obligation de garantie d'éviction</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-bold text-green-600 mb-2">Pour le cessionnaire</h4>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• Acquisition des droits sur la marque</li>
+                                        <li>• Droit d'interdire l'usage aux tiers</li>
+                                        <li>• Obligation d'exploiter la marque</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Radiation du Droit sur Marque -->
+                <section id="radiation" class="mb-12">
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-red-600 text-white p-3 rounded-lg mr-4">
+                                <i class="fas fa-times-circle text-2xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-800">Radiation du Droit sur Marque</h2>
+                        </div>
+                        
+                        <p class="text-gray-700 mb-6 leading-relaxed">
+                            La radiation d'une marque entraîne la perte définitive des droits de propriété industrielle sur cette marque. Elle peut être demandée par le titulaire ou par un tiers dans certains cas prévus par la loi.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Motifs de radiation</h3>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                        <span><strong>Déchéance:</strong> Non-exploitation de la marque pendant 5 ans consécutifs</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                        <span><strong>Renonciation volontaire:</strong> Demande du titulaire</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                        <span><strong>Nullité:</strong> Vice dans le dépôt initial</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                        <span><strong>Extinction:</strong> Décès du titulaire sans héritier</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Procédure de radiation</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">1</div>
+                                        <div>
+                                            <div class="font-medium text-gray-800">Demande de radiation</div>
+                                            <div class="text-sm text-gray-600">Formulaire et motifs détaillés</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">2</div>
+                                        <div>
+                                            <div class="font-medium text-gray-800">Instruction du dossier</div>
+                                            <div class="text-sm text-gray-600">Vérification des motifs par l'OMAPI</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">3</div>
+                                        <div>
+                                            <div class="font-medium text-gray-800">Publication au Bulletin Officiel</div>
+                                            <div class="text-sm text-gray-600">Notification aux tiers concernés</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">4</div>
+                                        <div>
+                                            <div class="font-medium text-gray-800">Décision de radiation</div>
+                                            <div class="text-sm text-gray-600">Mise à jour du registre national</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 rounded-lg p-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-4">Conséquences de la radiation</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-bold text-red-600 mb-2">Immédiates</h4>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• Perte du droit exclusif</li>
+                                        <li>• La marque tombe dans le domaine public</li>
+                                        <li>• Tout le monde peut l'utiliser</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-bold text-red-600 mb-2">À long terme</h4>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• Impossible de la redéposer</li>
+                                        <li>• Perte de la valeur commerciale</li>
+                                        <li>• Impact sur la notoriété</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section FAQ -->
+                <section id="faq" class="mb-12">
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-purple-600 text-white p-3 rounded-lg mr-4">
+                                <i class="fas fa-question-circle text-2xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-800">Questions Fréquemment Posées</h2>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="border border-gray-200 rounded-lg">
+                                <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                                    <span class="font-medium text-gray-800">Quelle est la durée de protection d'une marque ?</span>
+                                    <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                                </button>
+                                <div class="px-6 py-4 border-t border-gray-200 faq-content" style="display: none;">
+                                    <p class="text-gray-600">
+                                        La protection d'une marque est valable pour une durée de 10 ans à compter de la date de dépôt, renouvelable indéfiniment.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg">
+                                <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                                    <span class="font-medium text-gray-800">Puis-je déposer une marque moi-même ou dois-je passer par un mandataire ?</span>
+                                    <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                                </button>
+                                <div class="px-6 py-4 border-t border-gray-200 faq-content" style="display: none;">
+                                    <p class="text-gray-600">
+                                        Vous pouvez déposer une marque vous-même. Cependant, il est souvent recommandé de faire appel à un mandataire spécialisé en propriété industrielle pour vous accompagner et vous assurer que toutes les formalités sont correctement remplies.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg">
+                                <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                                    <span class="font-medium text-gray-800">Qu'est-ce qu'une recherche d'antériorité et est-elle obligatoire ?</span>
+                                    <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                                </button>
+                                <div class="px-6 py-4 border-t border-gray-200 faq-content" style="display: none;">
+                                    <p class="text-gray-600">
+                                        La recherche d'antériorité consiste à vérifier si une marque identique ou similaire à la vôtre existe déjà pour des produits ou services identiques ou similaires. Elle n'est pas obligatoire mais est fortement recommandée pour éviter les litiges et les refus de dépôt.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg">
+                                <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                                    <span class="font-medium text-gray-800">Que se passe-t-il si je n'utilise pas ma marque ?</span>
+                                    <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                                </button>
+                                <div class="px-6 py-4 border-t border-gray-200 faq-content" style="display: none;">
+                                    <p class="text-gray-600">
+                                        Si une marque enregistrée n'est pas exploitée sérieusement pendant une période de 5 ans consécutifs, elle peut faire l'objet d'une action en déchéance, entraînant la perte de vos droits sur la marque.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg">
+                                <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                                    <span class="font-medium text-gray-800">Comment savoir si ma marque est bien enregistrée ?</span>
+                                    <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                                </button>
+                                <div class="px-6 py-4 border-t border-gray-200 faq-content" style="display: none;">
+                                    <p class="text-gray-600">
+                                        Après l'enregistrement, l'OMAPI vous délivre un certificat d'enregistrement. Vous pouvez également consulter le Registre National des Marques ou le Bulletin Officiel de la Propriété Industrielle pour vérifier l'état de votre marque.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            </div>
+        </div>
+
+        <!-- Section Contact et Assistance -->
+        <section class="mb-12">
+            <div class="bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg p-8 text-white text-center">
+                <h2 class="text-2xl font-bold mb-4">Besoin d'aide pour votre dépôt de marque ?</h2>
+                <p class="mb-6 max-w-2xl mx-auto">
+                    Nos experts en propriété industrielle sont à votre disposition pour vous accompagner dans toutes les étapes de votre démarche de protection de marque.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="{% url 'contact' %}" class="bg-white text-primary px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-phone mr-2"></i> Contacter un expert
+                    </a>
+                    <a href="{% url 'formulaires' %}" class="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-primary transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-download mr-2"></i> Télécharger les formulaires
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqToggles = document.querySelectorAll('.faq-toggle');
+
+            // Initialiser l'état caché
+            faqToggles.forEach(toggle => {
+                const content = toggle.nextElementSibling;
+                if (content && content.classList.contains('faq-content')) {
+                    content.style.display = 'none'; // Cacher le contenu initialement
+                }
+            });
+
+            faqToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+
+                    if (content && content.classList.contains('faq-content')) {
+                        if (content.style.display === 'none') {
+                            content.style.display = 'block';
+                        } else {
+                            content.style.display = 'none';
+                        }
+                    }
+
+                    if (icon) {
+                        icon.classList.toggle('fa-chevron-down');
+                        icon.classList.toggle('fa-chevron-up');
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+</body>
+</html>

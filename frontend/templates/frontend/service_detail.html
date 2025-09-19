@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ service.get_nom_display }} - OMAPI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <!-- Fil d'Ariane -->
+    <div class="bg-gray-100 py-3">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fas fa-home mr-1"></i> Accueil
+                </a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <a href="{% url 'services_list' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">Services</a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <span class="text-primary font-medium">{{ service.get_nom_display }}</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Contenu Principal -->
+    <main class="max-w-5xl mx-auto px-3 sm:px-4 py-8">
+        <!-- Titre de la page -->
+        <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2 flex items-center">
+                {% if service.nom == 'brevet' %}
+                <i class="fas fa-flask mr-3"></i>
+                {% elif service.nom == 'marque' %}
+                <i class="fas fa-award mr-3"></i>
+                {% elif service.nom == 'dessin_modele' %}
+                <i class="fas fa-bezier-curve mr-3"></i>
+                {% elif service.nom == 'nom_commercial' %}
+                <i class="fas fa-handshake mr-3"></i>
+                {% elif service.nom == 'indication_geographique' %}
+                <i class="fas fa-map-marker-alt mr-3"></i>
+                {% else %}
+                <i class="fas fa-cogs mr-3"></i> {# Default icon #}
+                {% endif %}
+                {{ service.get_nom_display }}
+            </h1>
+            <p class="text-xl text-secondary font-medium">Découvrez tout sur la protection des {{ service.get_nom_display }}</p>
+            <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+        </div>
+
+        <!-- Navigation rapide -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8 sticky top-[65px] z-10">
+            <h2 class="text-lg font-bold text-gray-800 mb-4">Navigation rapide</h2>
+            <div class="flex flex-wrap gap-2">
+                <a href="#description" class="bg-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-secondary transition-colors duration-300">Description</a>
+                <a href="#pourquoi-proteger" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Pourquoi Protéger ?</a>
+                <a href="#procedure" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Procédure</a>
+                <a href="#documents" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Documents Requis</a>
+                {% if service.couts_tarifs %}<a href="#couts-tarifs" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Coûts & Tarifs</a>{% endif %}
+                {% if service.faq %}<a href="#faq-section" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">FAQ</a>{% endif %}
+            </div>
+        </div>
+
+        <!-- Section Description Générale -->
+        <section id="description" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-primary text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-info-circle text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Description Générale</h2>
+                </div>
+                <div class="prose max-w-none text-gray-700 leading-relaxed">
+                    {{ service.description_generale|linebreaksbr }}
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Pourquoi Protéger ? -->
+        <section id="pourquoi-proteger" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-secondary text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-shield-alt text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Pourquoi Protéger ?</h2>
+                </div>
+                <div class="prose max-w-none text-gray-700 leading-relaxed">
+                    {{ service.pourquoi_proteger|linebreaksbr }}
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Procédure de Dépôt/Enregistrement -->
+        <section id="procedure" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-accent text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-file-signature text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Procédure de Dépôt/Enregistrement</h2>
+                </div>
+                <div class="prose max-w-none text-gray-700 leading-relaxed">
+                    {{ service.procedure_depot|linebreaksbr }}
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Documents Requis -->
+        <section id="documents" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-purple-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-folder-open text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Documents Requis</h2>
+                </div>
+                <div class="prose max-w-none text-gray-700 leading-relaxed">
+                    {{ service.documents_requis|linebreaksbr }}
+                </div>
+            </div>
+        </section>
+
+        {% if service.couts_tarifs %}
+        <!-- Section Coûts & Tarifs -->
+        <section id="couts-tarifs" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-green-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-money-bill-wave text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Coûts & Tarifs</h2>
+                </div>
+                <div class="prose max-w-none text-gray-700 leading-relaxed">
+                    {{ service.couts_tarifs|linebreaksbr }}
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if service.faq %}
+        <!-- Section Foire Aux Questions (FAQ) -->
+        <section id="faq-section" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-red-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-question-circle text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Foire Aux Questions (FAQ)</h2>
+                </div>
+                <div class="prose max-w-none text-gray-700 leading-relaxed">
+                    {{ service.faq|linebreaksbr }}
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Section Contact et Assistance -->
+        <section class="mb-12">
+            <div class="bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg p-8 text-white text-center">
+                <h2 class="text-2xl font-bold mb-4">Besoin d'aide pour votre démarche ?</h2>
+                <p class="mb-6 max-w-2xl mx-auto">
+                    Nos experts en propriété industrielle sont à votre disposition pour vous accompagner dans toutes les étapes de votre démarche.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="{% url 'contact' %}" class="bg-white text-primary px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-phone mr-2"></i> Contacter un expert
+                    </a>
+                    <a href="{% url 'documents_list' %}" class="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-primary transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-download mr-2"></i> Télécharger les formulaires
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+</body>
+</html>

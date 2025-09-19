@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Législation - OMAPI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <!-- Fil d'Ariane -->
+    <div class="bg-gray-100 py-3">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fas fa-home mr-1"></i> Accueil
+                </a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors duration-300">Ressources</a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <span class="text-primary font-medium">Législation</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Contenu Principal -->
+    <main class="max-w-5xl mx-auto px-3 sm:px-4 py-8">
+        <!-- Titre de la page -->
+        <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Législation</h1>
+            <p class="text-xl text-secondary font-medium">Textes juridiques régissant la propriété industrielle à Madagascar</p>
+            <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+        </div>
+
+        <!-- Introduction -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <div class="flex items-start space-x-4">
+                <div class="bg-primary/10 p-3 rounded-lg flex-shrink-0">
+                    <i class="fas fa-balance-scale text-2xl text-primary"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800 mb-3">Cadre juridique de la propriété industrielle</h2>
+                    <p class="text-gray-600 mb-3">
+                        La propriété industrielle à Madagascar est régie par un ensemble de textes juridiques nationaux. 
+                        L'Office Malgache de la Propriété Industrielle (OMAPI) met à votre disposition ces textes pour vous permettre de mieux comprendre vos droits et obligations.
+                    </p>
+                    <p class="text-gray-600">
+                        Cette page regroupe les lois, ordonnances, décrets et arrêtés qui constituent le cadre légal de la propriété industrielle à Madagascar.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Textes Fondamentaux -->
+        <div class="mb-10">
+            <div class="flex items-center mb-4">
+                <div class="bg-red-100 p-2 rounded-lg mr-3">
+                    <i class="fas fa-gavel text-red-600 text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">Textes Fondamentaux</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Texte 1 -->
+                <div class="bg-white rounded-xl shadow-md p-5 hover:shadow-lg transition-shadow duration-300">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-bold text-gray-800 text-sm">Ordonnance n° 89-019 du 31 juillet 1989 instituant un régime pour la protection de la propriété industrielle en République Démocratique de Madagascar</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">PDF</span>
+                    </div>
+                    <p class="text-gray-600 text-xs mb-4">Texte fondamental qui institue le régime de protection de la propriété industrielle à Madagascar, couvrant les brevets, marques, dessins et modèles industriels, noms commerciaux et la répression de la concurrence déloyale.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">31/07/1989</span>
+                        <a href="#" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 flex items-center">
+                            <i class="fas fa-download mr-2"></i> Télécharger
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Texte 2 -->
+                <div class="bg-white rounded-xl shadow-md p-5 hover:shadow-lg transition-shadow duration-300">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-bold text-gray-800 text-sm">Loi n° 89-013 du 17 novembre 1989 portant ratification de l'Ordonnance n° 89-019 du 31 juillet 1989 instituant un régime pour la protection de la propriété industrielle à Madagascar</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">PDF</span>
+                    </div>
+                    <p class="text-gray-600 text-xs mb-4">Loi ratifiant l'ordonnance n° 89-019, lui donnant force de loi et confirmant le régime de protection de la propriété industrielle à Madagascar.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">17/11/1989</span>
+                        <a href="#" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 flex items-center">
+                            <i class="fas fa-download mr-2"></i> Télécharger
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Textes d'Application -->
+        <div class="mb-10">
+            <div class="flex items-center mb-4">
+                <div class="bg-purple-100 p-2 rounded-lg mr-3">
+                    <i class="fas fa-file-contract text-purple-600 text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">Textes d'Application</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Texte 1 -->
+                <div class="bg-white rounded-xl shadow-md p-5 hover:shadow-lg transition-shadow duration-300">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-bold text-gray-800 text-sm">Arrêté n° 10325/97/MIA du 10 novembre 1997 fixant les conditions d'agrément des représentants en propriété industrielle</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">PDF</span>
+                    </div>
+                    <p class="text-gray-600 text-xs mb-4">Arrêté ministériel fixant les conditions et modalités d'agrément des représentants en propriété industrielle (mandataires, conseils) habilités à représenter les tiers auprès de l'OMAPI.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">10/11/1997</span>
+                        <a href="#" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 flex items-center">
+                            <i class="fas fa-download mr-2"></i> Télécharger
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Gazettes Officielles -->
+        <div class="mb-10">
+            <div class="flex items-center mb-4">
+                <div class="bg-indigo-100 p-2 rounded-lg mr-3">
+                    <i class="fas fa-newspaper text-indigo-600 text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">Gazettes Officielles</h2>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md p-5 hover:shadow-lg transition-shadow duration-300">
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-bold text-gray-800 text-sm">Gazette Officielle de la Propriété Industrielle (GOPI)</h3>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Accès</span>
+                </div>
+                <p class="text-gray-600 text-xs mb-4">Publication officielle de l'OMAPI contenant les dépôts, délivrances, renouvellements et autres actes relatifs à la propriété industrielle.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-gray-500">Publication périodique</span>
+                    <a href="{% url 'gopi_list' %}" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 flex items-center">
+                        <i class="fas fa-external-link-alt mr-2"></i> Accéder
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Contact -->
+        <div class="bg-blue-50 rounded-xl p-6 mb-8">
+            <h3 class="font-bold text-lg text-primary mb-4">Besoin d'informations juridiques complémentaires ?</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-lg p-4 shadow-sm">
+                    <h4 class="font-medium text-gray-800 mb-2">Service juridique</h4>
+                    <p class="text-sm text-gray-600 mb-3">Notre service juridique est à votre disposition pour répondre à vos questions sur la législation en vigueur</p>
+                    <a href="{% url 'contact' %}" class="text-primary hover:text-secondary text-sm font-medium">Contacter le service →</a>
+                </div>
+                <div class="bg-white rounded-lg p-4 shadow-sm">
+                    <h4 class="font-medium text-gray-800 mb-2">Recherche avancée</h4>
+                    <p class="text-sm text-gray-600 mb-3">Accédez à notre base de données complète pour rechercher des textes juridiques spécifiques</p>
+                    <a href="{% url 'documents_list' %}" class="text-primary hover:text-secondary text-sm font-medium">Accéder à la recherche →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+</body>
+</html>

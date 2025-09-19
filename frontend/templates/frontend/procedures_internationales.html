@@ -1,0 +1,320 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procédures Internationales - OMAPI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?v=1.0"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <main class="max-w-7xl mx-auto px-3 sm:px-4">
+        <!-- Fil d'Ariane -->
+        <div class="bg-gray-100 py-3">
+            <div class="max-w-5xl mx-auto px-3 sm:px-4">
+                <nav class="flex items-center space-x-2 text-sm">
+                    <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                        <i class="fas fa-home mr-1"></i> Accueil
+                    </a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <a href="{% url 'procedures' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">Procédures</a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <span class="text-primary font-medium">Procédures Internationales</span>
+                </nav>
+            </div>
+        </div>
+
+        <div class="md:flex md:space-x-8">
+            <!-- Navigation rapide -->
+            <div class="md:w-1/4">
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-8 sticky top-[65px] z-10">
+                    <h2 class="text-lg font-bold text-gray-800 mb-4">Navigation rapide</h2>
+                    <div class="flex flex-col gap-2" id="tab-navigation">
+                        <a href="#traites-accords" class="bg-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-secondary transition-colors duration-300">Traités et Accords</a>
+                        <a href="#etapes-depot" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Étapes du dépôt</a>
+                        <a href="#documents-requis" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Documents requis</a>
+                        <a href="#faq" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">FAQ</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenu Principal -->
+            <div class="md:w-3/4">
+                <div class="mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Procédures Internationales</h1>
+                    <p class="text-xl text-secondary font-medium">Étendez la protection de votre propriété intellectuelle au-delà des frontières</p>
+                    <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+                </div>
+
+                <!-- Section Traités et Accords Internationaux -->
+                <section id="traites-accords" class="mb-12">
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-primary text-white p-3 rounded-lg mr-4">
+                                <i class="fas fa-globe text-2xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-800">Traités et Accords Internationaux</h2>
+                        </div>
+                        
+                        <p class="text-gray-700 mb-6 leading-relaxed">
+                            Madagascar, à travers l'OMAPI, participe à plusieurs traités et accords internationaux facilitant la protection de la propriété intellectuelle à l'étranger. Ces accords simplifient les procédures pour les déposants souhaitant protéger leurs innovations, marques ou créations dans plusieurs pays simultanément.
+                        </p>
+
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Principaux accords</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-file-contract"></i></div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Protocole de Madrid (Marques)</h4>
+                                        <p class="text-gray-600 text-sm">Permet de déposer une marque dans plusieurs pays membres avec une seule demande internationale auprès de l'OMPI. Cela simplifie considérablement les démarches, réduit les coûts et centralise la gestion de votre portefeuille de marques international.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-file-contract"></i></div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Traité de Coopération en matière de Brevets (PCT)</h4>
+                                        <p class="text-gray-600 text-sm">Simplifie le dépôt de demandes de brevets dans de nombreux pays. Une seule demande PCT a l'effet d'une demande nationale dans tous les pays désignés, offrant un délai prolongé pour décider où poursuivre la protection.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-file-contract"></i></div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Arrangement de La Haye (Dessins et Modèles Industriels)</h4>
+                                        <p class="text-gray-600 text-sm">Permet l'enregistrement international de jusqu'à 100 dessins et modèles industriels dans plusieurs pays contractants par le dépôt d'une seule demande auprès de l'OMPI. Cela offre une gestion simplifiée et des coûts réduits.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Étapes du dépôt International -->
+                <section id="etapes-depot" class="mb-12">
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-secondary text-white p-3 rounded-lg mr-4">
+                                <i class="fas fa-cogs text-2xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-800">Étapes Générales du Dépôt International</h2>
+                        </div>
+                        
+                        <p class="text-gray-700 mb-6 leading-relaxed">
+                            Bien que chaque traité ait ses spécificités, les procédures internationales de dépôt de propriété intellectuelle suivent généralement des étapes communes.
+                        </p>
+
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Procédure simplifiée</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-secondary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">1</div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Dépôt initial national (ou régional)</h4>
+                                        <p class="text-gray-600 text-sm">Déposez votre demande (marque, brevet, dessin/modèle) auprès de l'OMAPI ou d'un office régional (ex: OAPI, ARIPO) pour établir une date de priorité.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-secondary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">2</div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Demande internationale centralisée</h4>
+                                        <p class="text-gray-600 text-sm">Dans un délai de 6 mois (marques/dessins) ou 12 mois (brevets) à compter du dépôt initial, déposez une demande internationale (Madrid, PCT, La Haye) auprès de l'OMPI, désignant les pays où vous souhaitez étendre votre protection.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-secondary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">3</div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Examen par les offices nationaux/régionaux</h4>
+                                        <p class="text-gray-600 text-sm">Votre demande internationale est transmise aux offices de propriété intellectuelle des pays ou régions désignés pour examen, selon leurs législations nationales.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-secondary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">4</div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Décision et enregistrement</h4>
+                                        <p class="text-gray-600 text-sm">Une fois l'examen favorable, chaque office désigné accorde la protection selon ses règles. La protection est alors effective dans ces territoires.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Documents Requis -->
+                <section id="documents-requis" class="mb-12">
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-accent text-white p-3 rounded-lg mr-4">
+                                <i class="fas fa-file-alt text-2xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-800">Documents Requis</h2>
+                        </div>
+                        
+                        <p class="text-gray-700 mb-6 leading-relaxed">
+                            Les documents nécessaires varient en fonction du type de propriété intellectuelle (marque, brevet, dessin/modèle) et du traité international utilisé. Cependant, certains documents sont généralement requis.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-bold text-gray-800 mb-2">Documents courants</h4>
+                                <ul class="space-y-1 text-sm text-gray-600">
+                                    <li>• Formulaire officiel de demande internationale</li>
+                                    <li>• Copie de la demande nationale initiale (pour la revendication de priorité)</li>
+                                    <li>• Reproduction/Description de l'objet de la protection</li>
+                                    <li>• Pouvoir (si vous passez par un mandataire)</li>
+                                    <li>• Preuve du paiement des taxes internationales</li>
+                                    <li>• Traduction des documents (si nécessaire)</li>
+                                </ul>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-bold text-gray-800 mb-2">Informations clés</h4>
+                                <ul class="space-y-1 text-sm text-gray-600">
+                                    <li>• Identité complète du déposant</li>
+                                    <li>• Nationalité et résidence</li>
+                                    <li>• Liste des pays désignés</li>
+                                    <li>• Classification des produits/services ou classes de produits</li>
+                                    <li>• Date et numéro du dépôt initial national (si revendication de priorité)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section FAQ -->
+                <section id="faq" class="mb-12">
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-purple-600 text-white p-3 rounded-lg mr-4">
+                                <i class="fas fa-question-circle text-2xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-800">Questions Fréquemment Posées</h2>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="border border-gray-200 rounded-lg">
+                                <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                                    <span class="font-medium text-gray-800">Qu'est-ce que la priorité conventionnelle et comment en bénéficier ?</span>
+                                    <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                                </button>
+                                <div class="px-6 py-4 border-t border-gray-200 faq-content" style="display: none;">
+                                    <p class="text-gray-600">
+                                        La priorité conventionnelle est un droit fondamental découlant de la Convention de Paris. Elle vous permet, après un premier dépôt de demande de propriété intellectuelle (PI) dans un pays membre, de déposer la même demande dans d'autres pays membres dans un délai spécifié (6 mois pour les marques et dessins/modèles, 12 mois pour les brevets). Le grand avantage est que la date de dépôt dans les pays suivants sera considérée comme la date du premier dépôt, vous protégeant ainsi contre toute divulgation ou dépôt par un tiers entre-temps. Pour en bénéficier, vous devez revendiquer expressément la priorité de votre premier dépôt lors de votre demande internationale.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg">
+                                <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                                    <span class="font-medium text-gray-800">Quels sont les avantages des systèmes internationaux (Madrid, PCT, La Haye) par rapport aux dépôts nationaux multiples ?</span>
+                                    <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                                </button>
+                                <div class="px-6 py-4 border-t border-gray-200 faq-content" style="display: none;">
+                                    <p class="text-gray-600">
+                                        Les systèmes internationaux offrent plusieurs avantages clés :
+                                        <ul class="list-disc list-inside ml-4 mt-2">
+                                            <li><strong>Simplification :</strong> Une seule demande, dans une seule langue et avec un seul jeu de taxes, permet de désigner de nombreux pays.</li>
+                                            <li><strong>Coût :</strong> Souvent plus économique que de multiples dépôts nationaux, surtout si vous visez un grand nombre de pays.</li>
+                                            <li><strong>Gestion Centralisée :</strong> Facilite la gestion de votre portefeuille de PI international (renouvellements, changements de titulaire, etc.).</li>
+                                            <li><strong>Délai :</strong> Pour le PCT, vous disposez d'un délai prolongé (jusqu'à 30-31 mois) pour décider dans quels pays vous souhaitez réellement poursuivre la protection, vous laissant le temps d'évaluer le marché.</li>
+                                        </ul>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg">
+                                <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                                    <span class="font-medium text-gray-800">Comment l'OMAPI peut-elle m'assister dans mes démarches internationales ?</span>
+                                    <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                                </button>
+                                <div class="px-6 py-4 border-t border-gray-200 faq-content" style="display: none;">
+                                    <p class="text-gray-600">
+                                        L'OMAPI est votre point d'entrée national pour les procédures internationales. Nous pouvons :
+                                        <ul class="list-disc list-inside ml-4 mt-2">
+                                            <li>Vous conseiller sur le système international le mieux adapté à vos besoins (Madrid, PCT, La Haye).</li>
+                                            <li>Recevoir votre demande internationale et la transmettre à l'OMPI.</li>
+                                            <li>Vous fournir les formulaires et les informations nécessaires.</li>
+                                            <li>Vous orienter vers des mandataires agréés spécialisés en PI internationale si vous souhaitez être représenté.</li>
+                                            <li>Vous aider à comprendre les exigences nationales des pays désignés.</li>
+                                        </ul>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Section Contact et Assistance -->
+        <section class="mb-12">
+            <div class="bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg p-8 text-white text-center">
+                <h2 class="text-2xl font-bold mb-4">Besoin d'aide pour vos procédures internationales ?</h2>
+                <p class="mb-6 max-w-2xl mx-auto">
+                    Nos experts en propriété industrielle sont à votre disposition pour vous accompagner dans l'extension de la protection de votre propriété intellectuelle à l'étranger.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="bg-white text-primary px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-phone mr-2"></i> Contacter un expert
+                    </button>
+                    <button class="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-primary transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-download mr-2"></i> Télécharger les formulaires
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqToggles = document.querySelectorAll('.faq-toggle');
+
+            // Initialiser l'état caché
+            faqToggles.forEach(toggle => {
+                const content = toggle.nextElementSibling;
+                if (content && content.classList.contains('faq-content')) {
+                    content.style.display = 'none'; // Cacher le contenu initialement
+                }
+            });
+
+            faqToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+
+                    if (content && content.classList.contains('faq-content')) {
+                        if (content.style.display === 'none') {
+                            content.style.display = 'block';
+                        } else {
+                            content.style.display = 'none';
+                        }
+                    }
+
+                    if (icon) {
+                        icon.classList.toggle('fa-chevron-down');
+                        icon.classList.toggle('fa-chevron-up');
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+</body>
+</html>

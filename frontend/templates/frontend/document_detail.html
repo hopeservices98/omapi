@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ document.titre }} - OMAPI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    {% include 'frontend/includes/header.html' %}
+
+    <main class="container mx-auto mt-8 p-4">
+        <article class="bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-4xl font-extrabold text-gray-800 mb-4">{{ document.titre }}</h2>
+            <p class="text-gray-600 text-sm mb-6">Publié le {{ document.date_publication|date:"d/m/Y" }}</p>
+
+            <div class="prose max-w-none text-gray-700 leading-relaxed mb-6">
+                {{ document.description|linebreaksbr }}
+            </div>
+
+            {% if document.fichier %}
+                <a href="{{ document.fichier.url }}" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-lg shadow-lg transform transition duration-300 hover:scale-105">
+                    Télécharger le document
+                </a>
+            {% endif %}
+
+            <div class="mt-8">
+                <a href="{% url 'documents_list' %}" class="inline-block bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-full hover:bg-gray-300 transition-colors duration-300">
+                    &larr; Retour aux documents
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-6 mt-12">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 OMAPI. Tous droits réservés.</p>
+        </div>
+    </footer>
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+</body>
+</html>

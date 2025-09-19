@@ -1,0 +1,80 @@
+Parfait ! Voici l'architecture proposée pour le nouveau site web de l'OMAPI, présentée sous forme de liste hiérarchique. Cette structure est conçue pour optimiser l'expérience utilisateur, la visibilité de l'OMAPI et la mise en avant des informations clés, tout en intégrant les spécificités que vous avez mentionnées (GOPI, formations, pas de dépôt en ligne).
+
+Architecture du Site Web de l'OMAPI
+1. Accueil
+
+Header Immersif (Visuel dynamique, Slogan, Brève mission)
+Section "Services Clés" (Brevets, Marques, Dessins & Modèles, Noms Commerciaux, Indications Géographiques - avec liens vers les pages détaillées)
+Section "Actualités Récentes & Événements" (Carrousel/Grille des dernières infos)
+Section "Pourquoi Protéger votre Innovation ?" (Importance de la PI, Bénéfices)
+Appels à l'Action Principaux (Ex: "Nous Contacter", "Consulter la Législation", "Accéder aux Formulaires")
+Footer (Liens rapides, Coordonnées, Réseaux sociaux, Mentions légales)
+2. À Propos de l'OMAPI
+
+Notre Mission & Vision
+Historique & Valeurs
+Organigramme & Équipe (Optionnel, mais recommandé pour la transparence)
+Partenaires & Collaborations (Nationaux et Internationaux)
+3. Services & Procédures
+
+3.1. Vue d'ensemble des Services (Présentation générale des types de protection)
+3.2. Brevets d'Invention
+Qu'est-ce qu'un brevet ?
+Pourquoi déposer ?
+Procédure de Dépôt (Étapes détaillées, sans formulaire en ligne)
+Documents Requis
+Coûts & Tarifs (Indicatifs)
+Foire Aux Questions (FAQ)
+3.3. Marques
+Qu'est-ce qu'une marque ?
+Pourquoi enregistrer ?
+Procédure d'Enregistrement
+Documents Requis
+Coûts & Tarifs
+FAQ
+3.4. Dessins & Modèles Industriels
+Qu'est-ce qu'un dessin ou modèle ?
+Pourquoi protéger ?
+Procédure de Dépôt
+Documents Requis
+Coûts & Tarifs
+FAQ
+3.5. Noms Commerciaux
+Qu'est-ce qu'un nom commercial ?
+Pourquoi protéger ?
+Procédure d'Enregistrement
+Documents Requis
+Coûts & Tarifs
+FAQ
+3.6. Indications Géographiques
+Qu'est-ce qu'une indication géographique ?
+Pourquoi protéger ?
+Procédure d'Enregistrement
+Documents Requis
+Coûts & Tarifs
+FAQ
+3.7. Formulaires & Guides (Section dédiée aux documents téléchargeables : formulaires de dépôt, guides pratiques, etc.)
+4. Législation
+
+Textes de Lois Nationaux (Lois, Décrets, Ordonnances relatifs à la PI à Madagascar)
+Conventions & Traités Internationaux (Accords signés par Madagascar)
+5. Actualités & Ressources
+
+5.1. Actualités & Événements (Articles de blog, communiqués de presse, annonces d'événements)
+5.2. GOPI (Gazette Officielle de la Propriété Industrielle)
+Dernière Publication
+Archives (Par année/numéro)
+Fonction de Recherche (Par type de PI, nom, etc.)
+5.3. Publications & Rapports (Rapports annuels, études, statistiques)
+5.4. Formations sur la PI
+Présentation des offres de formation
+Thèmes abordés
+Modalités de demande de formation
+Témoignages (si disponibles)
+6. Contact
+
+Coordonnées Complètes (Adresse physique, Téléphone, Email par service)
+Formulaire de Contact Général (Pour les demandes d'informations non liées aux dépôts)
+Plan d'Accès (Carte interactive ou image)
+FAQ Générale (Questions administratives, horaires, etc.)
+Cette architecture fournit une base solide pour la refonte. Chaque section sera conçue avec une attention particulière à l'esthétique, l'accessibilité et la facilité d'accès à l'information.

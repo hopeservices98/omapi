@@ -1,0 +1,874 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dépôt de Brevet - OMAPI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <!-- Fil d'Ariane -->
+    <div class="bg-gray-100 py-3">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fas fa-home mr-1"></i> Accueil
+                </a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <a href="{% url 'services_list' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">Procédures</a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <span class="text-primary font-medium">Dépôt de Brevet</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Contenu Principal -->
+    <main class="max-w-7xl mx-auto px-3 sm:px-4 py-8">
+        <div class="md:flex md:space-x-8">
+            <!-- Navigation rapide -->
+            <div class="md:w-1/4">
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-8 sticky top-[65px] z-10">
+                    <h2 class="text-lg font-bold text-gray-800 mb-4">Navigation rapide</h2>
+                    <div class="flex flex-col gap-2" id="tab-navigation">
+                        <a href="#depot" class="bg-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-secondary transition-colors duration-300">Dépôt initial</a>
+                        <a href="#examen" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Examen</a>
+                        <a href="#delivrance" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Délivrance</a>
+                        <a href="#annuites" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Annuités</a>
+                        <a href="#modifications" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Modifications</a>
+                        <a href="#transfert" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Transfert</a>
+                        <a href="#radiation" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">Radiation</a>
+                        <a href="#faq" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 transition-colors duration-300">FAQ</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:w-3/4">
+                <!-- Titre de la page -->
+                <div class="mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Dépôt de Brevet</h1>
+                    <p class="text-xl text-secondary font-medium">Protégez vos inventions technologiques</p>
+                    <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+                </div>
+
+                <!-- Section Dépôt Initial -->
+                <section id="depot" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-primary text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-certificate text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Dépôt Initial de Brevet</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Le brevet protège les inventions nouvelles, impliquant une activité inventive et susceptibles d'application industrielle. La protection est valable pour 20 ans non renouvelables à compter de la date de dépôt.
+                </p>
+
+                <!-- Conditions de brevetabilité -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Conditions de brevetabilité</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-primary/5 rounded-lg p-4">
+                            <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Nouveauté</h4>
+                            <p class="text-sm text-gray-600">L'invention ne doit pas être comprise dans l'état de la technique au moment du dépôt.</p>
+                        </div>
+                        <div class="bg-primary/5 rounded-lg p-4">
+                            <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Activité inventive</h4>
+                            <p class="text-sm text-gray-600">L'invention ne doit pas découler de manière évidente de l'état de la technique.</p>
+                        </div>
+                        <div class="bg-primary/5 rounded-lg p-4">
+                            <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-industry"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">Application industrielle</h4>
+                            <p class="text-sm text-gray-600">L'invention doit pouvoir être fabriquée ou utilisée dans tout genre d'industrie.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Étapes du dépôt -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Étapes du dépôt</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">1</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Recherche d'antériorité</h4>
+                                <p class="text-gray-600 text-sm">Vérifiez que votre invention n'a pas déjà été brevetée ou divulguée publiquement.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">2</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Préparation du dossier</h4>
+                                <p class="text-gray-600 text-sm">Rédigez la description, les revendications, les dessins et le résumé de l'invention.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">3</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Dépôt à l'OMAPI</h4>
+                                <p class="text-gray-600 text-sm">Soumettez votre dossier complet et payez les frais de dépôt.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">4</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Examen formel</h4>
+                                <p class="text-gray-600 text-sm">Vérification de la conformité du dossier par l'OMAPI.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">5</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Délivrance du rapport de recherche</h4>
+                                <p class="text-gray-600 text-sm">L'OMAPI établit un rapport citant les documents pertinents de l'état de la technique.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documents nécessaires -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Documents nécessaires</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Pour les personnes physiques</h4>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Formulaire de demande de brevet</li>
+                                <li>• Description détaillée de l'invention</li>
+                                <li>• Revendications claires et précises</li>
+                                <li>• Dessins techniques (si nécessaire)</li>
+                                <li>• Résumé de l'invention</li>
+                                <li>• Copie de la pièce d'identité</li>
+                                <li>• Procuration si nécessaire</li>
+                            </ul>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Pour les personnes morales</h4>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• Formulaire de demande de brevet</li>
+                                <li>• Description, revendications, dessins, résumé</li>
+                                <li>• Extrait du registre de commerce</li>
+                                <li>• Statuts de l'entreprise</li>
+                                <li>• Pouvoir du représentant légal</li>
+                                <li>• Procuration si nécessaire</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarifs -->
+                <div class="bg-primary/5 rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Tarifs de dépôt</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg shadow-md">
+                            <thead>
+                                <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                    <th class="py-3 px-6 text-left">Service</th>
+                                    <th class="py-3 px-6 text-left">Tarifs standards (MGA)</th>
+                                    <th class="py-3 px-6 text-left">Tarifs réduits (résidents)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 text-sm font-light">
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">Dépôt (2 premières années)</td>
+                                    <td class="py-3 px-6 text-left">180 000</td>
+                                    <td class="py-3 px-6 text-left">144 000</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">Demande divisionnaire</td>
+                                    <td class="py-3 px-6 text-left">10 000</td>
+                                    <td class="py-3 px-6 text-left">8 000</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">Revendication de priorité (par priorité)</td>
+                                    <td class="py-3 px-6 text-left">65 000</td>
+                                    <td class="py-3 px-6 text-left">52 000</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">Revendication supplémentaire (au-delà 10)</td>
+                                    <td class="py-3 px-6 text-left">60 000</td>
+                                    <td class="py-3 px-6 text-left">48 000</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">Page supplémentaire (à partir de la 21ᵉ)</td>
+                                    <td class="py-3 px-6 text-left">25 000</td>
+                                    <td class="py-3 px-6 text-left">20 000</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">Correction d’erreur (par page)</td>
+                                    <td class="py-3 px-6 text-left">8 000</td>
+                                    <td class="py-3 px-6 text-left">6 400</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Examen -->
+        <section id="examen" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-secondary text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-search text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Examen de la Demande de Brevet</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Après le dépôt, votre demande de brevet subit un examen approfondi pour vérifier sa conformité avec les exigences légales et sa brevetabilité.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Examen formel</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Vérification de la complétude du dossier</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Conformité des formulaires</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Paiement des frais de dépôt</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Classification de l'invention</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Examen au fond</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Évaluation de la nouveauté</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Appréciation de l'activité inventive</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Vérification de l'application industrielle</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Clarté des revendications</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-secondary/5 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Rapport de recherche et publication</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-secondary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">1</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Rapport de recherche documentaire</h4>
+                                <p class="text-gray-600 text-sm">L'OMAPI établit un rapport citant les documents pertinents de l'état de la technique.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-secondary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">2</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Publication de la demande</h4>
+                                <p class="text-gray-600 text-sm">La demande est publiée au Bulletin Officiel de la Propriété Industrielle (GOPI) 18 mois après le dépôt.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-secondary text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">3</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Période d'opposition</h4>
+                                <p class="text-gray-600 text-sm">Toute personne peut former opposition à la délivrance du brevet dans un délai de 3 mois après la publication.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Délivrance -->
+        <section id="delivrance" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-accent text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-award text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Délivrance du Brevet</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Après examen favorable et absence d'opposition fondée, l'OMAPI délivre le brevet qui confère à son titulaire un droit exclusif d'exploitation de l'invention pour 20 ans.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Droits conférés par le brevet</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-accent mr-2 mt-1"></i>
+                                <span>Droit d'interdire à tout tiers l'exploitation de l'invention</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-accent mr-2 mt-1"></i>
+                                <span>Droit d'autoriser l'exploitation par licence</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-accent mr-2 mt-1"></i>
+                                <span>Droit d'engager des actions en contrefaçon</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-accent mr-2 mt-1"></i>
+                                <span>Droit de céder ou transmettre le brevet</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Limitations des droits</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-accent mr-2 mt-1"></i>
+                                <span>Recherche expérimentale</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-accent mr-2 mt-1"></i>
+                                <span>Préparations de médicaments (Bolar)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-accent mr-2 mt-1"></i>
+                                <span>Usage à titre privé et non commercial</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-accent mr-2 mt-1"></i>
+                                <span>Droit de procédure antérieure</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-accent/5 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Procédure de délivrance</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">1</div>
+                            <div>
+                                <div class="font-medium text-gray-800">Décision de délivrance</div>
+                                <div class="text-sm text-gray-600">Notification de la décision favorable au demandeur</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">2</div>
+                            <div>
+                                <div class="font-medium text-gray-800">Paiement des frais de délivrance</div>
+                                <div class="text-sm text-gray-600">Versement des frais pour la délivrance du brevet</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">3</div>
+                            <div>
+                                <div class="font-medium text-gray-800">Délivrance du titre</div>
+                                <div class="text-sm text-gray-600">Remise du certificat de brevet et inscription au registre</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">4</div>
+                            <div>
+                                <div class="font-medium text-gray-800">Publication définitive</div>
+                                <div class="text-sm text-gray-600">Publication de la délivrance au GOPI</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Annuités -->
+        <section id="annuites" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-green-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-calendar-alt text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Maintien en Vigueur - Annuités</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Pour maintenir un brevet en vigueur, le titulaire doit payer des annuités annuelles à partir de la deuxième année suivant le dépôt. Le non-paiement des annuités entraîne la déchéance du brevet.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Calendrier des annuités</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg shadow-md">
+                            <thead>
+                                <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                    <th class="py-3 px-6 text-left">Année</th>
+                                    <th class="py-3 px-6 text-left">Tarifs standards (MGA)</th>
+                                    <th class="py-3 px-6 text-left">Tarifs réduits (résidents)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 text-sm font-light">
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">2ᵉ à 4ᵉ année</td>
+                                    <td class="py-3 px-6 text-left">125 000</td>
+                                    <td class="py-3 px-6 text-left">100 000</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">5ᵉ année</td>
+                                    <td class="py-3 px-6 text-left">125 000</td>
+                                    <td class="py-3 px-6 text-left">100 000</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">6ᵉ à 10ᵉ année</td>
+                                    <td class="py-3 px-6 text-left">380 000</td>
+                                    <td class="py-3 px-6 text-left">304 000</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">11ᵉ et 12ᵉ années</td>
+                                    <td class="py-3 px-6 text-left">650 000</td>
+                                    <td class="py-3 px-6 text-left">520 000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Modalités de paiement</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-green-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">1</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Période normale</div>
+                                    <div class="text-sm text-gray-600">Paiement dans les 3 mois précédant l'échéance</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-yellow-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">2</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Période de grâce</div>
+                                    <div class="text-sm text-gray-600">Paiement dans les 6 mois suivant l'échéance (+50% de majoration)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">3</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Déchéance</div>
+                                    <div class="text-sm text-gray-600">Non-paiement au-delà de la période de grâce</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-600 mb-2">Paiement anticipé</h4>
+                            <p class="text-sm text-gray-600">
+                                Il est possible de payer plusieurs annuités d'avance. Un escompte de 10% est appliqué pour le paiement anticipé de 3 annuités ou plus.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Modifications -->
+        <section id="modifications" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-purple-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-edit text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Modifications du Brevet</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Après la délivrance d'un brevet, certaines modifications peuvent être apportées sous conditions. Ces modifications doivent être demandées auprès de l'OMAPI et publiées pour être opposables aux tiers.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Types de modifications</h3>
+                        <div class="space-y-4">
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-bold text-purple-600 mb-2">Correction d'erreurs</h4>
+                                <p class="text-sm text-gray-600">Correction des erreurs matérielles ou typographiques dans la description ou les revendications.</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-bold text-purple-600 mb-2">Limitation des revendications</h4>
+                                <p class="text-sm text-gray-600">Réduction de la portée des revendications pour renforcer la validité du brevet.</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-bold text-purple-600 mb-2">Division du brevet</h4>
+                                <p class="text-sm text-gray-600">Division d'un brevet en plusieurs brevets lorsque les revendications portent sur plusieurs inventions indépendantes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Procédure de modification</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-purple-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">1</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Demande de modification</div>
+                                    <div class="text-sm text-gray-600">Formulaire spécifique et justification détaillée</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-purple-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">2</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Examen par l'OMAPI</div>
+                                    <div class="text-sm text-gray-600">Vérification de la conformité de la modification</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-purple-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">3</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Publication au GOPI</div>
+                                    <div class="text-sm text-gray-600">Notification aux tiers de la modification</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-purple-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">4</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Mise à jour du registre</div>
+                                    <div class="text-sm text-gray-600">Inscription de la modification au registre des brevets</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-purple-50 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Tarifs des modifications</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg p-4 text-center">
+                            <div class="text-xl font-bold text-purple-600 mb-2">75 000 Ar</div>
+                            <div class="text-gray-600 text-sm">Correction d'erreurs</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 text-center">
+                            <div class="text-xl font-bold text-purple-600 mb-2">100 000 Ar</div>
+                            <div class="text-gray-600 text-sm">Limitation des revendications</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 text-center">
+                            <div class="text-xl font-bold text-purple-600 mb-2">150 000 Ar</div>
+                            <div class="text-gray-600 text-sm">Division du brevet</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Transfert -->
+        <section id="transfert" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-green-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-exchange-alt text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Transfert de Brevet</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Le transfert d'un brevet consiste à céder les droits de propriété de l'invention brevetée à un tiers. Cette opération doit être obligatoirement inscrite au Registre National des Brevets pour être opposable aux tiers.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Conditions de transfert</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                <span>Le brevet doit être en vigueur</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                <span>Accord écrit entre le cédant et le cessionnaire</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                <span>Le transfert doit porter sur la totalité des droits</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                                <span>Le cessionnaire doit remplir les conditions légales</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Documents nécessaires</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Formulaire de demande de transfert</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Acte de cession (contrat de transfert)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Pièces d'identité du cédant et du cessionnaire</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-green-600 mr-2 mt-1"></i>
+                                <span>Preuve du paiement des frais d'inscription</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-green-50 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Tarifs de transfert</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white rounded-lg p-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">Transfert de brevet</span>
+                                <span class="text-xl font-bold text-green-600">200 000 Ar</span>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">Licence d'exploitation</span>
+                                <span class="text-xl font-bold text-green-600">150 000 Ar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Radiation -->
+        <section id="radiation" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-red-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-times-circle text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Radiation du Droit sur Brevet</h2>
+                </div>
+                
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    La radiation d'un brevet entraîne la perte définitive des droits de propriété industrielle sur l'invention. Elle peut intervenir pour divers motifs légaux et procedures spécifiques.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Motifs de radiation</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                <span><strong>Déchéance :</strong> Non-paiement des annuités</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                <span><strong>Renonciation volontaire :</strong> Demande du titulaire</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                <span><strong>Nullité :</strong> Absence de brevetabilité</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                <span><strong>Abandon :</strong> Retrait de la demande</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-600 mr-2 mt-1"></i>
+                                <span><strong>Extinction :</strong> Décès sans héritier</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Procédure de radiation</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">1</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Demande de radiation</div>
+                                    <div class="text-sm text-gray-600">Formulaire et motifs détaillés</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">2</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Instruction du dossier</div>
+                                    <div class="text-sm text-gray-600">Vérification des motifs par l'OMAPI</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">3</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Publication au Bulletin Officiel</div>
+                                    <div class="text-sm text-gray-600">Notification aux tiers concernés</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">4</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">Décision de radiation</div>
+                                    <div class="text-sm text-gray-600">Mise à jour du registre national</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-red-50 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Conséquences de la radiation</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white rounded-lg p-4">
+                            <h4 class="font-bold text-red-600 mb-2">Immédiates</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Perte du droit exclusif</li>
+                                <li>• L'invention tombe dans le domaine public</li>
+                                <li>• Tout le monde peut l'exploiter librement</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <h4 class="font-bold text-red-600 mb-2">À long terme</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Impossibilité de le restaurer</li>
+                                <li>• Perte de la valeur commerciale</li>
+                                <li>• Impact sur la stratégie d'entreprise</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section FAQ -->
+        <section id="faq" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-purple-600 text-white p-3 rounded-lg mr-4">
+                        <i class="fas fa-question-circle text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Questions Fréquemment Posées</h2>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Quelle est la durée de protection d'un brevet ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                La protection d'un brevet est valable pour 20 ans non renouvelables à compter de la date de dépôt. Pour maintenir le brevet en vigueur, le titulaire doit payer des annuités annuelles à partir de la deuxième année suivant le dépôt.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Quelles inventions ne peuvent pas être brevetées ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                Ne peuvent pas être brevetées : les découvertes, les théories scientifiques, les méthodes mathématiques, les créations esthétiques, les plans, principes et méthodes dans l'exercice d'activités intellectuelles, les programmes d'ordinateurs, et les présentations d'informations.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Qu'est-ce que le rapport de recherche documentaire ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                Le rapport de recherche documentaire est un document établi par l'OMAPI qui cite les documents pertinents de l'état de la technique. Il permet d'évaluer la nouveauté et l'activité inventive de l'invention. Ce rapport est communiqué au demandeur qui peut modifier ses revendications en conséquence.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Puis-je déposer un brevet moi-même ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                Vous pouvez déposer un brevet vous-même si vous êtes résident à Madagascar. Pour les non-résidents, le passage par un mandataire agréé est obligatoire. Cependant, compte tenu de la complexité technique et juridique, il est fortement recommandé de consulter un conseil en propriété industrielle.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-300 faq-toggle">
+                            <span class="font-medium text-gray-800">Qu'est-ce que la licence obligatoire ?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="hidden px-6 py-4 border-t border-gray-200 faq-content">
+                            <p class="text-gray-600">
+                                La licence obligatoire est une autorisation d'exploitation accordée par l'autorité compétente sans le consentement du titulaire du brevet, dans des cas exceptionnels comme l'absence d'exploitation, l'intérêt public, ou les dépendances de brevets. Des redevances sont dues au titulaire.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Contact et Assistance -->
+        <section class="mb-12">
+            <div class="bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg p-8 text-white text-center">
+                <h2 class="text-2xl font-bold mb-4">Besoin d'aide pour votre dépôt de brevet ?</h2>
+                <p class="mb-6 max-w-2xl mx-auto">
+                    Nos experts en propriété industrielle sont à votre disposition pour vous accompagner dans toutes les étapes de votre démarche de protection d'invention.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="{% url 'contact' %}" class="bg-white text-primary px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-phone mr-2"></i> Contacter un expert
+                    </a>
+                    <a href="{% url 'formulaires' %}" class="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-primary transition-colors duration-300 flex items-center justify-center">
+                        <i class="fas fa-download mr-2"></i> Télécharger les formulaires
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div> <!-- Fermeture de md:w-3/4 -->
+    </div> <!-- Fermeture de md:flex md:space-x-8 -->
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+</body>
+</html>

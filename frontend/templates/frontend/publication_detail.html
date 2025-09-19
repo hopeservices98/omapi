@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ publication.titre }} - OMAPI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <main class="container mx-auto mt-8 p-4">
+        <article class="bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-4xl font-extrabold text-gray-800 mb-4">{{ publication.titre }}</h2>
+            <p class="text-gray-600 text-sm mb-6">Publié le {{ publication.date_publication|date:"d/m/Y" }}</p>
+
+            <div class="prose max-w-none text-gray-700 leading-relaxed mb-6">
+                {{ publication.description|linebreaksbr }}
+            </div>
+
+            {% if publication.fichier %}
+                <a href="{{ publication.fichier.url }}" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-lg shadow-lg transform transition duration-300 hover:scale-105">
+                    Télécharger le document
+                </a>
+            {% endif %}
+
+            <div class="mt-8">
+                <a href="{% url 'publications_list' %}" class="inline-block bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-full hover:bg-gray-300 transition-colors duration-300">
+                    &larr; Retour aux publications
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-6 mt-12">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 OMAPI. Tous droits réservés.</p>
+        </div>
+    </footer>
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+</body>
+</html>

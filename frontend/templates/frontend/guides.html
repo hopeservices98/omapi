@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guides - OMAPI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Styles pour la navigation rapide */
+        .quick-nav-link.active {
+            background-color: #1e40af; /* primary color */
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .quick-nav-link:hover {
+            transform: translateX(3px); /* Léger décalage au survol */
+        }
+        html {
+            scroll-behavior: smooth; /* Défilement doux */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    {% include 'frontend/includes/header.html' %}
+
+    <!-- Fil d'Ariane -->
+    <div class="bg-gray-100 py-3">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-primary transition-colors duration-300">
+                    <i class="fas fa-home mr-1"></i> Accueil
+                </a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors duration-300">Ressources</a>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <span class="text-primary font-medium">Guides</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Contenu Principal -->
+    <main class="flex flex-col md:flex-row max-w-7xl mx-auto px-3 sm:px-4 py-8">
+        <!-- Barre latérale pour la navigation rapide (fixe à gauche) -->
+        <aside class="w-full md:w-64 lg:w-72 md:flex-shrink-0 mb-8 md:mb-0 md:mr-8">
+            <div class="sticky top-24 bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Accès rapide par catégorie :</h2>
+                <nav class="flex flex-col space-y-2" id="quick-nav-links">
+                    {% for category_key, guides_in_category in grouped_guides.items %}
+                    <a href="#{{ category_key|slugify }}" class="quick-nav-link flex items-center p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-all duration-200 text-gray-700 text-sm font-medium">
+                        <i class="fas fa-arrow-right text-primary mr-2"></i> {{ category_key }}
+                    </a>
+                    {% endfor %}
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Contenu principal des formulaires -->
+        <div class="flex-grow">
+            <!-- Titre de la page -->
+            <div class="mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">Guides Pratiques OMAPI</h1>
+                <p class="text-xl text-secondary font-medium">Accompagnement pour vos démarches de propriété industrielle</p>
+                <div class="w-24 h-1 bg-primary rounded-full mt-4"></div>
+            </div>
+
+        <!-- Introduction -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <div class="flex items-start space-x-4">
+                <div class="bg-primary/10 p-3 rounded-lg flex-shrink-0">
+                    <i class="fas fa-book-open text-2xl text-primary"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800 mb-3">À propos de nos guides</h2>
+                    <p class="text-gray-600 mb-3">
+                        L'Office Malgache de la Propriété Industrielle (OMAPI) met à votre disposition des guides pratiques pour vous accompagner dans vos démarches. 
+                        Ces documents détaillent les procédures à suivre, les pièces à fournir et les taxes à payer pour chaque type de demande.
+                    </p>
+                    <p class="text-gray-600">
+                        Nos guides sont disponibles en plusieurs langues (Français, Malagasy, Anglais) et sont régulièrement mis à jour pour refléter les dernières évolutions législatives.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+            <!-- Contenu des guides dynamiques -->
+            {% if grouped_guides %}
+                {% for category_key, guides_in_category in grouped_guides.items %}
+                    <section id="{{ category_key|slugify }}" class="mb-10">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-purple-100 p-2 rounded-lg mr-3">
+                                <i class="fas fa-folder-open text-purple-600 text-xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-800">{{ category_key }}</h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {% for guide in guides_in_category %}
+                                <div class="bg-white rounded-xl shadow-md p-5 hover:shadow-lg transition-shadow duration-300">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <h3 class="font-bold text-gray-800 text-sm">{{ guide.titre }}</h3>
+                                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">PDF</span>
+                                    </div>
+                                    <p class="text-gray-600 text-xs mb-4">{{ guide.description|default:"Aucune description disponible." }}</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs text-gray-500">{{ guide.get_categorie_pi_display }}</span>
+                                        <a href="{{ guide.fichier.url }}" target="_blank" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 flex items-center">
+                                            <i class="fas fa-download mr-2"></i> Télécharger
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                {% endfor %}
+            {% else %}
+                <p class="text-gray-600 text-center col-span-2">Aucun guide disponible pour le moment.</p>
+            {% endif %}
+
+            <!-- Section Contact et Assistance -->
+            <section class="mb-12 mt-8">
+                <div class="bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg p-8 text-white text-center">
+                    <h2 class="text-2xl font-bold mb-4">Besoin d'aide pour votre dépôt de brevet ?</h2>
+                    <p class="mb-6 max-w-2xl mx-auto">
+                        Nos experts en propriété industrielle sont à votre disposition pour vous accompagner dans toutes les étapes de votre démarche de protection d'invention.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="{% url 'contact' %}" class="bg-white text-primary px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center">
+                            <i class="fas fa-phone mr-2"></i> Contacter un expert
+                        </a>
+                        <a href="#" class="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-primary transition-colors duration-300 flex items-center justify-center">
+                            <i class="fas fa-download mr-2"></i> Télécharger les formulaires
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    {% include 'frontend/includes/footer.html' %}
+    <!-- Script pour le menu mobile et sous-menus -->
+    <script src="{% static 'js/mobile_menu.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quickNavLinks = document.querySelectorAll('.quick-nav-link');
+            const sections = document.querySelectorAll('main section[id]');
+
+            function removeActiveClass() {
+                quickNavLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+            }
+
+            function addActiveClass(id) {
+                const link = document.querySelector(`.quick-nav-link[href="#${id}"]`);
+                if (link) {
+                    link.classList.add('active');
+                }
+            }
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5 // Déclenche quand 50% de la section est visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        removeActiveClass();
+                        addActiveClass(entry.target.id);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Gérer le clic sur les liens pour le scroll doux
+            quickNavLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
