@@ -17,6 +17,11 @@ python manage.py collectstatic --noinput --clear
 
 # Appliquer les migrations de base de données
 echo "🗄️ Application des migrations..."
-python manage.py migrate --noinput
+python manage.py showmigrations
+python manage.py migrate --noinput --verbosity=2
+
+# Vérifier que les migrations ont été appliquées
+echo "🔍 Vérification des migrations..."
+python manage.py showmigrations | grep "\[X\]" | wc -l
 
 echo "✅ Build terminé avec succès!"
