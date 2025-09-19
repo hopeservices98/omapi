@@ -6,10 +6,26 @@ from itertools import groupby
 from operator import attrgetter
 
 def index(request):
-    latest_actualites = Actualite.objects.all().order_by('-date_publication')[:3]
-    annonces = Annonce.objects.filter(est_active=True).order_by('date_creation')
-    statistiques = Statistique.objects.all().order_by('ordre')
-    carousel_slides = CarouselSlide.objects.all().order_by('ordre') # Récupérer les slides du carrousel
+    try:
+        latest_actualites = Actualite.objects.all().order_by('-date_publication')[:3]
+    except:
+        latest_actualites = []
+
+    try:
+        annonces = Annonce.objects.filter(est_active=True).order_by('date_creation')
+    except:
+        annonces = []
+
+    try:
+        statistiques = Statistique.objects.all().order_by('ordre')
+    except:
+        statistiques = []
+
+    try:
+        carousel_slides = CarouselSlide.objects.all().order_by('ordre') # Récupérer les slides du carrousel
+    except:
+        carousel_slides = []
+
     context = {
         'latest_actualites': latest_actualites,
         'annonces': annonces,
